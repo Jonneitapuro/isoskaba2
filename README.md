@@ -30,5 +30,13 @@ Sähköinen ISOpistejärjestelmä AYY:n ISOille
   * Tiedosto valmiina committia varten: git add *file_name*
   * Commitataan tiedosto: git commit -m "*kuvaus commitista*"
   * Pushataan commit GitHubiin: git push -u origin *branch_name* 
-  * Kun taski on valmis ja kaikki sen commitit ovat GitHubissa, tehdään GitHubissa pull request.
+  * Kun taski on valmis, toimitaan seuraavalla tavalla:
+    * Vaihda master-branchiin: `git checkout master`
+    * Mergeä taskin branch lokaalisti: `git merge branch_name`
+    * Tässä vaiheessa saattaa esiintyä konflikteja, niiden kanssa ei auta kun ottaa vim kauniiseen käteen ja ratkoa ne käsin.
+    * Tämän jälkeen testaa toimivuus lokaalisti.
+    * Takaisin taskin branchiin.
+    * Pushaa githubiin
+    * Tee pull request
+  * Näin toimitaan siksi, että pull requestit voidaan vain hyväksyä aikajärjestyksessä. Niiden hyväksyjän ei tarvitse enää miettiä, että "mitähän vittua tässä on taas tehty?! :0" 
   
