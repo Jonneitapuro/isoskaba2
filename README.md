@@ -7,7 +7,8 @@ Sähköinen ISOpistejärjestelmä AYY:n ISOille
 
 ## Projektinhallintatyökalut ja menetelmät
 
-- **Trello** - pitää kirjaa taskeista ja backlogista 
+- **Trello** - pitää kirjaa taskeista ja backlogista
+  * Trello-linkki -> https://trello.com/invite/isoskaba20/980fcc02354bb6aef511ced44e95b3c2 
 - **Git** - versionhallinta
 - **GitHub** - repositorionhallinta, issuet
 - **Scrum** - sovellettu versio Scrumista projektin hallintaan
@@ -23,7 +24,7 @@ Sähköinen ISOpistejärjestelmä AYY:n ISOille
   * Ready, valmiina tarkastettavaksi. Tässä vaiheessa tehdään GitHubissa pull request.
   * Complete, pull request hyväksytty eli taskissa tehdyt asiat ovat lisätty Gitin master branchiin
   
-- **Gitissä** tehdään taskille sen alussa uusi branch. Gitin commitit tehdään imperatiivimuodossa, esim. "add tests for new attendance" tai "refactor URL scheme" Pikaohjeet Gitin käytöstä:
+- **Gitissä** tehdään taskille sen alussa uusi branch. Gitin commitit tehdään imperatiivimuodossa, esim. "add tests for new attendance" tai "refactor URL scheme". Huomaa, että commit-messaget ja koodi kirjoitetaan aina englanniksi! Pikaohjeet Gitin käytöstä:
   * Otetaan uusin master branch: git pull, git checkout master (2 erillistä komentoa)
   * Uusi branch: git checkout -b *branch_name*
   * Tiedosto valmiina committia varten: git add *file_name*
