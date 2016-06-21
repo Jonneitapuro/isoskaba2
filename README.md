@@ -20,14 +20,14 @@ Sähköinen ISOpistejärjestelmä AYY:n ISOille
   * Sprint backlog, käynnissä olevan sprintin taskit
   * Started, task aloitettu
   * Tests made, testit taskille kirjoitettu
-  * Ready, valmiina tarkastettavaksi. Tässä vaiheessa tehdään GitHubissa 
-  * Complete, taskissa tehdyt asiat ovat lisätty Gitin master branchiin
+  * Ready, valmiina tarkastettavaksi. Tässä vaiheessa tehdään GitHubissa pull request.
+  * Complete, pull request hyväksytty eli taskissa tehdyt asiat ovat lisätty Gitin master branchiin
   
 - **Gitissä** tehdään taskille sen alussa uusi branch. Gitin commitit tehdään imperatiivimuodossa, esim. "add tests for new attendance" tai "refactor URL scheme" Pikaohjeet Gitin käytöstä:
   * Otetaan uusin master branch: git pull, git checkout master (2 erillistä komentoa)
-  * Uusi branch: git checkout -b branch_name
-  * Tiedosto valmiina committia varten: git add file_name
-  * Commitataan tiedosto: git commit -m "kuvaus commitista"
-  * Pushataan commit GitHubiin: git push -u origin branch_name 
+  * Uusi branch: git checkout -b *branch_name*
+  * Tiedosto valmiina committia varten: git add *file_name*
+  * Commitataan tiedosto: git commit -m "*kuvaus commitista*"
+  * Pushataan commit GitHubiin: git push -u origin *branch_name* 
   * Kun taski on valmis ja kaikki sen commitit ovat GitHubissa, tehdään GitHubissa pull request.
   
