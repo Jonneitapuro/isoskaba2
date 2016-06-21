@@ -25,14 +25,13 @@ Sähköinen ISOpistejärjestelmä AYY:n ISOille
   * Complete, pull request hyväksytty eli taskissa tehdyt asiat ovat lisätty Gitin master branchiin
   
 - **Gitissä** tehdään taskille sen alussa uusi branch. Gitin commitit tehdään imperatiivimuodossa, esim. "add tests for new attendance" tai "refactor URL scheme". Huomaa, että commit-messaget ja koodi kirjoitetaan aina englanniksi! Pikaohjeet Gitin käytöstä:
-  * Otetaan uusin master branch: git pull, git checkout master (2 erillistä komentoa)
-  * Uusi branch: git checkout -b *branch_name*
-  * Tiedosto valmiina committia varten: git add *file_name*
-  * Commitataan tiedosto: git commit -m "*kuvaus commitista*"
-  * Pushataan commit GitHubiin: git push -u origin *branch_name* 
+  * Otetaan uusin master branch: `git pull`, `git checkout master` (2 erillistä komentoa)
+  * Uusi branch: `git checkout -b *branch_name*`
+  * Tiedosto valmiina committia varten: `git add *file_name*`
+  * Commitataan tiedosto: `git commit -m "*kuvaus commitista*"`
+  * Pushataan commit GitHubiin: `git push -u origin *branch_name*` 
   * Kun taski on valmis, toimitaan seuraavalla tavalla:
-    * Vaihda master-branchiin: `git checkout master`
-    * Mergeä taskin branch lokaalisti: `git merge branch_name`
+    * Mergeä taskin branch lokaalisti: `git merge master`
     * Tässä vaiheessa saattaa esiintyä konflikteja, niiden kanssa ei auta kun ottaa vim kauniiseen käteen ja ratkoa ne käsin.
     * Tämän jälkeen testaa toimivuus lokaalisti.
     * Takaisin taskin branchiin.
