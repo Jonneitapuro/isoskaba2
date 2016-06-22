@@ -34,7 +34,6 @@ Sähköinen ISOpistejärjestelmä AYY:n ISOille
     * Mergeä taskin branch lokaalisti: `git merge master`
     * Tässä vaiheessa saattaa esiintyä konflikteja, niiden kanssa ei auta kun ottaa vim kauniiseen käteen ja ratkoa ne käsin.
     * Tämän jälkeen testaa toimivuus lokaalisti.
-    * Takaisin taskin branchiin.
     * Pushaa githubiin
     * Tee pull request
   * Näin toimitaan siksi, että pull requestit voidaan vain hyväksyä aikajärjestyksessä. Niiden hyväksyjän ei tarvitse enää miettiä, että "mitähän vittua tässä on taas tehty?! :0" 
