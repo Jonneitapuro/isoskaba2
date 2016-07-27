@@ -4,8 +4,8 @@ Sähköinen ISOpistejärjestelmä AYY:n ISOille
 ## Asennus
 
 - Vaatimukset: 
-  * Python 3.4.x
-  * virtualenv
+  * Python 3.4.x [latauslinkki](https://www.python.org/downloads/release/python-340/)
+  * virtualenv `sudo pip3 install virtualenv`
 1. Asenna riippuvuudet käyttämällä `./envinstall.sh`
 2. Aja Djangon migraatiot `python manage.py migrate`
 3. Käynnistä lokaali deviserveri (localhost:8000) `python manage.py runserver`
