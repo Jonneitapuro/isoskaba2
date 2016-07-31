@@ -1,6 +1,6 @@
 # ISOskaba 2.0
 
-An applet to track tutor activity in AYY.
+An applet to track tutor activity in AYY. This is complete rewrite of this project. The old version is included as a submodule.
 
 ## Installation
 
