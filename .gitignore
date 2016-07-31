@@ -1,2 +1,9 @@
 # Virtualenv files
 .env/
+
+# SQLite3 database
+db.sqlite3
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
