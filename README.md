@@ -9,7 +9,7 @@ An applet to track tutor activity in AYY. This is complete rewrite of this proje
   * virtualenv `sudo pip3 install virtualenv`
 1. Install dependencies by running `./envinstall.sh`
 2. Migrate Django `python manage.py migrate`
-3. Start a locally served development server (localhost:8000) by running `python manage.py runserver`
+3. Start a locally served development server (localhost:8000) by running `python3 manage.py runserver`
 
 
 ### About the project
