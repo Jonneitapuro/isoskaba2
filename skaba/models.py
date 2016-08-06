@@ -26,6 +26,7 @@ class Guild(models.Model):
 class Event(models.Model):
 	name = models.TextField()
 	description = models.TextField()
+	slug = models.SlugField()
 	created_at = models.DateTimeField(auto_now_add=True)
 	points = models.IntegerField()
 	guild = models.ForeignKey('Guild', on_delete=models.CASCADE)
