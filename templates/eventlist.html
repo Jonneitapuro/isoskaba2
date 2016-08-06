@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block page_content %}
+<h1>Events</h1>
+<p>Requires actual event data</p>
+<table style="width:100%">
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Guild</th>
+    <th>Points</th>
+    <th>Created</th>
+  </tr>
+  {% for event in events %}
+  <tr>
+    <td>{{ event.name }}</td>
+    <td>{{ event.description }}</td>
+    <td>{{ event.guild }}</td>
+    <td>{{ event.points }}</td>
+    <td>{{ event.created }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

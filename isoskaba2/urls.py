@@ -20,5 +20,7 @@ from skaba import views as skabaviews
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', skabaviews.index, name='index')
+    url(r'^$', skabaviews.index, name='index'),
+    url(r'^userlist/$', skabaviews.list_users, name='userlist'),
+    url(r'^eventlist/$', skabaviews.list_events, name='eventlist'),
 ]
