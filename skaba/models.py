@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 class UserProfile(models.model):
 	user = models.OneToOneField(User)
 	is_tf = models.BooleanField(default=False)
+        is_kv = models.BooleanField(default=False)
 	role = models.CharField(max_length=8, default="user")
 
 # This bit of code is copy-pasted from a previous project.
@@ -28,6 +29,7 @@ class Events(models.Model):
 	description = models.TextField()
 	created_at = models.DateTimeField(auto_now_add=True)
 	points = models.IntegerField()
+        repeats = models.IntegerField()
 	guild = models.ForeignKey('Guild', on_delete=models.CASCADE)
 
 class Attendances(models.Model):
