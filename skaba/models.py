@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class UserProfile(models.model):
+class UserProfile(models.Model):
 	user = models.OneToOneField(User)
 	is_tf = models.BooleanField(default=False)
 	role = models.CharField(max_length=8, default="user")
@@ -23,14 +23,14 @@ class Guild(models.Model):
 	name = models.CharField(max_length=64)
 	abbreviation = models.CharField(max_length=8)
 
-class Events(models.Model):
+class Event(models.Model):
 	name = models.TextField()
 	description = models.TextField()
 	created_at = models.DateTimeField(auto_now_add=True)
 	points = models.IntegerField()
 	guild = models.ForeignKey('Guild', on_delete=models.CASCADE)
 
-class Attendances(models.Model):
+class Attendance(models.Model):
 	created = models.DateTimeField(auto_now_add=True)
 	modified = models.DateTimeField()
 	event = models.ForeignKey('Event', on_delete=models.CASCADE)
