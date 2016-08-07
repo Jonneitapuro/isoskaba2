@@ -44,6 +44,6 @@ class Event(models.Model):
 
 class Attendance(models.Model):
 	created = models.DateTimeField(auto_now_add=True)
-	modified = models.DateTimeField()
+	verified = models.BooleanField(default=False)
 	event = models.ForeignKey('Event', on_delete=models.CASCADE)
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
