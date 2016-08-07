@@ -13,6 +13,7 @@ class EventForm(forms.ModelForm):
 	repeats = forms.IntegerField(label='Repeats', initial=1, min_value=0)
 	points = forms.IntegerField(label='Points', min_value=0)
 
+
 class AddUserForm(forms.Form):
 	email = forms.CharField(label='User e-mail', max_length=128, min_length=1)
 	real_name = forms.CharField(label='Full name')
