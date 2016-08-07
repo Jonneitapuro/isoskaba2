@@ -1,5 +1,4 @@
 from skaba.models import UserProfile, Attendance, Guild, Event
-from django.shortcuts import render, render_to_response, redirect, get_object_or_404
 
 """""""""""""""""""""""""""""""""""
 "These don't work yet as intended!"

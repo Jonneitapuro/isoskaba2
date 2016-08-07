@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.template.response import TemplateResponse
-from django.contrib.auth.decorators import login_required, user_passes_test
+# from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.models import User
 
 from skaba.models import Event
@@ -13,8 +14,9 @@ def index(request):
     response.render()
     return response
 
-@login_required
+# @login_required
 # @user_passes_test(check_admin)
+@staff_member_required
 def list_users(request):
     """
     Lists all users. Available only for admins.
@@ -24,8 +26,9 @@ def list_users(request):
     response.render()
     return response
 
-@login_required
+# @login_required
 # @user_passes_test(check_admin)
+@staff_member_required
 def list_events(request):
     """
     Lists all events. Available only for admins.
