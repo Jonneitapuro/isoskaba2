@@ -1,14 +1,15 @@
 {% extends 'base.html' %}
 {% block page_content %}
 <h1>Events</h1>
-<p>Requires actual event data</p>
 <table style="width:100%">
   <tr>
     <th>Name</th>
     <th>Description</th>
     <th>Guild</th>
     <th>Points</th>
+    <th>Repeats</th>
     <th>Created</th>
+    <th>Slug</th>
   </tr>
   {% for event in events %}
   <tr>
@@ -16,7 +17,9 @@
     <td>{{ event.description }}</td>
     <td>{{ event.guild }}</td>
     <td>{{ event.points }}</td>
-    <td>{{ event.created }}</td>
+    <td>{{ event.repeats }}</td>
+    <td>{{ event.created_at|date:'d.m.Y H:i' }}</td>
+    <td>{{ event.slug }}</td>
   </tr>
   {% endfor %}
 </table>

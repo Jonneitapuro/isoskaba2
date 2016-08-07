@@ -4,7 +4,6 @@ from django.template.response import TemplateResponse
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib import messages
 from django.template.context_processors import csrf
-from django.contrib.auth.models import User
 
 from skaba.forms import AddEventForm, AddUserForm
 from skaba.models import Event, Guild, User

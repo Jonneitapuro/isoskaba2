@@ -1,5 +1,3 @@
-from skaba.models import UserProfile, Attendance, Guild, Event
-
 """""""""""""""""""""""""""""""""""
 "These don't work yet as intended!"
 """""""""""""""""""""""""""""""""""
