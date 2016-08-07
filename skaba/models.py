@@ -16,13 +16,14 @@ class User(models.Model):
 # Not sure what it does ¯\_(ツ)_/¯
 # Might be useful/required though
 # User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])
-
-# catch user creation
-#def create_user_profile(sender, instance, created, **kwargs):
+#
+# # catch user creation
+# def create_user_profile(sender, instance, created, **kwargs):
 #    if created:
 #        UserProfile.objects.create(user=instance)
 #
-#post_save.connect(create_user_profile, sender=User)
+# post_save.connect(create_user_profile, sender=User)
+
 
 class Guild(models.Model):
         name = models.CharField(max_length=64)

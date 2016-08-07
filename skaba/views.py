@@ -9,11 +9,28 @@ from django.forms import model_to_dict
 from skaba.forms import EventForm, AddUserForm
 from skaba.models import Event, Guild, User
 
-
-# Create your views here.
-
 def index(request):
     response = TemplateResponse(request, 'index.html', {})
+    response.render()
+    return response
+
+@staff_member_required
+def list_users(request):
+    """
+    Lists all users. Available only for admins.
+    """
+    users = User.objects.all()
+    response = TemplateResponse(request, 'userlist.html', {'users': users})
+    response.render()
+    return response
+
+@staff_member_required
+def list_events(request):
+    """
+    Lists all events. Available only for admins.
+    """
+    events = Event.objects.all()
+    response = TemplateResponse(request, 'eventlist.html', {'events': events})
     response.render()
     return response
 

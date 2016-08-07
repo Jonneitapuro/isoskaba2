@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block page_content %}
+<h1>Users</h1>
+<table style="width:100%">
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Guild</th>
+    <th>Role</th>
+    <th>TF</th>
+    <th>KV</th>
+  </tr>
+  {% for user in users %}
+  <tr>
+    <td>{{ user.real_name }}</td>
+    <td>{{ user.email }}</td>
+    <td>{{ user.guild }}</td>
+    <td>{{ user.role }}</td>
+    <td>{{ user.is_tf }}</td>
+    <td>{{ user.is_kv }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}
