@@ -23,9 +23,9 @@ class AddUserForm(UserCreationForm):
         is_kv = forms.BooleanField()
         is_tf = forms.BooleanField()
 
-        class Meta:
-            model = User
-            fields = ('email', 'password1')
+#        class Meta:
+#            model = User
+#            fields = ('email', 'password1')
 
 #        def save(self,commit = True):
 #            user = super(AddUserForm, self).save(commit = False)

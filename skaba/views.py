@@ -19,7 +19,7 @@ def list_users(request):
     """
     Lists all users. Available only for admins.
     """
-    users = User.objects.all()
+    users = UserProfile.objects.all()
     response = TemplateResponse(request, 'userlist.html', {'users': users})
     response.render()
     return response
@@ -99,7 +99,7 @@ def guilds_populate(request):
         guilds = [
                 {'name': 'Yleinen', 'abbr': 'Yleinen'},
                 {'name': 'Arkkitehtikilta', 'abbr': 'AK'},
-                {'name': 'AS-kilta', 'abbr': 'AS'},
+                {'name': 'Automaatio- ja systeemitekniikan kilta', 'abbr': 'AS'},
                 {'name': 'Athene', 'abbr': 'Athene'},
                 {'name': 'Fyysikkokilta', 'abbr': 'FK'},
                 {'name': 'Inkubio', 'abbr': 'Bio'},
@@ -120,9 +120,12 @@ def guilds_populate(request):
 @staff_member_required
 def user_add(request):
         if request.method == 'POST':
-                form = AddUserForm(request.POST)
-                if (form.is_valid()):
-                        form.save()
+                form = AddUserForm(data=request.POST)
+                print(form.errors)
+                if form.is_valid():
+                        profile = form.save(commit=False)
+                        profile.guild = request.guild
+                        profile.save()
                         messages.add_message(request, messages.INFO, 'Creation successfull')
                         return HttpResponseRedirect('/admin/users/add')
 #                        role = request.POST.get('role')
@@ -141,7 +144,7 @@ def user_add(request):
 #                        except:
 #                                status = 400
                 else:
-                        messages.add_message(request, messages.INFO, 'Error in user creation')
+                        messages.add_message(request, messages.INFO, form.errors)
                         return HttpResponseRedirect('/admin/users/add')
         else:
             args = {}
