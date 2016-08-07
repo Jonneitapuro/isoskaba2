@@ -1,10 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class UserProfile(models.Model):
-	user = models.OneToOneField(User)
+class User(models.Model):
+	email = models.email(unique=True)
+	real_name = models.CharField(max_length=40)
 	is_tf = models.BooleanField(default=False)
+	is_kv = models.BooleanField(default=False)
 	role = models.CharField(max_length=8, default="user")
+	guild = models.ForeignKey('Guild', on_delete=models.CASCADE)
 
 # This bit of code is copy-pasted from a previous project.
 # Not sure what it does ¯\_(ツ)_/¯
@@ -31,7 +34,8 @@ class Event(models.Model):
 	description = models.TextField()
 	slug = models.SlugField()
 	created_at = models.DateTimeField(auto_now_add=True)
-	points = models.IntegerField()
+	points = models.IntegerField(default=1)
+	repeats= models.IntegerField(default=1)
 	guild = models.ForeignKey('Guild', on_delete=models.CASCADE)
 
 class Attendance(models.Model):
@@ -39,6 +43,3 @@ class Attendance(models.Model):
 	modified = models.DateTimeField()
 	event = models.ForeignKey('Event', on_delete=models.CASCADE)
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-
-
