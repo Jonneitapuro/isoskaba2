@@ -48,8 +48,11 @@ def event_add(request):
 	token = {}
 	token.update(csrf(request))
 	token['form'] = form
+	token['site_title'] = 'Create event'
+	token['submit_text'] = 'Add event'
+	token['form_action'] = '/admin/events/add'
 
-	return render_to_response('event_add.html', token)
+	return render_to_response('admin_form.html', token)
 
 @staff_member_required
 def guilds_populate(request):
