@@ -1,12 +1,14 @@
-from django.shortcuts import render, render_to_response, redirect
+from django.shortcuts import render, render_to_response, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.template.response import TemplateResponse
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib import messages
 from django.template.context_processors import csrf
+from django.forms import model_to_dict
 
-from skaba.forms import AddEventForm, AddUserForm
+from skaba.forms import EventForm, AddUserForm
 from skaba.models import Event, Guild, User
+
 
 # Create your views here.
 
@@ -24,26 +26,18 @@ def admin_index(request):
 @staff_member_required
 def event_add(request):
 	if request.method == 'POST':
-		form = AddEventForm(request.POST)
+		form = EventForm(request.POST)
 		if (form.is_valid()):
-			name = request.POST.get('name')
-			description = request.POST.get('description')
-			slug = request.POST.get('slug')
-			points = request.POST.get('points')
-			repeats = request.POST.get('repeats')
-			guild = Guild.objects.get(pk=request.POST.get('guild'))
-
 			try:
-				event = Event(name=name, description=description, slug=slug, points=points, repeats=repeats, guild=guild)
-				event.save()
+				form.save()
 				status = 200
 				messages.add_message(request, messages.INFO, 'event added')
-				return redirect('/admin/events/add')
+				return redirect('/admin/events/add/')
 			except:
 				status = 400
 
 	else:
-		form = AddEventForm()
+		form = EventForm()
 		status = 200
 
 	token = {}
@@ -51,7 +45,33 @@ def event_add(request):
 	token['form'] = form
 	token['site_title'] = 'Create event'
 	token['submit_text'] = 'Add event'
-	token['form_action'] = '/admin/events/add'
+	token['form_action'] = '/admin/events/add/'
+
+	return render_to_response('admin_form.html', token)
+
+def event_edit(request, event_slug):
+	event = get_object_or_404(Event, slug=event_slug)
+	if request.method == 'POST':
+		form = EventForm(request.POST, instance=event)
+		if (form.is_valid()):
+			try:
+				form.save()
+				status = 200
+				messages.add_message(request, messages.INFO, 'event saved')
+				return redirect('/admin/events/edit/' + slug + '/')
+			except:
+				status = 400
+
+	else:
+		form = EventForm(instance=event)
+		status = 200
+
+	token = {}
+	token.update(csrf(request))
+	token['form'] = form
+	token['site_title'] = 'Edit event'
+	token['submit_text'] = 'Save event'
+	token['form_action'] = '/admin/events/edit/' + event.slug + '/'
 
 	return render_to_response('admin_form.html', token)
 
