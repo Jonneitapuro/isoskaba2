@@ -7,7 +7,7 @@ from django.template.context_processors import csrf
 from django.forms import model_to_dict
 
 from skaba.forms import EventForm, AddUserForm
-from skaba.models import Event, Guild, UserProfile
+from skaba.models import Event, Guild, User
 
 def index(request):
     response = TemplateResponse(request, 'index.html', {})
@@ -19,8 +19,8 @@ def list_users(request):
     """
     Lists all users. Available only for admins.
     """
-    order_by = request.GET.get('order_by', 'real_name')
-    users = UserProfile.objects.all().order_by(order_by)
+    order_by = request.GET.get('order_by', 'username')
+    users = User.objects.all().order_by(order_by)
     response = TemplateResponse(request, 'userlist.html', {'users': users})
     response.render()
     return response
@@ -125,9 +125,10 @@ def user_add(request):
                 form = AddUserForm(data=request.POST)
                 print(form.errors)
                 if form.is_valid():
-                        profile = form.save(commit=False)
-                        print(profile.guild)
-                        profile.save()
+                        form.save(commit=False)
+                        #print(profile)
+
+                        #profile.save()
                         messages.add_message(request, messages.INFO, 'Creation successfull')
                         return HttpResponseRedirect('/admin/users/add')
 #                        role = request.POST.get('role')
