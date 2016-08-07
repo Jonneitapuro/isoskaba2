@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block page_content %}
+<div class="row">
+	<div class="col-lg-1 col-md-2 col-xs-3">
+		<ul>
+			<li><a href="/admin/events/add">Add event</a></li>
+			
+		</ul>
+	</div>
+	<div class="col-lg-11 cold-md-10 col-xs-9">
+		{% block admin_content %}{% endblock %} 
+	</div>
+</div>
+{% endblock %}

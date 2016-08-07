@@ -25,6 +25,9 @@
        			<div class="collapse navbar-collapse" id="myNavbar">
           			<ul class="nav navbar-nav">
             			<li><a href="/">Home</a></li>
+            			{% if user.is_superuser %}
+            			<li><a href="/admin/events">Events</a></li>
+            			{% endif %}
          		 	</ul>
           			<ul class="nav navbar-nav navbar-right">
         				{% if user.is_authenticated %}
@@ -37,8 +40,7 @@
         		</div>
       		</div>
     	</nav>
-		<div id="content">
-			<h1>Hello World!</h1>
+		<div id="content" class="container-fluid">
 	      	<div class="flash-messages">
         		{% if messages %}
           		<ul class="messages">
