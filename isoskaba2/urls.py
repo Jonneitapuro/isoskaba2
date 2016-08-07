@@ -21,5 +21,6 @@ from skaba import views as skabaviews
 urlpatterns = [
     url(r'^$', skabaviews.index, name='index'),
     url(r'^admin/$', skabaviews.admin_index, name='admin_index'),
-    url(r'^admin/events/add', skabaviews.event_add, name='event_add')
+    url(r'^admin/events/add', skabaviews.event_add, name='event_add'),
+    url(r'^admin/guilds/populate', skabaviews.guilds_populate, name='guilds_populate')
 ]
