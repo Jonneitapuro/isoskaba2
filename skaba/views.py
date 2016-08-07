@@ -19,7 +19,9 @@ def list_users(request):
     """
     Lists all users. Available only for admins.
     """
-    users = User.objects.all()
+    order_by = request.GET.get('order_by', 'real_name')
+    print(order_by)
+    users = User.objects.all().order_by(order_by)
     response = TemplateResponse(request, 'userlist.html', {'users': users})
     response.render()
     return response
@@ -29,7 +31,8 @@ def list_events(request):
     """
     Lists all events. Available only for admins.
     """
-    events = Event.objects.all()
+    order_by = request.GET.get('order_by', 'name')
+    events = Event.objects.all().order_by(order_by)
     response = TemplateResponse(request, 'eventlist.html', {'events': events})
     response.render()
     return response
