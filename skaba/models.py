@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import BaseUserManager
 
 class User(models.Model):
 	email = models.email(unique=True)
@@ -20,11 +23,10 @@ class User(models.Model):
 #        UserProfile.objects.create(user=instance)
 #
 #post_save.connect(create_user_profile, sender=User)
-#
 
 class Guild(models.Model):
-	name = models.CharField(max_length=64)
-	abbreviation = models.CharField(max_length=8)
+    name = models.CharField(max_length=64)
+    abbreviation = models.CharField(max_length=8)
 
 	def __str__(self):
 	    return u'{0}'.format(self.name)
