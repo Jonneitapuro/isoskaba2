@@ -82,21 +82,21 @@ def user_add(request):
 	if request.method == 'POST':
 		form = AddUserForm(request.POST)
 		if (form.is_valid()):
-			email = request.POST.get('email')
-			real_name = request.POST.get('real_name')
-            role = request.POST.get('role')
-			guild = Guild.objects.get(pk=request.POST.get('guild'))
-            is_tf = request.POST.get('is_tf')
-            is_kv = request.POST.get('is_kv')
+                        role = request.POST.get('role')
+                        email = request.POST.get('email')
+                        real_name = request.POST.get('real_name')
+                        guild = Guild.objects.get(pk=request.POST.get('guild'))
+                        is_tf = request.POST.get('is_tf')
+                        is_kv = request.POST.get('is_kv')
 
-			try:
-				user = User(email=email, real_name=real_name, role=role, guild=guild, is_kv=is_kv, is_tf=is_tf)
-				user.save()
-				status = 200
-				messages.add_message(request, messages.INFO, 'user added')
-				return redirect('/admin/users/add')
-			except:
-				status = 400
+                        try:
+                                user = User(email=email, real_name=real_name, role=role, guild=guild, is_kv=is_kv, is_tf=is_tf)
+                                user.save()
+                                status = 200
+                                messages.add_message(request, messages.INFO, 'user added')
+                                return redirect('/admin/users/add')
+                        except:
+                                status = 400
 
 	else:
 		form = AddUserForm()

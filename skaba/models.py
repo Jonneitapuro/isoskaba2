@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.contrib.auth.models import BaseUserManager
 
 class User(models.Model):
-	email = models.email(unique=True)
+	email = models.CharField(max_length=40, unique=True)
 	real_name = models.CharField(max_length=40)
 	is_tf = models.BooleanField(default=False)
 	is_kv = models.BooleanField(default=False)
@@ -25,11 +25,11 @@ class User(models.Model):
 #post_save.connect(create_user_profile, sender=User)
 
 class Guild(models.Model):
-    name = models.CharField(max_length=64)
-    abbreviation = models.CharField(max_length=8)
+	name = models.CharField(max_length=64)
+	abbreviation = models.CharField(max_length=8)
 
 	def __str__(self):
-	    return u'{0}'.format(self.name)
+		return u'{0}'.format(self.name)
 
 class Event(models.Model):
 	name = models.TextField()
