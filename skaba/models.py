@@ -25,8 +25,8 @@ class User(models.Model):
 #post_save.connect(create_user_profile, sender=User)
 
 class Guild(models.Model):
-	name = models.CharField(max_length=64)
-	abbreviation = models.CharField(max_length=8)
+    name = models.CharField(max_length=64)
+    abbreviation = models.CharField(max_length=8)
 
 	def __str__(self):
 		return u'{0}'.format(self.name)

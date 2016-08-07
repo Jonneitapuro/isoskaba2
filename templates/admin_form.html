@@ -1,13 +1,6 @@
 {% extends 'admin_base.html' %}
 {% block admin_content %}
 {% if form.errors %}
-  {% for field in form %}
-    {% for error in field.errors %}
-      <div class="alert alert-error">
-        <strong>{{ error|escape }}</strong>
-      </div>
-    {% endfor %}
-  {% endfor %}
   {% for error in form.non_field_errors %}
     <div class="alert alert-error">
       <strong>{{ error|escape }}</strong>
@@ -15,18 +8,21 @@
   {% endfor %}
 {% endif %}
 
-<h1>Add event</h2>
+<h2>{{ site_title }}</h2>
 	<div class="panel panel-primary">
 		<div class="panel-heading"></div>
-		<form role="form" clas="form-horizontal" action="/admin/events/add" method="POST">
+		<form role="form" clas="form-horizontal" action="{{ form_action }}" method="POST">
 			{% csrf_token %}
 			{% for field in form %}
 			<div class="input-container">
 				<label>{{ field.label }}</label>
 				{{ field }}
+		    	{% for error in field.errors %}
+	      			<div class="form-error">{{ error|escape }}</div>
+   			 	{% endfor %}
 			</div>
 			{% endfor %}
-			<input type="submit" value="Add event" />
+			<input type="submit" value="{{ submit_text }}" />
 		</form>
 
 {% endblock %}
