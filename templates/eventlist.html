@@ -1,6 +1,33 @@
-{% extends 'base.html' %}
-{% block page_content %}
+{% extends 'admin_base.html' %}
+{% block admin_content %}
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
 <h1>Events</h1>
+<div class="search-events">
+  <label for="search-input">Search events</label>
+  <input id="search-input" />
+</div>
+<script>
+  $(document).ready(function() {
+    events = [];
+    {% for event in events %}
+      events.push({'value': '{{ event.slug }}', 'label': '{{ event.name }}'});
+    {% endfor %}
+    console.log(events);
+    $('#search-input').autocomplete({
+      minlength: 2,
+      source: events,
+            focus: function(event, ui) {
+              $('#search-input').val(ui.item.label);
+              return false;
+          },
+            select: function(event, ui) {
+              window.location.href = '/admin/events/edit/' + ui.item.value + '/';
+            }
+    });
+  });
+</script>
 <table style="width:100%">
   <tr>
     <th>Name</th>
@@ -13,7 +40,7 @@
   </tr>
   {% for event in events %}
   <tr>
-    <td>{{ event.name }}</td>
+    <td><a href="/admin/events/edit/{{ event.slug }}/" title="Edit Event">{{ event.name }}</a></td>
     <td>{{ event.description }}</td>
     <td>{{ event.guild }}</td>
     <td>{{ event.points }}</td>
