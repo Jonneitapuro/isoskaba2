@@ -5,7 +5,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib import messages
 from django.template.context_processors import csrf
 
-from skaba.forms import AddEventForm
+from skaba.forms import AddEventForm, AddUserForm
 from skaba.models import Event, Guild, User
 
 # Create your views here.
@@ -108,5 +108,8 @@ def user_add(request):
 	token = {}
 	token.update(csrf(request))
 	token['form'] = form
+	token['site_title'] = 'Add User'
+	token['submit_text'] = 'Add user'
+	token['form_action'] = '/admin/users/add'
 
-	return render_to_response('user_add.html', token)
+	return render_to_response('admin_form.html', token)
