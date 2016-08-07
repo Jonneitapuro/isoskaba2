@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^$', skabaviews.index, name='index'),
     url(r'^userlist/$', skabaviews.list_users, name='userlist'),
     url(r'^eventlist/$', skabaviews.list_events, name='eventlist'),
-    url(r'^admin/events/add', skabaviews.event_add, name='event_add')
+    url(r'^admin/events/add', skabaviews.event_add, name='event_add'),
+    url(r'^admin/guilds/populate', skabaviews.guilds_populate, name='guilds_populate')
 ]
