@@ -6,8 +6,8 @@ from django.contrib import messages
 from django.template.context_processors import csrf
 from django.contrib.auth.models import User
 
-from skaba.forms import AddEventForm
-from skaba.models import Event, Guild
+from skaba.forms import AddEventForm, AddUserForm
+from skaba.models import Event, Guild, User
 
 
 def index(request):
@@ -50,10 +50,11 @@ def event_add(request):
 			description = request.POST.get('description')
 			slug = request.POST.get('slug')
 			points = request.POST.get('points')
+			repeats = request.POST.get('repeats')
 			guild = Guild.objects.get(pk=request.POST.get('guild'))
 
 			try:
-				event = Event(name=name, description=description, slug=slug, points=points, guild=guild)
+				event = Event(name=name, description=description, slug=slug, points=points, repeats=repeats, guild=guild)
 				event.save()
 				status = 200
 				messages.add_message(request, messages.INFO, 'event added')
@@ -98,3 +99,37 @@ def guilds_populate(request):
 		new_guild = Guild(name=guild['name'], abbreviation = guild['abbr'])
 		new_guild.save()
 	return redirect('index')
+
+@staff_member_required
+def user_add(request):
+	if request.method == 'POST':
+		form = AddUserForm(request.POST)
+		if (form.is_valid()):
+                        role = request.POST.get('role')
+                        email = request.POST.get('email')
+                        real_name = request.POST.get('real_name')
+                        guild = Guild.objects.get(pk=request.POST.get('guild'))
+                        is_tf = request.POST.get('is_tf')
+                        is_kv = request.POST.get('is_kv')
+
+                        try:
+                                user = User(email=email, real_name=real_name, role=role, guild=guild, is_kv=is_kv, is_tf=is_tf)
+                                user.save()
+                                status = 200
+                                messages.add_message(request, messages.INFO, 'user added')
+                                return redirect('/admin/users/add')
+                        except:
+                                status = 400
+
+	else:
+		form = AddUserForm()
+		status = 200
+
+	token = {}
+	token.update(csrf(request))
+	token['form'] = form
+	token['site_title'] = 'Add User'
+	token['submit_text'] = 'Add user'
+	token['form_action'] = '/admin/users/add'
+
+	return render_to_response('admin_form.html', token)
