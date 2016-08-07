@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.template.context_processors import csrf
 
 from skaba.forms import AddEventForm, AddUserForm
-from skaba.models import Event, Guild, User
+from skaba.models import Event, Guild, UserProfile
 
 # Create your views here.
 
@@ -85,31 +85,32 @@ def user_add(request):
 	if request.method == 'POST':
 		form = AddUserForm(request.POST)
 		if (form.is_valid()):
-                        role = request.POST.get('role')
-                        email = request.POST.get('email')
-                        real_name = request.POST.get('real_name')
-                        guild = Guild.objects.get(pk=request.POST.get('guild'))
-                        is_tf = request.POST.get('is_tf')
-                        is_kv = request.POST.get('is_kv')
+                        form.save()
+                        return HttpResponseRedirect('/admin/users/add')
+#                        role = request.POST.get('role')
+#                        email = request.POST.get('email')
+#                        real_name = request.POST.get('real_name')
+#                        guild = Guild.objects.get(pk=request.POST.get('guild'))
+#                        is_tf = request.POST.get('is_tf')
+#                        is_kv = request.POST.get('is_kv')
+#
+#                        try:
+#                                user = User(email=email, real_name=real_name, role=role, guild=guild, is_kv=is_kv, is_tf=is_tf)
+#                                user.save()
+#                                status = 200
+#                                messages.add_message(request, messages.INFO, 'user added')
+#                                return redirect('/admin/users/add')
+#                        except:
+#                                status = 400
 
-                        try:
-                                user = User(email=email, real_name=real_name, role=role, guild=guild, is_kv=is_kv, is_tf=is_tf)
-                                user.save()
-                                status = 200
-                                messages.add_message(request, messages.INFO, 'user added')
-                                return redirect('/admin/users/add')
-                        except:
-                                status = 400
-
-	else:
-		form = AddUserForm()
-		status = 200
-
-	token = {}
-	token.update(csrf(request))
+        args = {}
+        args.update(csrf(request))
+        args['form'] = AddUserForm()
+        print args
 	token['form'] = form
 	token['site_title'] = 'Add User'
 	token['submit_text'] = 'Add user'
 	token['form_action'] = '/admin/users/add'
+        return render(request, 'admin_form.html', args)
 
-	return render_to_response('admin_form.html', token)
+	#return render_to_response('admin_form.html', token)

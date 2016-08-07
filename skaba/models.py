@@ -4,7 +4,8 @@ from django.db.models.signals import post_save
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.contrib.auth.models import BaseUserManager
 
-class User(models.Model):
+class UserProfile(models.Model):
+	user = models.OneToOneField(User)
 	email = models.CharField(max_length=40, unique=True)
 	real_name = models.CharField(max_length=40)
 	is_tf = models.BooleanField(default=False)
