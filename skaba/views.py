@@ -30,10 +30,11 @@ def event_add(request):
 			description = request.POST.get('description')
 			slug = request.POST.get('slug')
 			points = request.POST.get('points')
+			repeats = request.POST.get('repeats')
 			guild = Guild.objects.get(pk=request.POST.get('guild'))
 
 			try:
-				event = Event(name=name, description=description, slug=slug, points=points, guild=guild)
+				event = Event(name=name, description=description, slug=slug, points=points, repeats=repeats, guild=guild)
 				event.save()
 				status = 200
 				messages.add_message(request, messages.INFO, 'event added')
