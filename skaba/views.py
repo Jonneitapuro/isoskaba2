@@ -2,6 +2,7 @@ from django.shortcuts import render, render_to_response, redirect
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.template.response import TemplateResponse
 from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib import messages
 from django.template.context_processors import csrf
 
 from skaba.forms import AddEventForm
@@ -23,19 +24,20 @@ def admin_index(request):
 @staff_member_required
 def event_add(request):
 	if request.method == 'POST':
-		form = addEventForm(request.POST)
+		form = AddEventForm(request.POST)
 		if (form.is_valid()):
 			name = request.POST.get('name')
 			description = request.POST.get('description')
 			slug = request.POST.get('slug')
-			points = request.POT.get('points')
-			guild = request.POST.get('guild')
+			points = request.POST.get('points')
+			guild = Guild.objects.get(pk=request.POST.get('guild'))
 
 			try:
 				event = Event(name=name, description=description, slug=slug, points=points, guild=guild)
 				event.save()
 				status = 200
-				return redirect('/admin/events/add', message='event added')
+				messages.add_message(request, messages.INFO, 'event added')
+				return redirect('/admin/events/add')
 			except:
 				status = 400
 
