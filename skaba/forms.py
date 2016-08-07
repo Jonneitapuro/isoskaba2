@@ -1,15 +1,18 @@
 from django import forms
-from skaba.models import Guild, UserProfile
+from skaba.models import Guild, UserProfile, Event
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
-class AddEventForm(forms.Form):
+class EventForm(forms.ModelForm):
+	class Meta:
+		model = Event
+		fields = ['name', 'description', 'slug', 'points', 'guild', 'repeats']
+	
 	name = forms.CharField(label='Event name', max_length=128, min_length=1)
 	description = forms.CharField(label='Description')
-	slug = forms.SlugField(label='Slug (used in URL)')
-	points = forms.IntegerField(label='Points')
-	repeats = forms.IntegerField(label='Repeats')
 	guild = forms.ModelChoiceField(queryset=Guild.objects.all(), empty_label=None)
+	repeats = forms.IntegerField(label='Repeats', initial=1, min_value=0)
+	points = forms.IntegerField(label='Points', min_value=0)
 
 class AddUserForm(UserCreationForm):
 	email = forms.EmailField(required=True)
