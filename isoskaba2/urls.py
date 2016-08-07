@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^siteadmin/', admin.site.urls),
     url(r'^admin/$', skabaviews.admin_index, name='admin_index'),
     url(r'^admin/events/add/$', skabaviews.event_add, name='event_add'),
+    url(r'^admin/events/edit/(?P<event_slug>([a-z0-9-]+))/$', skabaviews.event_edit, name='event_edit'),
     url(r'^admin/guilds/populate', skabaviews.guilds_populate, name='guilds_populate')
 ]
