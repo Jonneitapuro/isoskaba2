@@ -16,3 +16,7 @@ footer .copyright {
 div.input-container label {
 	width: 300px;
 }
+
+div.form-error {
+   color: red;
+}
