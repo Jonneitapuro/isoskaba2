@@ -1,10 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import BaseUserManager
 
-class UserProfile(models.Model):
-	user = models.OneToOneField(User)
-	is_tf = models.BooleanField(default=False)
-	role = models.CharField(max_length=8, default="user")
+class User(models.Model):
+    email = models.EmailField(unique=True)
+    real_name = models.CharField(max_length=50)
+    is_tf = models.BooleanField(default=False)
+    is_kv = models.BooleanField(default=False)
+    role = models.CharField(max_length=8, default="user")
 
 # This bit of code is copy-pasted from a previous project.
 # Not sure what it does ¯\_(ツ)_/¯
@@ -17,28 +22,24 @@ class UserProfile(models.Model):
 #        UserProfile.objects.create(user=instance)
 #
 #post_save.connect(create_user_profile, sender=User)
-#
 
 class Guild(models.Model):
-	name = models.CharField(max_length=64)
-	abbreviation = models.CharField(max_length=8)
+    name = models.CharField(max_length=64)
+    abbreviation = models.CharField(max_length=8)
 
 	def __str__(self):
 	    return u'{0}'.format(self.name)
 
 class Event(models.Model):
-	name = models.TextField()
-	description = models.TextField()
-	slug = models.SlugField()
-	created_at = models.DateTimeField(auto_now_add=True)
-	points = models.IntegerField()
-	guild = models.ForeignKey('Guild', on_delete=models.CASCADE)
+    name = models.TextField()
+    description = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    points = models.IntegerField()
+    repeats = models.IntegerField(default=1)
+    guild = models.ForeignKey('Guild', on_delete=models.CASCADE)
 
 class Attendance(models.Model):
-	created = models.DateTimeField(auto_now_add=True)
-	modified = models.DateTimeField()
-	event = models.ForeignKey('Event', on_delete=models.CASCADE)
-	user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-
-
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField()
+    event = models.ForeignKey('Event', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
