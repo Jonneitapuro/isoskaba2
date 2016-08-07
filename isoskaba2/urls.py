@@ -24,7 +24,8 @@ urlpatterns = [
     url(r'^admin/$', skabaviews.admin_index, name='admin_index'),
     url(r'^admin/users/$', skabaviews.list_users, name='userlist'),
     url(r'^admin/events/$', skabaviews.list_events, name='eventlist'),
+    url(r'^admin/events/add/$', skabaviews.event_add, name='event_add'),
+    url(r'^admin/events/edit/(?P<event_slug>([a-z0-9-]+))/$', skabaviews.event_edit, name='event_edit'),
     url(r'^admin/users/add', skabaviews.user_add, name='user_add'),
-    url(r'^admin/events/add', skabaviews.event_add, name='event_add'),
     url(r'^admin/guilds/populate', skabaviews.guilds_populate, name='guilds_populate')
 ]

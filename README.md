@@ -10,6 +10,7 @@ An applet to track tutor activity in AYY. This is complete rewrite of this proje
 1. Install dependencies by running `./envinstall.sh`
 2. Migrate Django `python3 manage.py migrate`
 3. Start a locally served development server (localhost:8000) by running `python3 manage.py runserver`
+4. There is also an script to automate virtualenv-schenanigans, called `test_applet.sh`
 
 
 ### About the project

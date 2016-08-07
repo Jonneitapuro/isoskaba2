@@ -35,7 +35,7 @@ class Guild(models.Model):
 class Event(models.Model):
 	name = models.TextField()
 	description = models.TextField()
-	slug = models.SlugField()
+	slug = models.SlugField(unique=True)
 	created_at = models.DateTimeField(auto_now_add=True)
 	points = models.IntegerField(default=1)
 	repeats= models.IntegerField(default=1)
