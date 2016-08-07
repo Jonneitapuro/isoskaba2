@@ -37,13 +37,14 @@ class Guild(models.Model):
                 return u'{0}'.format(self.name)
 
 class Event(models.Model):
-        name = models.TextField()
-        description = models.TextField()
-        slug = models.SlugField(unique=True)
-        created_at = models.DateTimeField(auto_now_add=True)
-        points = models.IntegerField(default=1)
-        repeats= models.IntegerField(default=1)
-        guild = models.ForeignKey('Guild', on_delete=models.CASCADE)
+	name = models.TextField()
+	description = models.TextField()
+	slug = models.SlugField(unique=True)
+	created_at = models.DateTimeField(auto_now_add=True)
+	date = models.DateField()
+	points = models.IntegerField(default=1)
+	repeats= models.IntegerField(default=1)
+	guild = models.ForeignKey('Guild', on_delete=models.CASCADE)
 
 class Attendance(models.Model):
         created = models.DateTimeField(auto_now_add=True)

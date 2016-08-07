@@ -30,13 +30,12 @@
 </script>
 <table style="width:100%">
   <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Guild</th>
-    <th>Points</th>
-    <th>Repeats</th>
-    <th>Created</th>
-    <th>Slug</th>
+    <th><a href="?order_by=name">Name</a></th>
+    <th><a href="?order_by=description">Description</a></th>
+    <th><a href="?order_by=guild">Guild</a></th>
+    <th><a href="?order_by=points">Points</a></th>
+    <th><a href="?order_by=repeats">Repeats</a></th>
+    <th><a href="?order_by=date">Date</a></th>
   </tr>
   {% for event in events %}
   <tr>
@@ -45,8 +44,7 @@
     <td>{{ event.guild }}</td>
     <td>{{ event.points }}</td>
     <td>{{ event.repeats }}</td>
-    <td>{{ event.created_at|date:'d.m.Y H:i' }}</td>
-    <td>{{ event.slug }}</td>
+    <td>{{ event.date|date:'d.m.Y' }}</td>
   </tr>
   {% endfor %}
 </table>

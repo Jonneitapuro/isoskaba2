@@ -19,7 +19,8 @@ def list_users(request):
     """
     Lists all users. Available only for admins.
     """
-    users = UserProfile.objects.all()
+    order_by = request.GET.get('order_by', 'real_name')
+    users = UserProfile.objects.all().order_by(order_by)
     response = TemplateResponse(request, 'userlist.html', {'users': users})
     response.render()
     return response
@@ -29,7 +30,8 @@ def list_events(request):
     """
     Lists all events. Available only for admins.
     """
-    events = Event.objects.all()
+    order_by = request.GET.get('order_by', 'name')
+    events = Event.objects.all().order_by(order_by)
     response = TemplateResponse(request, 'eventlist.html', {'events': events})
     response.render()
     return response
@@ -124,7 +126,7 @@ def user_add(request):
                 print(form.errors)
                 if form.is_valid():
                         profile = form.save(commit=False)
-                        profile.guild = request.guild
+                        print(profile.guild)
                         profile.save()
                         messages.add_message(request, messages.INFO, 'Creation successfull')
                         return HttpResponseRedirect('/admin/users/add')
