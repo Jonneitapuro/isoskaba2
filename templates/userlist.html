@@ -14,10 +14,10 @@
   <tr>
     <td>{{ user.username }}</td>
     <td>{{ user.email }}</td>
-    <td>{{ user.guild }}</td>
-    <td>{{ user.role }}</td>
-    <td>{{ user.is_tf }}</td>
-    <td>{{ user.is_kv }}</td>
+    <td>{{ user.profile.guild }}</td>
+    <td>{{ user.profile.role }}</td>
+    <td>{{ user.profile.is_tf }}</td>
+    <td>{{ user.profile.is_kv }}</td>
   </tr>
   {% endfor %}
 </table>
