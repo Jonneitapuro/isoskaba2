@@ -18,7 +18,7 @@ class AddUserForm(UserCreationForm):
     email = forms.EmailField(required=True)
     first_name = forms.CharField(required = True)
     last_name = forms.CharField(required = True)
-    role = forms.CharField(label='User\'s role', required=False)
+    role = forms.CharField(label='User\'s role', required=False, initial='user')
     guild = forms.ModelChoiceField(queryset=Guild.objects.all(), empty_label=None)
     is_kv = forms.BooleanField(required=False)
     is_tf = forms.BooleanField(required=False)
