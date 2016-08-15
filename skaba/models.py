@@ -37,7 +37,7 @@ class Event(models.Model):
 	guild = models.ForeignKey('Guild', on_delete=models.CASCADE)
 
 class Attendance(models.Model):
-    created = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField()
-    event = models.ForeignKey('Event', on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+	created = models.DateTimeField(auto_now_add=True)
+	verified = models.BooleanField(default=False)
+	event = models.ForeignKey('Event', on_delete=models.CASCADE)
+	user = models.ForeignKey(User, on_delete=models.CASCADE)

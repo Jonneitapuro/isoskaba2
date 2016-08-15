@@ -44,55 +44,55 @@ def admin_index(request):
 
 @staff_member_required
 def event_add(request):
-	if request.method == 'POST':
-		form = EventForm(request.POST)
-		if (form.is_valid()):
-			try:
-				form.save()
-				status = 200
-				messages.add_message(request, messages.INFO, 'event added')
-				return redirect('/admin/events/add/')
-			except:
-				status = 400
+    if request.method == 'POST':
+        form = EventForm(request.POST)
+        if (form.is_valid()):
+            try:
+                form.save()
+                status = 200
+                messages.add_message(request, messages.INFO, 'event added')
+                return redirect('/admin/events/add/')
+            except:
+                status = 400
 
-	else:
-		form = EventForm()
-		status = 200
+    else:
+        form = EventForm()
+        status = 200
 
-	token = {}
-	token.update(csrf(request))
-	token['form'] = form
-	token['site_title'] = 'Create event'
-	token['submit_text'] = 'Add event'
-	token['form_action'] = '/admin/events/add/'
+    token = {}
+    token.update(csrf(request))
+    token['form'] = form
+    token['site_title'] = 'Create event'
+    token['submit_text'] = 'Add event'
+    token['form_action'] = '/admin/events/add/'
 
-	return render_to_response('admin_form.html', token)
+    return render_to_response('admin_form.html', token)
 
 def event_edit(request, event_slug):
-	event = get_object_or_404(Event, slug=event_slug)
-	if request.method == 'POST':
-		form = EventForm(request.POST, instance=event)
-		if (form.is_valid()):
-			try:
-				form.save()
-				status = 200
-				messages.add_message(request, messages.INFO, 'event saved')
-				return redirect('/admin/events/edit/' + slug + '/')
-			except:
-				status = 400
+    event = get_object_or_404(Event, slug=event_slug)
+    if request.method == 'POST':
+        form = EventForm(request.POST, instance=event)
+        if (form.is_valid()):
+            try:
+                form.save()
+                status = 200
+                messages.add_message(request, messages.INFO, 'event saved')
+                return redirect('/admin/events/edit/' + slug + '/')
+            except:
+                status = 400
 
-	else:
-		form = EventForm(instance=event)
-		status = 200
+    else:
+        form = EventForm(instance=event)
+        status = 200
 
-	token = {}
-	token.update(csrf(request))
-	token['form'] = form
-	token['site_title'] = 'Edit event'
-	token['submit_text'] = 'Save event'
-	token['form_action'] = '/admin/events/edit/' + event.slug + '/'
+    token = {}
+    token.update(csrf(request))
+    token['form'] = form
+    token['site_title'] = 'Edit event'
+    token['submit_text'] = 'Save event'
+    token['form_action'] = '/admin/events/edit/' + event.slug + '/'
 
-	return render_to_response('admin_form.html', token)
+    return render_to_response('admin_form.html', token)
 
 @staff_member_required
 def guilds_populate(request):
@@ -139,3 +139,4 @@ def user_add(request):
 	args['submit_text'] = 'Add user'
 	args['form_action'] = '/admin/users/add'
 	return render_to_response('admin_form.html', args)
+
