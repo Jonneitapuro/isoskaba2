@@ -1,20 +1,21 @@
 from django.shortcuts import render, render_to_response, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.template.response import TemplateResponse
-from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.admin.views.decorators import user_passes_test
 from django.contrib import messages
 from django.template.context_processors import csrf
 from django.forms import model_to_dict
 
 from skaba.forms import EventForm, AddUserForm
 from skaba.models import Event, Guild, User
+from skaba.util import check_moderator, check_admin
 
 def index(request):
 	response = TemplateResponse(request, 'index.html', {})
 	response.render()
 	return response
 
-@staff_member_required
+@user_passes_test(check_moderator)
 def list_users(request):
 	"""
 	Lists all users. Available only for admins.
@@ -25,7 +26,7 @@ def list_users(request):
 	response.render()
 	return response
 
-@staff_member_required
+@user_passes_test(check_moderator)
 def list_events(request):
 	"""
 	Lists all events. Available only for admins.
@@ -36,13 +37,13 @@ def list_events(request):
 	response.render()
 	return response
 
-@staff_member_required
+@user_passes_test(check_moderator)
 def admin_index(request):
 	response = TemplateResponse(request, 'admin_index.html', {})
 	response.render()
 	return response
 
-@staff_member_required
+@user_passes_test(check_moderator)
 def event_add(request):
     if request.method == 'POST':
         form = EventForm(request.POST)
@@ -94,7 +95,7 @@ def event_edit(request, event_slug):
 
     return render(request, 'admin_form.html', token)
 
-@staff_member_required
+@user_passes_test(check_moderator)
 def guilds_populate(request):
 	if Guild.objects.all().exists():
 		return redirect('index')
@@ -119,7 +120,7 @@ def guilds_populate(request):
 		new_guild.save()
 	return redirect('index')
 
-@staff_member_required
+@user_passes_test(check_moderator)
 def user_add(request):
 	if request.method == 'POST':
 		form = AddUserForm(request.POST)

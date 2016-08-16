@@ -16,10 +16,13 @@ class EventForm(forms.ModelForm):
     points = forms.IntegerField(label='Points', min_value=0)
 
 class AddUserForm(UserCreationForm):
+    #role choices
+    role_choices = (('user', 'user'), ('moderator', 'moderator'), ('admin', 'admin'))
     email = forms.EmailField(required=True)
     first_name = forms.CharField(required = True)
     last_name = forms.CharField(required = True)
-    role = forms.CharField(label='User\'s role', required=False, initial='user')
+    #role = forms.CharField(label='User\'s role', required=False, initial='user')
+    role = forms.ChoiceField(choices=role_choices)
     guild = forms.ModelChoiceField(queryset=Guild.objects.all(), empty_label=None)
     is_kv = forms.BooleanField(required=False)
     is_tf = forms.BooleanField(required=False)

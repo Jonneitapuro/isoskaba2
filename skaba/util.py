@@ -1,19 +1,17 @@
-"""""""""""""""""""""""""""""""""""
-"These don't work yet as intended!"
-"""""""""""""""""""""""""""""""""""
+from skaba.models import User
 
 """
 Check if user has admin status.
 """
 def check_admin(user):
-    if (user.role == "admin"):
+    if (user.profile.role == "admin"):
         return True
     return False
 
 """
 Check if user has moderator status.
 """
-def check_mod(user):
-    if (user.role == "mod"):
+def check_moderator(user):
+    if (user.profile.role == "moderator" or user.profile.role == 'admin'):
         return True
-    return False
+    return True
