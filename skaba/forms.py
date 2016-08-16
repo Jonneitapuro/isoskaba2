@@ -6,11 +6,12 @@ from django.contrib.auth.forms import UserCreationForm
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event
-        fields = ['name', 'description', 'slug', 'points', 'guild', 'repeats']
+        fields = ['name', 'description', 'slug', 'date', 'points', 'guild', 'repeats']
         
     name = forms.CharField(label='Event name', max_length=128, min_length=1)
     description = forms.CharField(label='Description')
     guild = forms.ModelChoiceField(queryset=Guild.objects.all(), empty_label=None)
+    date = forms.DateField(widget=forms.SelectDateWidget())
     repeats = forms.IntegerField(label='Repeats', initial=1, min_value=0)
     points = forms.IntegerField(label='Points', min_value=0)
 
