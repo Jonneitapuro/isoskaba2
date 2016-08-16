@@ -10,7 +10,7 @@ from skaba.forms import EventForm, AddUserForm
 from skaba.models import Event, Guild, User
 
 def index(request):
-	response = TemplateResponse(request, 'index.html', {})
+	response = TemplateResponse(request, 'index.html')
 	response.render()
 	return response
 
@@ -25,13 +25,13 @@ def list_users(request):
 	response.render()
 	return response
 
-@staff_member_required
+"""@staff_member_required"""
 def list_events(request):
 	"""
 	Lists all events. Available only for admins.
 	"""
 	order_by = request.GET.get('order_by', 'name')
-	events = Event.objects.all().order_by(order_by)
+	events = Event().objects.all().order_by(order_by)
 	response = TemplateResponse(request, 'eventlist.html', {'events': events})
 	response.render()
 	return response
@@ -42,7 +42,7 @@ def admin_index(request):
 	response.render()
 	return response
 
-@staff_member_required
+"""@staff_member_required"""
 def event_add(request):
     if request.method == 'POST':
         form = EventForm(request.POST)
@@ -119,7 +119,7 @@ def guilds_populate(request):
 		new_guild.save()
 	return redirect('index')
 
-@staff_member_required
+"""@staff_member_required"""
 def user_add(request):
 	if request.method == 'POST':
 		form = AddUserForm(request.POST)
@@ -140,3 +140,14 @@ def user_add(request):
 	args['form_action'] = '/admin/users/add'
 	return render_to_response('admin_form.html', args)
 
+def list_user_events(request):
+	"""
+	Lists all events. Available only for admins.
+	"""
+	order_by = request.GET.get('order_by', 'name')
+	current_user = request.user
+	u_g_id = current_user.guild_id
+	events = Event(guild_id = u_g_id).objects.order_by(order_by)
+	response = TemplateResponse(request, 'eventlist.html', {'events': events})
+	response.render()
+	return response
