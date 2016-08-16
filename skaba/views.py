@@ -3,6 +3,8 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.template.response import TemplateResponse
 from django.contrib.admin.views.decorators import user_passes_test
 from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.template import RequestContext
 from django.template.context_processors import csrf
 from django.forms import model_to_dict
 
@@ -141,3 +143,34 @@ def user_add(request):
 	args['form_action'] = '/admin/users/add'
 	return render(request, 'admin_form.html', args)
 
+def login_user(request):
+    c = RequestContext(request)
+    if (request.user and request.user.is_authenticated()):
+        return redirect('index')
+    username = password = ''
+    status = 200
+
+    if request.POST:
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                messages.success(request, 'Logged in successfully, welcome ' + username)
+                return redirect('index')
+            else:
+                messages.error(request, 'Your account is not active.')
+                status=403 #Forbidden
+        else:
+            messages.error(request, 'Invalid username and/or password.')
+            status=401 #Unauthorised
+
+
+    return render_to_response('simple_login.html', {'username': username}, c, status=status)
+
+def logout_user(request):
+    logout(request)
+    messages.success(request, 'Logged out')
+    return redirect('index')
