@@ -66,7 +66,7 @@ def event_add(request):
     token['submit_text'] = 'Add event'
     token['form_action'] = '/admin/events/add/'
 
-    return render_to_response('admin_form.html', token)
+    return render(request, 'admin_form.html', token)
 
 def event_edit(request, event_slug):
     event = get_object_or_404(Event, slug=event_slug)
@@ -92,7 +92,7 @@ def event_edit(request, event_slug):
     token['submit_text'] = 'Save event'
     token['form_action'] = '/admin/events/edit/' + event.slug + '/'
 
-    return render_to_response('admin_form.html', token)
+    return render(request, 'admin_form.html', token)
 
 @staff_member_required
 def guilds_populate(request):
@@ -138,5 +138,5 @@ def user_add(request):
 	args['site_title'] = 'Add User'
 	args['submit_text'] = 'Add user'
 	args['form_action'] = '/admin/users/add'
-	return render_to_response('admin_form.html', args)
+	return render(request, 'admin_form.html', args)
 
