@@ -128,3 +128,5 @@ STATICFILES_DIRS = [
 ]
 
 AUTH_PROFILE_MODULE = 'skaba.UserProfile'
+
+LOGIN_URL = '/login'
