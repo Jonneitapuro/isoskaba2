@@ -9,7 +9,7 @@ from django.template.context_processors import csrf
 from django.forms import model_to_dict
 
 from skaba.forms import EventForm, AddUserForm
-from skaba.models import Event, Guild, User
+from skaba.models import Event, Guild, User, UserProfile
 from skaba.util import check_moderator, check_admin
 
 def index(request):
@@ -182,3 +182,14 @@ def logout_user(request):
     logout(request)
     messages.success(request, 'Logged out')
     return redirect('index')
+
+def list_user_events(request):
+	order_by = request.GET.get('order_by', 'name')
+	"""
+	Stops working here
+	"""
+	cur_guild_id = UserProfile.objects.filter(user_id=request.user.id)
+	events = Event.objects.filter(guild = cur_guild_id).order_by(order_by)
+	response = TemplateResponse(request, 'eventlist.html', {'events': events})
+	response.render()
+	return response
