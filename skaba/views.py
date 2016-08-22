@@ -164,7 +164,7 @@ def login_user(request):
             if user.is_active:
                 login(request, user)
                 messages.success(request, 'Logged in successfully, welcome ' + username)
-                if redirectURL is not None:
+                if redirectURL is not None and redirectURL != 'None':
                     return redirect(redirectURL)
                 else:
                     return redirect('index')
