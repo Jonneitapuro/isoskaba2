@@ -7,15 +7,17 @@ from django.contrib.auth import authenticate, login, logout
 from django.template import RequestContext
 from django.template.context_processors import csrf
 from django.forms import model_to_dict
+from django.utils.translation import ugettext as _
 
 from skaba.forms import EventForm, AddUserForm
 from skaba.models import Event, Guild, User
 from skaba.util import check_moderator, check_admin
 
 def index(request):
-	response = TemplateResponse(request, 'index.html', {})
-	response.render()
-	return response
+    response = TemplateResponse(request, 'index.html', {})
+    response.render()
+    print(request.LANGUAGE_CODE)
+    return response
 
 @user_passes_test(check_moderator)
 def list_users(request):
@@ -163,16 +165,16 @@ def login_user(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                messages.success(request, 'Logged in successfully, welcome ' + username)
+                messages.success(request, _('Logged in successfully, welcome ') + username)
                 if redirectURL is not None and redirectURL != 'None':
                     return redirect(redirectURL)
                 else:
                     return redirect('index')
             else:
-                messages.error(request, 'Your account is not active.')
+                messages.error(request, _('Your account is not active.'))
                 status=403 #Forbidden
         else:
-            messages.error(request, 'Invalid username and/or password.')
+            messages.error(request, _('Invalid username and/or password.'))
             status=401 #Unauthorised
 
 
@@ -180,5 +182,5 @@ def login_user(request):
 
 def logout_user(request):
     logout(request)
-    messages.success(request, 'Logged out')
+    messages.success(request, _('Logged out'))
     return redirect('index')
