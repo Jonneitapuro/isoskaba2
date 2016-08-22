@@ -1,7 +1,7 @@
 from django.shortcuts import render, render_to_response, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.template.response import TemplateResponse
-from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.admin.views.decorators import user_passes_test
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.template import RequestContext
@@ -10,13 +10,14 @@ from django.forms import model_to_dict
 
 from skaba.forms import EventForm, AddUserForm
 from skaba.models import Event, Guild, User
+from skaba.util import check_moderator, check_admin
 
 def index(request):
 	response = TemplateResponse(request, 'index.html', {})
 	response.render()
 	return response
 
-@staff_member_required
+@user_passes_test(check_moderator)
 def list_users(request):
 	"""
 	Lists all users. Available only for admins.
@@ -27,7 +28,7 @@ def list_users(request):
 	response.render()
 	return response
 
-@staff_member_required
+@user_passes_test(check_moderator)
 def list_events(request):
 	"""
 	Lists all events. Available only for admins.
@@ -38,13 +39,13 @@ def list_events(request):
 	response.render()
 	return response
 
-@staff_member_required
+@user_passes_test(check_moderator)
 def admin_index(request):
 	response = TemplateResponse(request, 'admin_index.html', {})
 	response.render()
 	return response
 
-@staff_member_required
+@user_passes_test(check_moderator)
 def event_add(request):
     if request.method == 'POST':
         form = EventForm(request.POST)
@@ -70,6 +71,7 @@ def event_add(request):
 
     return render(request, 'admin_form.html', token)
 
+@user_passes_test(check_moderator)
 def event_edit(request, event_slug):
     event = get_object_or_404(Event, slug=event_slug)
     if request.method == 'POST':
@@ -96,7 +98,7 @@ def event_edit(request, event_slug):
 
     return render(request, 'admin_form.html', token)
 
-@staff_member_required
+@user_passes_test(check_admin)
 def guilds_populate(request):
 	if Guild.objects.all().exists():
 		return redirect('index')
@@ -121,7 +123,7 @@ def guilds_populate(request):
 		new_guild.save()
 	return redirect('index')
 
-@staff_member_required
+@user_passes_test(check_moderator)
 def user_add(request):
 	if request.method == 'POST':
 		form = AddUserForm(request.POST)
@@ -144,21 +146,28 @@ def user_add(request):
 
 def login_user(request):
     c = RequestContext(request)
+    redirectURL = request.GET.get('next', None)
+
     if (request.user and request.user.is_authenticated()):
         return redirect('index')
+
     username = password = ''
     status = 200
 
     if request.POST:
         username = request.POST.get('username')
         password = request.POST.get('password')
+        redirectURL = request.POST.get('next')
 
         user = authenticate(username=username, password=password)
         if user is not None:
             if user.is_active:
                 login(request, user)
                 messages.success(request, 'Logged in successfully, welcome ' + username)
-                return redirect('index')
+                if redirectURL is not None:
+                    return redirect(redirectURL)
+                else:
+                    return redirect('index')
             else:
                 messages.error(request, 'Your account is not active.')
                 status=403 #Forbidden
@@ -167,7 +176,7 @@ def login_user(request):
             status=401 #Unauthorised
 
 
-    return render_to_response('simple_login.html', {'username': username}, c, status=status)
+    return render(request, 'simple_login.html', {'username': username, 'next': redirectURL}, c, status=status)
 
 def logout_user(request):
     logout(request)
