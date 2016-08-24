@@ -184,12 +184,10 @@ def logout_user(request):
     return redirect('index')
 
 def list_user_events(request):
-	order_by = request.GET.get('order_by', 'name')
-	"""
-	Stops working here
-	"""
-	cur_guild_id = UserProfile.objects.filter(user_id=request.user.id)
-	events = Event.objects.filter(guild = cur_guild_id).order_by(order_by)
-	response = TemplateResponse(request, 'eventlist.html', {'events': events})
-	response.render()
-	return response
+    order_by = request.GET.get('order_by', 'name')
+    cur_user = request.user
+    cur_user_profile = UserProfile.objects.get(user_id = cur_user.id)
+    events = Event.objects.filter(guild__id = cur_user_profile.guild_id).order_by(order_by)
+    response = TemplateResponse(request, 'eventlist.html', {'events': events})
+    response.render()
+    return response
