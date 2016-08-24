@@ -18,5 +18,31 @@ div.input-container label {
 }
 
 div.form-error {
-   color: red;
+  color: red;
+}
+
+#headerpic {
+  width: 100%;
+}
+
+#header {
+  /*background: url('../images/isoskaba-kuva-pieni.jpg') no-repeat;
+  -webkit-background-size: contain;
+  -moz-background-size: contain;
+  -o-background-size: contain;
+  background-size: contain;*/
+}
+
+#login {
+ position: absolute;
+ float: right;
+}
+
+.panel-default {
+ opacity: 0.9;
+ margin-top:40px;
+}
+
+.form-group.last {
+ margin-bottom:40px;
 }
