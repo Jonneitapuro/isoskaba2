@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.template import RequestContext
 from django.template.context_processors import csrf
 from django.forms import model_to_dict
+from django.db.models import Q
 
 from skaba.forms import EventForm, AddUserForm
 from skaba.models import Event, Guild, User, UserProfile
@@ -187,7 +188,7 @@ def list_user_events(request):
     order_by = request.GET.get('order_by', 'name')
     cur_user = request.user
     cur_user_profile = UserProfile.objects.get(user_id = cur_user.id)
-    events = Event.objects.filter(guild__id = cur_user_profile.guild_id).order_by(order_by)
+    events = Event.objects.filter(Q(guild__id = cur_user_profile.guild_id) | Q(guild__id = 1)).order_by(order_by)
     response = TemplateResponse(request, 'eventlist.html', {'events': events})
     response.render()
     return response
