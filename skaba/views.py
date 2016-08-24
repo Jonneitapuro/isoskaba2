@@ -131,10 +131,7 @@ def user_add(request):
 		if form.is_valid():
 			form.save()
 			messages.add_message(request, messages.INFO, 'Creation successfull')
-			return HttpResponseRedirect('/admin/users/add')
-		else:
-			messages.add_message(request, messages.INFO, form.errors)
-			return HttpResponseRedirect('/admin/users/add')
+			return redirect('/admin/users/add')
 	else:
 		form = AddUserForm()
 	args = {}
