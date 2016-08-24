@@ -36,7 +36,7 @@ def list_events(request):
 	"""
 	order_by = request.GET.get('order_by', 'name')
 	events = Event.objects.all().order_by(order_by)
-	response = TemplateResponse(request, 'eventlist.html', {'events': events})
+	response = TemplateResponse(request, 'admin_eventlist.html', {'events': events})
 	response.render()
 	return response
 
