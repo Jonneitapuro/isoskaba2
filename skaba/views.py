@@ -185,13 +185,13 @@ def logout_user(request):
     return redirect('index')
 
 def list_user_events(request):
-    order_by = request.GET.get('order_by', 'name')
+    order_by = request.GET.get('order_by', 'guild')
     cur_user = request.user
     cur_user_profile = UserProfile.objects.get(user_id = cur_user.id)
     if cur_user_profile.is_tf == 1:
         tf = 14
     else:
-        tf = null
+        tf = 20
     events = Event.objects.filter(Q(guild__id = cur_user_profile.guild_id) | Q(guild__id = 1) | Q(guild__id = tf)).order_by(order_by)
     response = TemplateResponse(request, 'eventlist.html', {'events': events})
     response.render()
