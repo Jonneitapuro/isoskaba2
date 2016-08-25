@@ -8,9 +8,10 @@ from django.template import RequestContext
 from django.template.context_processors import csrf
 from django.forms import model_to_dict
 from django.utils.translation import ugettext as _
+from django.db.models import Q
 
 from skaba.forms import EventForm, AddUserForm
-from skaba.models import Event, Guild, User
+from skaba.models import Event, Guild, User, UserProfile
 from skaba.util import check_moderator, check_admin
 
 def index(request):
@@ -37,7 +38,7 @@ def list_events(request):
 	"""
 	order_by = request.GET.get('order_by', 'name')
 	events = Event.objects.all().order_by(order_by)
-	response = TemplateResponse(request, 'eventlist.html', {'events': events})
+	response = TemplateResponse(request, 'admin_eventlist.html', {'events': events})
 	response.render()
 	return response
 
@@ -132,10 +133,7 @@ def user_add(request):
 		if form.is_valid():
 			form.save()
 			messages.add_message(request, messages.INFO, 'Creation successfull')
-			return HttpResponseRedirect('/admin/users/add')
-		else:
-			messages.add_message(request, messages.INFO, form.errors)
-			return HttpResponseRedirect('/admin/users/add')
+			return redirect('/admin/users/add')
 	else:
 		form = AddUserForm()
 	args = {}
@@ -184,3 +182,16 @@ def logout_user(request):
     logout(request)
     messages.success(request, _('Logged out'))
     return redirect('index')
+
+def list_user_events(request):
+    order_by = request.GET.get('order_by', 'guild')
+    cur_user = request.user
+    cur_user_profile = UserProfile.objects.get(user_id = cur_user.id)
+    if cur_user_profile.is_tf == 1:
+        tf = 14
+    else:
+        tf = 20
+    events = Event.objects.filter(Q(guild__id = cur_user_profile.guild_id) | Q(guild__id = 1) | Q(guild__id = tf)).order_by(order_by)
+    response = TemplateResponse(request, 'eventlist.html', {'events': events})
+    response.render()
+    return response
