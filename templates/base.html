@@ -26,21 +26,26 @@
         		</div>
        			<div class="collapse navbar-collapse" id="myNavbar">
           			<ul class="nav navbar-nav">
-            			<li><a href="/">Home</a></li>
+            			<li><a href="/">{% trans 'Home' %}</a></li>
             			{% if user.is_superuser %}
-            			<li><a href="/admin/events">Events</a></li>
+            			<li><a href="/admin/events">{% trans 'Events' %}</a></li>
             			{% endif %}
          		 	</ul>
-          			<ul class="nav navbar-nav navbar-right">
-                  <li><button class="setlang" href="/" value="fi">FIN</a></li>
-                  <li><button class="setlang" href="/" value="sv">SWE</a></li>
-                  <li><button class="setlang" href="/" value="en">ENG</a></li>
+              <div id="language-form nav navbar-nav navbar-right">
+                <form action="i18n/setlang/" id="language-form" method="post">
+                  {% csrf_token %}
+                  <input type="submit" name="language" value="fi">
+                  <input type="submit" name="language" value="en">
+                  <input type="submit" name="language" value="sv">
+                </form>
+              </div>
+              <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
-              			<li><a href="/logout/"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
-            			{% else %}
-              			<li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-            			{% endif %}
-          			</ul>
+            			<li><a href="/logout/"><span class="glyphicon glyphicon-log-out"></span> {%trans 'Log out' %}</a></li>
+          			{% else %}
+            			<li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> {%trans 'Log in' %}</a></li>
+          			{% endif %}
+        			</ul>
         		</div>
       		</div>
     	</nav>

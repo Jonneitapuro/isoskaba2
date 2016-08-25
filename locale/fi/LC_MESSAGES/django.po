@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-22 20:04+0300\n"
+"POT-Creation-Date: 2016-08-25 20:55+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,6 +34,22 @@ msgstr "Väärä käyttäjänimi ja/tai salasana"
 msgid "Logged out"
 msgstr "Kirjauduit ulos"
 
-#: templates/base.html:60
+#: templates/base.html:29
+msgid "Home"
+msgstr "Etusivu"
+
+#: templates/base.html:31
+msgid "Events"
+msgstr "Tapahtumat"
+
+#: templates/base.html:42
+msgid "Log out"
+msgstr "Kirjaudu ulos"
+
+#: templates/base.html:44
+msgid "Log in"
+msgstr "Kirjaudu sisään"
+
+#: templates/base.html:63
 msgid "Text"
 msgstr "Teksti"
