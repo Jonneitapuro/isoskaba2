@@ -1,12 +1,7 @@
 
 
-$(function() {
-	$('.setlang').click(function() {
-		$.post('i18n/setlang/', { language: this.value, next: window.location.pathname })
-	})
-})
 
-// using jQuery
+// https://docs.djangoproject.com/en/1.7/ref/contrib/csrf/#ajax
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie !== '') {
