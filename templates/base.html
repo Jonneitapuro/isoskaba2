@@ -56,9 +56,6 @@
                       </div>
                     </form>
                   </div>
-                  <div class="panel-footer">
-                    Not Registered? <a href="#">Register here</a></div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -78,15 +75,14 @@
                    <li><a href="/">Omat pisteet</a></li>
                    <li><a href="/">Killan leaderboard</a></li>
                    <li><a href="/">Kiltojen välinen leaderboard</a></li>
-                   {% if user.is_superuser %}
-                   <li><a href="/admin/events">Events</a></li>
+                   {% if user.profile.role == 'moderator' or user.profile.role == 'admin' %}
+                   <li><a href="/admin/">Admin panel</a></li>
                    {% endif %}
                  </ul>
                  <ul class="nav navbar-nav navbar-right">
                   {% if user.is_authenticated %}
                   <li><a href="/logout/"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
                   {% else %}
-                  <li><a href="/accounts/register/"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                   <li><a href="/login/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                   {% endif %}
                 </ul>
