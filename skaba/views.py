@@ -4,6 +4,7 @@ from django.template.response import TemplateResponse
 from django.contrib.admin.views.decorators import user_passes_test
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.template.context_processors import csrf
 from django.forms import model_to_dict
@@ -11,7 +12,7 @@ from django.utils.translation import ugettext as _
 from django.db.models import Q
 
 from skaba.forms import EventForm, AddUserForm
-from skaba.models import Event, Guild, User, UserProfile
+from skaba.models import Event, Guild, User, UserProfile, Attendance
 from skaba.util import check_moderator, check_admin
 
 def index(request):
@@ -193,5 +194,14 @@ def list_user_events(request):
         tf = 20
     events = Event.objects.filter(Q(guild__id = cur_user_profile.guild_id) | Q(guild__id = 1) | Q(guild__id = tf)).order_by(order_by)
     response = TemplateResponse(request, 'eventlist.html', {'events': events})
+    response.render()
+    return response
+
+@login_required
+def user_info(request):
+    cur_user = request.user
+    cur_user_profile = UserProfile.objects.get(user_id = cur_user.id)
+    # attendances = Attendance.objects.filter(user = cur_user)
+    response = TemplateResponse(request, 'user_info.html', {'profile': cur_user_profile, 'attendances': {}})
     response.render()
     return response

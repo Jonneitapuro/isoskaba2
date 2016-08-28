@@ -33,7 +33,8 @@ urlpatterns = [
     url(r'^admin/guilds/populate', skabaviews.guilds_populate, name='guilds_populate'),
     url(r'^logout/$', skabaviews.logout_user, name='logout'),
     url(r'^login', skabaviews.login_user, name='login'),
-    url(r'^user/events/', skabaviews.list_user_events, name='usereventlist')
+    url(r'^user/events/', skabaviews.list_user_events, name='usereventlist'),
+    url(r'^user/$', skabaviews.user_info, name='userinfo')
 ]
 urlpatterns += i18n_patterns('',
 
