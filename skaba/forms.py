@@ -65,6 +65,7 @@ class AdminEditProfileForm(forms.ModelForm):
         exclude = ('user',)
 
     def save(self, commit = True):
+        # user = self.instance.user
         profile = super(AdminEditProfileForm, self).save(commit = False)
         profile.role = self.cleaned_data['role']
         profile.guild = self.cleaned_data['guild']
