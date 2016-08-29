@@ -32,7 +32,7 @@
             			{% endif %}
          		 	</ul>
               <div id="language-form nav navbar-nav navbar-right">
-                <form action="i18n/setlang/" id="language-form" method="post">
+                <form action="/i18n/setlang/" id="language-form" method="post">
                   {% csrf_token %}
                   <input type="submit" name="language" value="fi">
                   <input type="submit" name="language" value="en">
