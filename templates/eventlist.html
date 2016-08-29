@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block page_content %}
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/divemes/smoodivness/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
 <h1>Events</h1>
@@ -16,18 +16,19 @@
     {% endfor %}
     console.log(events);
     $('#search-input').autocomplete({
-      minlength: 2,
+      minlengdiv: 2,
       source: events,
             focus: function(event, ui) {
               $('#search-input').val(ui.item.label);
               return false;
           },
             select: function(event, ui) {
-              window.location.href = '/admin/events/edit/' + ui.item.value + '/';
+              window.location.href = '/events/attend/' + ui.item.value + '/';
             }
     });
   });
 </script>
+<<<<<<< HEAD
 <table style="width:100%">
   <tr>
     <th><a href="?order_by=name">Name</a></th>
@@ -38,15 +39,27 @@
     <th><a href="?order_by=date">Date</a></th>
     <th>Attend</th>
   </tr>
+=======
+<div class="div-table">
+  <div class="div-table-row">
+    <div>Extra info</div>
+    <div><a href="?order_by=name">Name</a></div>
+    <div><a href="?order_by=guild">Guild</a></div>
+    <div><a href="?order_by=points">Points</a></div>
+    <div><a href="?order_by=date">Date</a></div>
+  </div>
+>>>>>>> master
   {% for event in events %}
-  <tr>
-    <td>{{ event.name }}</td>
-    <td>{{ event.description }}</td>
-    <td>{{ event.guild }}</td>
-    <td>{{ event.points }}</td>
-    <td>{{ event.repeats }}</td>
-    <td>{{ event.date|date:'d.m.Y' }}</td>
-  </tr>
+  <div class="div-table-row">
+    <div><a href="#{{ event.slug }}" data-toggle="collapse">+</a></div>
+    <div>{{ event.name }}</div>
+    <div>{{ event.guild }}</div>
+    <div>{{ event.points }}</div>
+    <div>{{ event.date|date:'d.m.Y' }}</div>
+  </div>
+  <div id="{{ event.slug }}" class="collapse">
+    {{ event.description }}
+  </div>
   {% endfor %}
 </table>
 {% endblock %}
