@@ -11,7 +11,7 @@ from django.utils.translation import ugettext as _
 from django.db.models import Q
 
 from skaba.forms import EventForm, AddUserForm
-from skaba.models import Event, Guild, User, UserProfile
+from skaba.models import Event, Guild, User, UserProfile, Attendance
 from skaba.util import check_moderator, check_admin
 
 def index(request):
@@ -186,7 +186,7 @@ def logout_user(request):
 def list_user_events(request):
     order_by = request.GET.get('order_by', 'guild')
     cur_user = request.user
-    cur_user_profile = UserProfile.objects.get(user_id = cur_user.id)
+    cur_user_profile = UserProfile.objects.get(user_id  = cur_user.id)
     if cur_user_profile.is_tf == 1:
         tf = 14
     else:
@@ -198,4 +198,9 @@ def list_user_events(request):
 
 def attend_event(request):
     if 'attend' in request.POST:
-        return redirect('usereventlist')
+        reps = request.POST.get('e_repeats')
+        reps = int(reps)
+        cur_user = UserProfile.objects.get(user_id = request.user.id)
+        repcount = Attendance.objects.filter(Q(user_id = cur_user.id) | Q(event_id = request.POST.get('e_id'))).count()
+        if  reps > repcount:
+            return redirect('usereventlist')

@@ -49,6 +49,8 @@
     <form role="form" class="form-horizontal" action="/attend" method="POST">
         {% csrf_token %}
 	<input type="hidden" name="next" value="{{ next }}" />
+        <input type="hidden" name="e_id" value="{{ event.id }}" />
+        <input type="hidden" name="e_repeats" int value="{{ event.points }}" />
         <input type="submit" name="attend" value="Attend" />
     </form>
   </div>
