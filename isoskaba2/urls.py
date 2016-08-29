@@ -17,6 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf import settings
 from skaba import views as skabaviews
+from django.conf.urls.static import static
 from django.conf.urls.i18n import i18n_patterns
 
 
@@ -35,6 +36,6 @@ urlpatterns = [
     url(r'^login', skabaviews.login_user, name='login'),
     url(r'^events/$', skabaviews.list_user_events, name='usereventlist')
 ]
-urlpatterns += i18n_patterns('',
 
-)
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
