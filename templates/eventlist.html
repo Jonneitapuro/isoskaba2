@@ -29,8 +29,6 @@
   });
 </script>
 
-
-
 <div class="div-table">
   <div class="div-table-row">
     <div>Extra info</div>
@@ -38,6 +36,7 @@
     <div><a href="?order_by=guild">Guild</a></div>
     <div><a href="?order_by=points">Points</a></div>
     <div><a href="?order_by=date">Date</a></div>
+    <div>Attend</div>
   </div>
 
   {% for event in events %}
@@ -47,6 +46,9 @@
     <div>{{ event.guild }}</div>
     <div>{{ event.points }}</div>
     <div>{{ event.date|date:'d.m.Y' }}</div>
+    <div class="form-group">
+	<input type="checkbox" id="attend" value="{{ attend }}" />
+    </div>
   </div>
   <div id="{{ event.slug }}" class="collapse">
     {{ event.description }}
