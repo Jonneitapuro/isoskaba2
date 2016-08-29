@@ -1,3 +1,11 @@
+#content {
+   margin-bottom:60px;
+}
+
+#language-form input {
+   float:left;
+}
+
 footer {
    position:fixed;
    bottom:0;
