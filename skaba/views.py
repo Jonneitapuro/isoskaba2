@@ -9,6 +9,7 @@ from django.template.context_processors import csrf
 from django.forms import model_to_dict
 from django.utils.translation import ugettext as _
 from django.db.models import Q
+from django.db.models import Count
 
 from skaba.forms import EventForm, AddUserForm
 from skaba.models import Event, Guild, User, UserProfile, Attendance
@@ -200,7 +201,14 @@ def attend_event(request):
     if 'attend' in request.POST:
         reps = request.POST.get('e_repeats')
         reps = int(reps)
+        eventid = request.POST.get('e_id')
+        eventid = int(eventid)
         cur_user = UserProfile.objects.get(user_id = request.user.id)
-        repcount = Attendance.objects.filter(Q(user_id = cur_user.id) | Q(event_id = request.POST.get('e_id'))).count()
+        repcount = Attendance.objects.filter(Q(user_id = cur_user.id) & Q(event_id = request.POST.get('e_id'))).count()
         if  reps > repcount:
+            a = Attendance(event_id = eventid, user_id = cur_user.id)
+            a.save()
+            return redirect('usereventlist')
+        else:
+            messages.error(request, _('You have attended for maximum amount'))
             return redirect('usereventlist')

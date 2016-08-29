@@ -50,7 +50,7 @@
         {% csrf_token %}
 	<input type="hidden" name="next" value="{{ next }}" />
         <input type="hidden" name="e_id" value="{{ event.id }}" />
-        <input type="hidden" name="e_repeats" int value="{{ event.points }}" />
+        <input type="hidden" name="e_repeats" int value="{{ event.repeats }}" />
         <input type="submit" name="attend" value="Attend" />
     </form>
   </div>
