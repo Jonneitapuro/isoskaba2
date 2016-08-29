@@ -195,3 +195,7 @@ def list_user_events(request):
     response = TemplateResponse(request, 'eventlist.html', {'events': events})
     response.render()
     return response
+
+def attend_event(request):
+    if 'attend' in request.POST:
+        return redirect('usereventlist')
