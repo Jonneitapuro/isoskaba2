@@ -11,7 +11,7 @@ from django.utils.translation import ugettext as _
 from django.db.models import Q
 
 from skaba.forms import EventForm, AddUserForm
-from skaba.models import Event, Guild, User, UserProfile
+from skaba.models import Event, Guild, User, UserProfile, Attendance
 from skaba.util import check_moderator, check_admin
 
 def index(request):
@@ -193,5 +193,21 @@ def list_user_events(request):
         tf = 20
     events = Event.objects.filter(Q(guild__id = cur_user_profile.guild_id) | Q(guild__id = 1) | Q(guild__id = tf)).order_by(order_by)
     response = TemplateResponse(request, 'eventlist.html', {'events': events})
+    response.render()
+    return response
+
+def verify_attendances(request):
+
+    if request.POST:
+        attendance = Attendance.objects.get(pk=request.POST.get('attendance'))
+        attendance.verified = True
+        attendance.save()
+
+    order_by = request.GET.get('order_by', 'user')
+    guild_users = User.objects.filter(userprofile__guild = request.user.userprofile.guild)
+    unverified = Attendance.objects.filter(Q(user__in = guild_users) & Q(verified = False)).order_by(order_by)
+    verified = Attendance.objects.filter(Q(user__in = guild_users) & Q(verified = True)).order_by(order_by)
+
+    response = TemplateResponse(request, 'admin_attendances.html', {'unverified': unverified, 'verified': verified})
     response.render()
     return response
