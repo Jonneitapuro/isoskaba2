@@ -35,6 +35,6 @@ urlpatterns = [
     url(r'^login', skabaviews.login_user, name='login'),
     url(r'^user/events/', skabaviews.list_user_events, name='usereventlist')
 ]
-urlpatterns += i18n_patterns('',
 
-)
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
