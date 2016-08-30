@@ -9,9 +9,10 @@ from django.template.context_processors import csrf
 from django.forms import model_to_dict
 from django.utils.translation import ugettext as _
 from django.db.models import Q
+from django.db.models import Count
 
 from skaba.forms import EventForm, AddUserForm
-from skaba.models import Event, Guild, User, UserProfile
+from skaba.models import Event, Guild, User, UserProfile, Attendance
 from skaba.util import check_moderator, check_admin
 
 def index(request):
@@ -186,7 +187,7 @@ def logout_user(request):
 def list_user_events(request):
     order_by = request.GET.get('order_by', 'guild')
     cur_user = request.user
-    cur_user_profile = UserProfile.objects.get(user_id = cur_user.id)
+    cur_user_profile = UserProfile.objects.get(user_id  = cur_user.id)
     if cur_user_profile.is_tf == 1:
         tf = 14
     else:
@@ -195,3 +196,19 @@ def list_user_events(request):
     response = TemplateResponse(request, 'eventlist.html', {'events': events})
     response.render()
     return response
+
+def attend_event(request):
+    if 'attend' in request.POST:
+        reps = request.POST.get('e_repeats')
+        reps = int(reps)
+        eventid = request.POST.get('e_id')
+        eventid = int(eventid)
+        cur_user = UserProfile.objects.get(user_id = request.user.id)
+        repcount = Attendance.objects.filter(Q(user_id = cur_user.id) & Q(event_id = request.POST.get('e_id'))).count()
+        if  reps > repcount:
+            a = Attendance(event_id = eventid, user_id = cur_user.id)
+            a.save()
+            return redirect('usereventlist')
+        else:
+            messages.error(request, _('You have attended for maximum amount'))
+            return redirect('usereventlist')

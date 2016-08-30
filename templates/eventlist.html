@@ -28,6 +28,7 @@
     });
   });
 </script>
+
 <div class="div-table">
   <div class="div-table-row">
     <div>Extra info</div>
@@ -35,7 +36,9 @@
     <div><a href="?order_by=guild">Guild</a></div>
     <div><a href="?order_by=points">Points</a></div>
     <div><a href="?order_by=date">Date</a></div>
+    <div>Attend</div>
   </div>
+
   {% for event in events %}
   <div class="div-table-row">
     <div><a href="#{{ event.slug }}" data-toggle="collapse">+</a></div>
@@ -43,6 +46,13 @@
     <div>{{ event.guild }}</div>
     <div>{{ event.points }}</div>
     <div>{{ event.date|date:'d.m.Y' }}</div>
+    <form role="form" class="form-horizontal" action="/attend" method="POST">
+        {% csrf_token %}
+	<input type="hidden" name="next" value="{{ next }}" />
+        <input type="hidden" name="e_id" value="{{ event.id }}" />
+        <input type="hidden" name="e_repeats" int value="{{ event.repeats }}" />
+        <input type="submit" name="attend" value="Attend" />
+    </form>
   </div>
   <div id="{{ event.slug }}" class="collapse">
     {{ event.description }}
