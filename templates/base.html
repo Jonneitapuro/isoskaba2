@@ -2,7 +2,6 @@
 {% load i18n %}
 <!DOCTYPE html>
 <html>
-<<<<<<< HEAD
 <head>
   <title>ISOskaba</title>
   <meta charset="UTF-8">
@@ -70,6 +69,10 @@
      </div>
      <div class="collapse navbar-collapse" id="myNavbar">
        <ul class="nav navbar-nav">
+        <li><a href="/">{% trans 'Home' %}</a></li>
+          {% if user.is_superuser %}
+        <li><a href="/admin/events">{% trans 'Events' %}</a></li>
+          {% endif %}
          <li><a href="/">Lisää tapahtuma</a></li>
          <li><a href="/">Omat pisteet</a></li>
          <li><a href="/">Killan leaderboard</a></li>
@@ -86,6 +89,14 @@
         {% endif %}
       </ul>
     </div>
+    <div id="language-form nav navbar-nav navbar-right">
+                <form action="/i18n/setlang/" id="language-form" method="post">
+                  {% csrf_token %}
+                  <input type="submit" name="language" value="fi">
+                  <input type="submit" name="language" value="en">
+                  <input type="submit" name="language" value="sv">
+                </form>
+              </div>
   </div>
 </nav>
 <div id="content" class="container-fluid">
@@ -105,8 +116,7 @@
 </footer>
 </body>
 </html>
-=======
-	<head>
+	<!--<head>
 		<title>ISOskaba</title>
 		<meta charset="UTF-8">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -163,7 +173,6 @@
           		</ul>
         		{% endif %}
     		</div>
-			{% block page_content %}{% endblock %}
 		</div>
 		<footer>
       <span>{% trans "Text" %}
@@ -172,4 +181,4 @@
 		</footer>
 	</body>
 </html>
->>>>>>> refs/remotes/origin/master
+>>>>>>> refs/remotes/origin/master-->
