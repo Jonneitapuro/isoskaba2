@@ -35,7 +35,8 @@ urlpatterns = [
     url(r'^admin/guilds/populate', skabaviews.guilds_populate, name='guilds_populate'),
     url(r'^logout/$', skabaviews.logout_user, name='logout'),
     url(r'^login', skabaviews.login_user, name='login'),
-    url(r'^events/$', skabaviews.list_user_events, name='usereventlist')
+    url(r'^events/$', skabaviews.list_user_events, name='usereventlist'),
+    url(r'^attend', skabaviews.attend_event, name='attend')
 ]
 
 if settings.DEBUG:
