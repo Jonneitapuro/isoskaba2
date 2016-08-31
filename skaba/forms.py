@@ -46,13 +46,21 @@ class AddUserForm(UserCreationForm):
             return user
 
 class EditUserForm(forms.ModelForm):
+    old_password = forms.CharField(widget=forms.PasswordInput(), required=False)
+    password1 = forms.CharField(widget=forms.PasswordInput(), required=False)
+    password2 = forms.CharField(widget=forms.PasswordInput(), required=False)
     class Meta:
         model = User
-        fields = ('email',)
+        fields = ('email', )
 
     def save(self, commit=True):
         user = super(EditUserForm, self).save(commit=False)
         user.email = self.cleaned_data['email']
+        new_password = self.cleaned_data['password1']
+        if (user.check_password(self.cleaned_data['old_password']) and 
+                new_password == self.cleaned_data['password2'] and
+                len(new_password) > 5):
+            user.set_password(new_password)
 
         if commit:
             user.save()
