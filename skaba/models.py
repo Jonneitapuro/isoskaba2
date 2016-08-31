@@ -8,7 +8,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
     is_tf = models.BooleanField(default=False)
     is_kv = models.BooleanField(default=False)
-    role = models.CharField(max_length=8, default="user")
+    role = models.CharField(max_length=9, default="user")
     guild = models.ForeignKey('Guild', on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
@@ -43,7 +43,7 @@ class Event(models.Model):
         return u'{0}'.format(self.name)
 
 class Attendance(models.Model):
-    created = models.DateTimeField(auto_now_add=True)
-    verified = models.BooleanField(default=False)
-    event = models.ForeignKey('Event', on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+	created = models.DateTimeField(auto_now_add=True)
+	verified = models.BooleanField(default=False)
+	event = models.ForeignKey('Event', on_delete=models.CASCADE)
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
