@@ -4,6 +4,7 @@ from django.template.response import TemplateResponse
 from django.contrib.admin.views.decorators import user_passes_test
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.template.context_processors import csrf
 from django.forms import model_to_dict
@@ -11,7 +12,7 @@ from django.utils.translation import ugettext as _
 from django.db.models import Q
 from django.db.models import Count
 
-from skaba.forms import EventForm, AddUserForm
+from skaba.forms import *
 from skaba.models import Event, Guild, User, UserProfile, Attendance
 from skaba.util import check_moderator, check_admin
 
@@ -68,7 +69,7 @@ def event_add(request):
 
     token = {}
     token.update(csrf(request))
-    token['form'] = form
+    token['forms'] = [form]
     token['site_title'] = 'Create event'
     token['submit_text'] = 'Add event'
     token['form_action'] = '/admin/events/add/'
@@ -95,7 +96,7 @@ def event_edit(request, event_slug):
 
     token = {}
     token.update(csrf(request))
-    token['form'] = form
+    token['forms'] = [form]
     token['site_title'] = 'Edit event'
     token['submit_text'] = 'Save event'
     token['form_action'] = '/admin/events/edit/' + event.slug + '/'
@@ -133,13 +134,13 @@ def user_add(request):
 		form = AddUserForm(request.POST)
 		if form.is_valid():
 			form.save()
-			messages.add_message(request, messages.INFO, 'Creation successfull')
+			messages.add_message(request, messages.INFO, 'Creation successful')
 			return redirect('/admin/users/add')
 	else:
 		form = AddUserForm()
 	args = {}
 	args.update(csrf(request))
-	args['form'] = form
+	args['forms'] = [form]
 	args['site_title'] = 'Add User'
 	args['submit_text'] = 'Add user'
 	args['form_action'] = '/admin/users/add'
@@ -196,6 +197,72 @@ def list_user_events(request):
     response = TemplateResponse(request, 'eventlist.html', {'events': events})
     response.render()
     return response
+
+@login_required
+def user_info(request):
+    cur_user = request.user
+    cur_user_profile = UserProfile.objects.get(user_id = cur_user.id)
+    attendances = Attendance.objects.filter(user = cur_user)
+    response = TemplateResponse(request, 'user_info.html', {'profile': cur_user_profile, 'attendances': attendances})
+    response.render()
+    return response
+
+@login_required
+def user_edit(request):
+    if request.method == 'POST':
+        form = EditUserForm(request.POST, instance=request.user)
+        if (form.is_valid()):
+            try:
+                form.save()
+                status = 200
+                messages.add_message(request, messages.INFO, 'Changes saved')
+                return redirect('/user/edit/')
+            except:
+                status = 400
+
+    else:
+        form = EditUserForm(instance=request.user)
+        status = 200
+
+    token = {}
+    token.update(csrf(request))
+    token['forms'] = [form]
+    token['site_title'] = 'Edit user info'
+    token['submit_text'] = 'Save user info'
+    token['form_action'] = '/user/edit/'
+
+    return render(request, 'form.html', token)
+
+@user_passes_test(check_moderator)
+def admin_edit(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    profile = user.profile
+    if request.method == "POST":
+        user_form = AdminEditUserForm(request.POST, instance=user)
+        profile_form = AdminEditProfileForm(request.POST, instance=profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            try:
+                user_form.save()
+                profile_form.save()
+                status = 200
+                messages.add_message(request, messages.INFO, 'Changes saved')
+                return redirect('/admin/users/edit/' + user_id + '/')
+            except:
+                status = 400
+
+    else:
+        user_form = AdminEditUserForm(instance=user)
+        profile_form = AdminEditProfileForm(instance=profile)
+        status = 200
+
+    token = {}
+    token.update(csrf(request))
+    token['forms'] = [user_form, profile_form]
+    token['site_title'] = 'Edit user info'
+    token['submit_text'] = 'Save user info'
+    token['form_action'] = '/admin/users/edit/' + user_id + '/'
+
+    return render(request, 'admin_form.html', token)
 
 def attend_event(request):
     if 'attend' in request.POST:

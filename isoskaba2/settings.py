@@ -146,6 +146,13 @@ STATICFILES_DIRS = [
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
+# override a tag to match bootstrap 3 CSS class.
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger'
+}
+
 AUTH_PROFILE_MODULE = 'skaba.UserProfile'
 
 LOGIN_URL = '/login'

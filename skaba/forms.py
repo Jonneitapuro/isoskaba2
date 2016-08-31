@@ -7,7 +7,7 @@ class EventForm(forms.ModelForm):
     class Meta:
         model = Event
         fields = ['name', 'description', 'slug', 'date', 'points', 'guild', 'repeats']
-        
+
     name = forms.CharField(label='Event name', max_length=128, min_length=1)
     description = forms.CharField(label='Description')
     guild = forms.ModelChoiceField(queryset=Guild.objects.all(), empty_label=None)
@@ -29,7 +29,7 @@ class AddUserForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password1', 'password2', 'is_kv', 'is_tf', 'role')
+        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'is_kv', 'is_tf', 'role')
 
     def save(self,commit = True):
         user = super(AddUserForm, self).save(commit = True)
@@ -44,3 +44,64 @@ class AddUserForm(UserCreationForm):
         if commit:
             user.save()
             return user
+
+class EditUserForm(forms.ModelForm):
+    old_password = forms.CharField(widget=forms.PasswordInput(), required=False)
+    password1 = forms.CharField(widget=forms.PasswordInput(), required=False)
+    password2 = forms.CharField(widget=forms.PasswordInput(), required=False)
+    class Meta:
+        model = User
+        fields = ('email', )
+
+    def save(self, commit=True):
+        user = super(EditUserForm, self).save(commit=False)
+        user.email = self.cleaned_data['email']
+        new_password = self.cleaned_data['password1']
+        if (user.check_password(self.cleaned_data['old_password']) and 
+                new_password == self.cleaned_data['password2'] and
+                len(new_password) > 5):
+            user.set_password(new_password)
+
+        if commit:
+            user.save()
+
+        return user
+
+
+# Admins/moderators can modify all user info
+# Optimally the admin edit form would just be one form,
+# But I had trouble with that
+class AdminEditProfileForm(forms.ModelForm):
+    role_choices = (('user', 'user'), ('moderator', 'moderator'), ('admin', 'admin'))
+    role = forms.ChoiceField(choices=role_choices)
+
+    class Meta:
+        model = UserProfile
+        exclude = ('user',)
+
+    def save(self, commit = True):
+        profile = super(AdminEditProfileForm, self).save(commit = True)
+        profile.role = self.cleaned_data['role']
+        profile.guild = self.cleaned_data['guild']
+        profile.is_kv = self.cleaned_data['is_kv']
+        profile.is_tf = self.cleaned_data['is_tf']
+        return profile
+
+        if commit:
+            profile.save()
+
+        return profile
+
+class AdminEditUserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'email')
+
+    def save(self, commit=True):
+        user = super(AdminEditUserForm, self).save(commit=False)
+        user.email = self.cleaned_data['email']
+
+        if commit:
+            user.save()
+
+        return user
