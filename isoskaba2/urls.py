@@ -37,7 +37,7 @@ urlpatterns = [
     url(r'^login', skabaviews.login_user, name='login'),
     url(r'^user/$', skabaviews.user_info, name='userinfo'),
     url(r'^user/edit/$', skabaviews.user_edit, name='user_edit'),
-    url(r'^events/$', skabaviews.list_user_events, name='usereventlist')
+    url(r'^events/$', skabaviews.list_user_events, name='usereventlist'),
     url(r'^attend', skabaviews.attend_event, name='attend')
 ]
 
