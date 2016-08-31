@@ -1,0 +1,41 @@
+{% extends 'admin_base.html' %}
+{% block admin_content %}
+{% load i18n %}
+
+<h1>{% trans 'Unverified attendances' %}</h1>
+
+<form action="/admin/attendances/" method="POST">
+  {% csrf_token %}
+  <table style="width:100%">
+    <tr>
+      <th><a href="?order_by=user">{% trans 'User' %}</a></th>
+      <th><a href="?order_by=event">{% trans 'Event' %}</a></th>
+      <th><a href="?order_by=created">{% trans 'Date' %}</a></th>
+      <th>{% trans 'Verify' %}</th>
+    </tr>
+    {% for attendance in unverified %}
+    <tr>
+      <td>{{ attendance.user }}</td>
+      <td>{{ attendance.event }}</td>
+      <td>{{ attendance.date|date:'d.m.Y' }}</td>
+      <td><input type="submit" name="attendance" value="{{ attendance.pk }}"></td>
+    </tr>
+    {% endfor %}
+  </table>
+</form>
+<h1>{% trans 'Verified attendances' %}</h1>
+<table style="width:100%">
+  <tr>
+    <th><a href="?order_by=user">{% trans 'User' %}</a></th>
+    <th><a href="?order_by=event">{% trans 'Event' %}</a></th>
+    <th><a href="?order_by=created">{% trans 'Date' %}</a></th>
+  </tr>
+  {% for attendance in verified %}
+  <tr>
+    <td>{{ attendance.user }}</td>
+    <td>{{ attendance.event }}</td>
+    <td>{{ attendance.date|date:'d.m.Y' }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

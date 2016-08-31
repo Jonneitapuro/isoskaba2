@@ -11,6 +11,9 @@ class UserProfile(models.Model):
     role = models.CharField(max_length=9, default="user")
     guild = models.ForeignKey('Guild', on_delete=models.CASCADE, blank=True, null=True)
 
+    def __str__(self):
+        return u'%s %s' % (self.user.name)
+
 User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])
 
 def create_user_profile(sender, instance, created, **kwargs):
@@ -24,17 +27,20 @@ class Guild(models.Model):
     abbreviation = models.CharField(max_length=8)
 
     def __str__(self):
-            return u'{0}'.format(self.name)
+        return u'{0}'.format(self.name)
 
 class Event(models.Model):
-	name = models.TextField()
-	description = models.TextField()
-	slug = models.SlugField(unique=True)
-	created_at = models.DateTimeField(auto_now_add=True)
-	date = models.DateField()
-	points = models.IntegerField(default=1)
-	repeats= models.IntegerField(default=1)
-	guild = models.ForeignKey('Guild', on_delete=models.CASCADE)
+    name = models.TextField()
+    description = models.TextField()
+    slug = models.SlugField(unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    date = models.DateField()
+    points = models.IntegerField(default=1)
+    repeats= models.IntegerField(default=1)
+    guild = models.ForeignKey('Guild', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return u'{0}'.format(self.name)
 
 class Attendance(models.Model):
 	created = models.DateTimeField(auto_now_add=True)

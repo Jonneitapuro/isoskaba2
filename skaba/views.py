@@ -279,3 +279,19 @@ def attend_event(request):
         else:
             messages.error(request, _('You have attended for maximum amount'))
             return redirect('usereventlist')
+
+def verify_attendances(request):
+
+    if request.POST:
+        attendance = Attendance.objects.get(pk=request.POST.get('attendance'))
+        attendance.verified = True
+        attendance.save()
+
+    order_by = request.GET.get('order_by', 'user')
+    guild_users = User.objects.filter(userprofile__guild = request.user.userprofile.guild)
+    unverified = Attendance.objects.filter(Q(user__in = guild_users) & Q(verified = False)).order_by(order_by)
+    verified = Attendance.objects.filter(Q(user__in = guild_users) & Q(verified = True)).order_by(order_by)
+
+    response = TemplateResponse(request, 'admin_attendances.html', {'unverified': unverified, 'verified': verified})
+    response.render()
+    return response
