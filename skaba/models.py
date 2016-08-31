@@ -8,7 +8,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
     is_tf = models.BooleanField(default=False)
     is_kv = models.BooleanField(default=False)
-    role = models.CharField(max_length=8, default="user")
+    role = models.CharField(max_length=9, default="user")
     guild = models.ForeignKey('Guild', on_delete=models.CASCADE, blank=True, null=True)
 
 User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])

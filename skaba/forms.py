@@ -59,14 +59,20 @@ class EditUserForm(forms.ModelForm):
 
         return user
 
+
+# Admins/moderators can modify all user info
+# Optimally the admin edit form would just be one form,
+# But I had trouble with that
 class AdminEditProfileForm(forms.ModelForm):
+    role_choices = (('user', 'user'), ('moderator', 'moderator'), ('admin', 'admin'))
+    role = forms.ChoiceField(choices=role_choices)
+
     class Meta:
         model = UserProfile
         exclude = ('user',)
 
     def save(self, commit = True):
-        # user = self.instance.user
-        profile = super(AdminEditProfileForm, self).save(commit = False)
+        profile = super(AdminEditProfileForm, self).save(commit = True)
         profile.role = self.cleaned_data['role']
         profile.guild = self.cleaned_data['guild']
         profile.is_kv = self.cleaned_data['is_kv']
