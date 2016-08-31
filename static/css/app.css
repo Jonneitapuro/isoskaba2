@@ -33,10 +33,6 @@ div {
   text-align: center;
 }
 
-#language-form input {
-   float:left;
-}
-
 footer {
    position: fixed;
    bottom: 0;
@@ -91,6 +87,10 @@ div.form-error {
  margin-top: 40px;
 }
 
+.panel-heading-transparent {
+   background-color: inherit !important;
+}
+
 .form-group.last {
  margin-bottom: 40px;
 }
@@ -102,7 +102,7 @@ div.form-error {
   }
 
   #login-body {
-  height: 210px;
+  height: 170px;
 }
 }
 

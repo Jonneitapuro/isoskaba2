@@ -177,7 +177,7 @@ def login_user(request):
             status=401 #Unauthorised
 
 
-    return render(request, 'simple_login.html', {'username': username, 'next': redirectURL}, c, status=status)
+    return render(request, 'simple_login.html', {'username': username, 'next': redirectURL, 'view': 'login'}, c, status=status)
 
 def logout_user(request):
     logout(request)
