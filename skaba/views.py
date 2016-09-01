@@ -58,7 +58,7 @@ def event_add(request):
             try:
                 form.save()
                 status = 200
-                messages.add_message(request, messages.INFO, 'event added')
+                messages.add_message(request, messages.INFO, _('Event added'))
                 return redirect('/admin/events/add/')
             except:
                 status = 400
@@ -69,9 +69,15 @@ def event_add(request):
 
     token = {}
     token.update(csrf(request))
+<<<<<<< HEAD
+    token['form'] = form
+    token['site_title'] = _('Create event')
+    token['submit_text'] = _('Add event')
+=======
     token['forms'] = [form]
     token['site_title'] = 'Create event'
     token['submit_text'] = 'Add event'
+>>>>>>> refs/remotes/origin/master
     token['form_action'] = '/admin/events/add/'
 
     return render(request, 'admin_form.html', token)
@@ -85,7 +91,7 @@ def event_edit(request, event_slug):
             try:
                 form.save()
                 status = 200
-                messages.add_message(request, messages.INFO, 'event saved')
+                messages.add_message(request, messages.INFO, _('Event saved'))
                 return redirect('/admin/events/edit/' + slug + '/')
             except:
                 status = 400
@@ -96,9 +102,15 @@ def event_edit(request, event_slug):
 
     token = {}
     token.update(csrf(request))
+<<<<<<< HEAD
+    token['form'] = form
+    token['site_title'] = _('Edit event')
+    token['submit_text'] = _('Save event')
+=======
     token['forms'] = [form]
     token['site_title'] = 'Edit event'
     token['submit_text'] = 'Save event'
+>>>>>>> refs/remotes/origin/master
     token['form_action'] = '/admin/events/edit/' + event.slug + '/'
 
     return render(request, 'admin_form.html', token)
@@ -134,15 +146,25 @@ def user_add(request):
 		form = AddUserForm(request.POST)
 		if form.is_valid():
 			form.save()
+<<<<<<< HEAD
+			messages.add_message(request, messages.INFO, _('Creation successfull'))
+=======
 			messages.add_message(request, messages.INFO, 'Creation successful')
+>>>>>>> refs/remotes/origin/master
 			return redirect('/admin/users/add')
 	else:
 		form = AddUserForm()
 	args = {}
 	args.update(csrf(request))
+<<<<<<< HEAD
+	args['form'] = form
+	args['site_title'] = _('Add User')
+	args['submit_text'] = _('Add user')
+=======
 	args['forms'] = [form]
 	args['site_title'] = 'Add User'
 	args['submit_text'] = 'Add user'
+>>>>>>> refs/remotes/origin/master
 	args['form_action'] = '/admin/users/add'
 	return render(request, 'admin_form.html', args)
 
@@ -277,7 +299,7 @@ def attend_event(request):
             a.save()
             return redirect('usereventlist')
         else:
-            messages.error(request, _('You have attended for maximum amount'))
+            messages.error(request, _('You have attended for the maximum amount'))
             return redirect('usereventlist')
 
 def verify_attendances(request):
