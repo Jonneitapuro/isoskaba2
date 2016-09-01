@@ -3,9 +3,9 @@
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
-<h1>Events</h1>
+<h1>{% trans 'Events' %}</h1>
 <div class="search-events">
-  <label for="search-input">Search events</label>
+  <label for="search-input">{% trans 'Search events' %}</label>
   <input id="search-input" />
 </div>
 <script>
@@ -30,12 +30,12 @@
 </script>
 <table style="width:100%">
   <tr>
-    <th><a href="?order_by=name">Name</a></th>
-    <th><a href="?order_by=description">Description</a></th>
-    <th><a href="?order_by=guild">Guild</a></th>
-    <th><a href="?order_by=points">Points</a></th>
-    <th><a href="?order_by=repeats">Repeats</a></th>
-    <th><a href="?order_by=date">Date</a></th>
+    <th><a href="?order_by=name">{% trans 'Name' %}</a></th>
+    <th><a href="?order_by=description">{% trans 'Description' %}</a></th>
+    <th><a href="?order_by=guild">{% trans 'Guild' %}</a></th>
+    <th><a href="?order_by=points">{% trans 'Points' %}</a></th>
+    <th><a href="?order_by=repeats">{% trans 'Repeats' %}</a></th>
+    <th><a href="?order_by=date">{% trans 'Date' %}</a></th>
   </tr>
   {% for event in events %}
   <tr>
