@@ -1,5 +1,5 @@
-{% extends 'admin_base.html' %}
-{% block admin_content %}
+{% extends 'base.html' %}
+{% block page_content %}
 {% for form in forms %}
   {% if form.errors %}
     {% for error in form.non_field_errors %}

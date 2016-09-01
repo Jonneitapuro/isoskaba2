@@ -12,7 +12,7 @@
   </tr>
   {% for user in users %}
   <tr>
-    <td>{{ user.username }}</td>
+    <td><a href="/admin/users/edit/{{ user.pk }}" title="Edit User Info">{{ user.username }}</a></td>
     <td>{{ user.email }}</td>
     <td>{{ user.profile.guild }}</td>
     <td>{{ user.profile.role }}</td>
