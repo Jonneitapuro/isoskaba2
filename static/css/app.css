@@ -75,6 +75,11 @@ div.form-error {
   display: none;
 }*/
 
+#lang input {
+  position: relative;
+  transform: translateY(50%);
+}
+
 #container-fluid {
   width: 100%;
   left: 0;

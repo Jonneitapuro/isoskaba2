@@ -1,50 +1,52 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% block page_content %}
-<h1>User info</h1>
+<h1>{% trans 'User info' %}</h1>
 <table style="width:25%">
   <tr>
-    <th>Username:</th>
+    <th>{% trans 'Username' %}:</th>
     <td>{{ profile.user.username }}</td>
   </tr>
   <tr>
-    <th>First name:</th>
+    <th>{% trans 'First name' %}:</th>
     <td>{{ profile.user.first_name|default:"N/A" }}</td>
   </tr>
   <tr>
-    <th>Last name:</th>
+    <th>{% trans 'Last name' %}:</th>
     <td>{{ profile.user.last_name|default:"N/A" }}</td>
   </tr>
   <tr>
-    <th>Email:</th>
+    <th>{% trans 'Email' %}:</th>
     <td>{{ profile.user.email }}</td>
   </tr>
   <tr>
-    <th>Guild:</th>
+    <th>{% trans 'Guild' %}:</th>
     <td>{{ profile.guild }}</td>
   </tr>
   <tr>
-    <th>TF status:</th>
+    <th>{% trans 'TF status' %}:</th>
     <td>{{ profile.is_tf }}</td>
   </tr>
   <tr>
-    <th>KV status:</th>
+    <th>{% trans 'INTL status' %}:</th>
     <td>{{ profile.is_kv }}</td>
   </tr>
 </table>
 
-<a href="/user/edit/"><button type="button">Edit</button></a>
+<a href="/user/edit/"><button type="button">{% trans 'Edit' %}</button></a>
 
-<h2>Attended events</h2>
+<h2>{% trans 'Attended events' %}</h2>
 <table style="width:25%">
   <tr>
-    <th>Event name</th>
-    <th>Date added</th>
-    <th>Verified</th>
+    <th>{% trans 'Event name' %}</th>
+    <th>{% trans 'Points' %}</th>
+    <th>{% trans 'Date added' %}</th>
+    <th>{% trans 'Verified' %}</th>
   </tr>
 {% for att in attendances %}
 <tr>
   <td>{{ att.event.name }}</td>
+  <td>{{ att.event.points }}</td>
   <td>{{ att.created|date:"d.m.Y H:i" }}</td>
   <td>{{ att.verified }}</td>
 </tr>
