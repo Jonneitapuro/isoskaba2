@@ -40,7 +40,8 @@ urlpatterns = [
     url(r'^user/edit/$', skabaviews.user_edit, name='user_edit'),
     url(r'^events/$', skabaviews.list_user_events, name='usereventlist'),
     url(r'^attend', skabaviews.attend_event, name='attend'),
-    url(r'^guildranking/', skabaviews.guild_ranking, name='guild_ranking')
+    url(r'^guildranking/', skabaviews.guild_ranking, name='guild_ranking'),
+    url(r'^userranking/', skabaviews.user_ranking, name='user_ranking')
 ]
 
 if settings.DEBUG:

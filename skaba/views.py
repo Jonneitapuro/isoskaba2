@@ -305,7 +305,7 @@ def guild_ranking(request):
             score_list.append([])
             score_list[n].append(guild.name)
             users = User.objects.filter(userprofile__guild_id = guild.id)
-            attendances = Attendance.objects.filter(user__in = users)
+            attendances = Attendance.objects.filter(Q(user__in = users) & Q(verified = True))
             points = 0
             for att in attendances:
                 event = Event.objects.get(id = att.event_id)
@@ -318,3 +318,25 @@ def guild_ranking(request):
     response.render()
     return response
 
+@login_required
+def user_ranking(request):
+    
+    users = User.objects.filter(userprofile__guild = request.user.userprofile.guild)
+    score_list = []
+    n = 0
+    for user in users:
+        score_list.append([])
+        score_list[n].append(user.first_name)
+        score_list[n].append(user.last_name)
+        attendances = Attendance.objects.filter(Q(user_id = user.id) & Q(verified = False))
+        points = 0
+        for att in attendances:
+            event = Event.objects.get(id = att.event_id)
+            addpoints = event.points
+            addpoints = int(addpoints)
+            points = points + addpoints
+        score_list[n].append(points)
+        n = n + 1
+    response = TemplateResponse(request, 'userrank.html', {'score_list': score_list})
+    response.render()
+    return response
