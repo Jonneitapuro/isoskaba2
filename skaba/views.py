@@ -9,8 +9,7 @@ from django.template import RequestContext
 from django.template.context_processors import csrf
 from django.forms import model_to_dict
 from django.utils.translation import ugettext as _
-from django.db.models import Q
-from django.db.models import Count
+from django.db.models import Q, Count, Sum
 
 from skaba.forms import *
 from skaba.models import Event, Guild, User, UserProfile, Attendance
@@ -185,6 +184,7 @@ def logout_user(request):
     messages.success(request, _('Logged out'))
     return redirect('index')
 
+@login_required
 def list_user_events(request):
     order_by = request.GET.get('order_by', 'guild')
     cur_user = request.user
@@ -200,7 +200,7 @@ def list_user_events(request):
 
 @login_required
 def user_info(request):
-    cur_user = request.user
+    cur_user = request.user	
     cur_user_profile = UserProfile.objects.get(user_id = cur_user.id)
     attendances = Attendance.objects.filter(user = cur_user)
     response = TemplateResponse(request, 'user_info.html', {'profile': cur_user_profile, 'attendances': attendances})
@@ -295,3 +295,25 @@ def verify_attendances(request):
     response = TemplateResponse(request, 'admin_attendances.html', {'unverified': unverified, 'verified': verified})
     response.render()
     return response
+
+def guild_ranking(request):
+    guilds = Guild.objects.all()
+    score_list = []
+    n = 0
+    for guild in guilds:
+        score_list.append([])
+        score_list[n].append(guild.name)
+        users = User.objects.filter(userprofile__guild = request.user.userprofile.guild)
+        attendances = Attendance.objects.filter(user__in = users)
+        points = 0
+        for att in attendances:
+            event = Event.objects.get(id = att.event_id)
+            addpoints = event.points
+            addpoints = int(addpoints)
+            points = points + addpoints
+        score_list[n].append(points)
+        n = n + 1
+    response = TemplateResponse(request, 'guildrank.html', {'guild': guild, 'points':points})
+    response.render()
+    return response
+
