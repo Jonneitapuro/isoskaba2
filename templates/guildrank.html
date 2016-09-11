@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block page_content %}
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/divemes/smoodivness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
+<h1>{% trans 'Events' %}</h1>
+<script>
+  $(document).ready(function() {
+    events = [];
+    {% for event in events %}
+      events.push({'value': '{{ event.slug }}', 'label': '{{ event.name }}'});
+    {% endfor %}
+    console.log(events);
+    $('#search-input').autocomplete({
+      minlengdiv: 2,
+      source: events,
+            focus: function(event, ui) {
+              $('#search-input').val(ui.item.label);
+              return false;
+          },
+            select: function(event, ui) {
+              window.location.href = '/events/attend/' + ui.item.value + '/';
+            }
+    });
+  });
+</script>
+
+<div class="div-table">
+  <div class="div-table-row">
+    <div><a href="?order_by=guild">{% trans 'Guild' %}</a></div>
+    <div><a href="?order_by=points">{% trans 'Points' %}</a></div>
+  </div>
+
+  {% for score in score_list %}
+  <div class="div-table-row">
+    <div>{{ score.0 }}</div>
+    <div>{{ score.1 }}</div>
+  </div>
+  {% endfor %}
+</table>
+{% endblock %}

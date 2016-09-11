@@ -313,7 +313,7 @@ def guild_ranking(request):
             points = points + addpoints
         score_list[n].append(points)
         n = n + 1
-    response = TemplateResponse(request, 'guildrank.html', {'guild': guild, 'points':points})
+    response = TemplateResponse(request, 'guildrank.html', {'score_list': score_list})
     response.render()
     return response
 
