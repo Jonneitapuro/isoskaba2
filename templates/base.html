@@ -75,7 +75,7 @@
           <li><a href="/events">{% trans 'Lisää tapahtuma' %}</a></li>
           <li><a href="/user">{% trans 'Omat tiedot' %}</a></li>
           <li><a href="/">{% trans 'Killan leaderboard' %}</a></li>
-          <li><a href="/">{% trans 'Kiltojen välinen leaderboard' %}</a></li>
+          <li><a href="/guildranking">{% trans 'Kiltojen välinen leaderboard' %}</a></li>
           {% endif %}
           {% if user.is_superuser or user.profile.role == 'moderator' or user.profile.role == 'admin' %}
           <li><a href="/admin/">{% trans 'Admin panel' %}</a></li>

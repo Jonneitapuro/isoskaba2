@@ -301,18 +301,19 @@ def guild_ranking(request):
     score_list = []
     n = 0
     for guild in guilds:
-        score_list.append([])
-        score_list[n].append(guild.name)
-        users = User.objects.filter(userprofile__guild_id = guild.id)
-        attendances = Attendance.objects.filter(user__in = users)
-        points = 0
-        for att in attendances:
-            event = Event.objects.get(id = att.event_id)
-            addpoints = event.points
-            addpoints = int(addpoints)
-            points = points + addpoints
-        score_list[n].append(points)
-        n = n + 1
+        if guild.id != 1 and guild.id != 14: 
+            score_list.append([])
+            score_list[n].append(guild.name)
+            users = User.objects.filter(userprofile__guild_id = guild.id)
+            attendances = Attendance.objects.filter(user__in = users)
+            points = 0
+            for att in attendances:
+                event = Event.objects.get(id = att.event_id)
+                addpoints = event.points
+                addpoints = int(addpoints)
+                points = points + addpoints
+            score_list[n].append(points)
+            n = n + 1
     response = TemplateResponse(request, 'guildrank.html', {'score_list': score_list})
     response.render()
     return response
