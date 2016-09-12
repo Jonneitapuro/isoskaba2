@@ -69,7 +69,7 @@ def event_add(request):
 
     token = {}
     token.update(csrf(request))
-    token['form'] = form
+    token['forms'] = [form]
     token['site_title'] = _('Create event')
     token['submit_text'] = _('Add event')
     token['form_action'] = '/admin/events/add/'
@@ -96,7 +96,7 @@ def event_edit(request, event_slug):
 
     token = {}
     token.update(csrf(request))
-    token['form'] = form
+    token['forms'] = [form]
     token['site_title'] = _('Edit event')
     token['submit_text'] = _('Save event')
     token['form_action'] = '/admin/events/edit/' + event.slug + '/'
@@ -140,7 +140,7 @@ def user_add(request):
 		form = AddUserForm()
 	args = {}
 	args.update(csrf(request))
-	args['form'] = form
+	args['forms'] = [form]
 	args['site_title'] = _('Add User')
 	args['submit_text'] = _('Add user')
 	args['form_action'] = '/admin/users/add'
