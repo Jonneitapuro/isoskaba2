@@ -71,10 +71,6 @@ div.form-error {
   height: 220px;
 }
 
-/*#login-nav {
-  display: none;
-}*/
-
 #lang input {
   position: relative;
   transform: translateY(50%);
@@ -119,4 +115,12 @@ div.form-error {
   #login-nav {
     display: inline;
   }
+}
+
+#top-nav {
+   border-radius: 0px;
+}
+
+#top-nav li a:hover {
+   color: #4ebd71;
 }
