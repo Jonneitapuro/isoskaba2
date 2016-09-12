@@ -5,6 +5,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
 <h1>{% trans 'Events' %}</h1>
+<!-- DISABLED UNTIL FIXED
 <div class="search-events">
   <label for="search-input">{% trans 'Search events' %}</label>
   <input id="search-input" />
@@ -28,36 +29,31 @@
             }
     });
   });
-</script>
+</script>-->
+<form role="form" class="form-horizontal" action="/attend" method="POST">
+  {% csrf_token %}
+  <div class="div-table">
+    <div class="div-table-row div-table-heading">
+      <div style="width: 10%">{% trans 'Extra info' %}</div>
+      <div style="width: 25%" class="link"><a href="?order_by=name">{% trans 'Name' %}</a></div>
+      <div style="width: 15%" class="link"><a href="?order_by=guild">{% trans 'Guild' %}</a></div>
+      <div style="width: 10%" class="link"><a href="?order_by=points">{% trans 'Points' %}</a></div>
+      <div style="width: 20%" class="link"><a href="?order_by=date">{% trans 'Date' %}</a></div>
+      <div style="width: 20%">{% trans 'Attend' %}</div>
+    </div>
 
-<div class="div-table">
-  <div class="div-table-row">
-    <div>{% trans 'Extra info' %}</div>
-    <div><a href="?order_by=name">{% trans 'Name' %}</a></div>
-    <div><a href="?order_by=guild">{% trans 'Guild' %}</a></div>
-    <div><a href="?order_by=points">{% trans 'Points' %}</a></div>
-    <div><a href="?order_by=date">{% trans 'Date' %}</a></div>
-    <div>{% trans 'Attend' %}</div>
-  </div>
-
-  {% for event in events %}
-  <div class="div-table-row">
-    <div><a href="#{{ event.slug }}" data-toggle="collapse">+</a></div>
-    <div>{{ event.name }}</div>
-    <div>{{ event.guild }}</div>
-    <div>{{ event.points }}</div>
-    <div>{{ event.date|date:'d.m.Y' }}</div>
-    <form role="form" class="form-horizontal" action="/attend" method="POST">
-        {% csrf_token %}
-	<input type="hidden" name="next" value="{{ next }}" />
-        <input type="hidden" name="e_id" value="{{ event.id }}" />
-        <input type="hidden" name="e_repeats" int value="{{ event.repeats }}" />
-        <input type="submit" name="attend" value="Attend" />
-    </form>
-  </div>
-  <div id="{{ event.slug }}" class="collapse">
-    {{ event.description }}
-  </div>
-  {% endfor %}
-</table>
+    {% for event in events %}
+    <div class="div-table-row">
+      <div style="width: 10%" class="link"><a href="#{{ event.slug }}" data-toggle="collapse">+</a></div>
+      <div style="width: 25%">{{ event.name }}</div>
+      <div style="width: 15%">{{ event.guild }}</div>
+      <div style="width: 10%">{{ event.points }}</div>
+      <div style="width: 20%">{{ event.date|date:'d.m.Y' }}</div>
+      <div style="width: 20%"><button type="submit" name="e_id" value="{{ event.id }}">{% trans 'Attend' %}</button></div>
+    </div>
+    <div id="{{ event.slug }}" class="collapse div-table-collapse">
+      {{ event.description }}
+    </div>
+    {% endfor %}
+</form>
 {% endblock %}

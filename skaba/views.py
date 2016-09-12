@@ -265,20 +265,21 @@ def admin_edit(request, user_id):
     return render(request, 'admin_form.html', token)
 
 def attend_event(request):
-    if 'attend' in request.POST:
-        reps = request.POST.get('e_repeats')
-        reps = int(reps)
-        eventid = request.POST.get('e_id')
-        eventid = int(eventid)
+    # TODO: reformat redirection
+    if 'e_id' in request.POST:
+        eventid = int(request.POST.get('e_id'))
+        event = get_object_or_404(Event, pk=eventid)
         cur_user = UserProfile.objects.get(user_id = request.user.id)
-        repcount = Attendance.objects.filter(Q(user_id = cur_user.id) & Q(event_id = request.POST.get('e_id'))).count()
-        if  reps > repcount:
+        repcount = Attendance.objects.filter(Q(user_id = cur_user.id) & Q(event_id = eventid)).count()
+        if  event.repeats > repcount:
             a = Attendance(event_id = eventid, user_id = cur_user.id)
             a.save()
             return redirect('usereventlist')
         else:
             messages.error(request, _('You have attended for the maximum amount'))
             return redirect('usereventlist')
+    else:
+        return redirect('usereventlist')
 
 def verify_attendances(request):
 
