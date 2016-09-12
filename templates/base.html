@@ -15,11 +15,7 @@
 <body>
   <div class="container-fluid">
     <div id="header" class="row">
-      {% if user.is_superuser or user.profile.role == 'moderator' or user.profile.role == 'admin' %}
-        <a href="/"><img id="headerpic" src="../../static/images/isoskaba-kuva-pieni.jpg" alt="ISOskaba"></a>
-      {% else %}
-        <a href="/"><img id="headerpic" src="../static/images/isoskaba-kuva-pieni.jpg" alt="ISOskaba"></a>
-      {% endif %}
+        <a href="/"><img id="headerpic" src="{% static 'images/isoskaba-kuva-pieni.jpg' %}" alt="ISOskaba"></a>
     </div>
     {% if not user.is_authenticated and view != 'login' %}
     <div id="login">
@@ -84,15 +80,9 @@
 
         <ul id="login-nav" class="nav navbar-nav navbar-right">
           <li id="lang">
-            {% if user.is_superuser or user.profile.role == 'moderator' or user.profile.role == 'admin' %}
-              <input type="image" name="language" value="fi" src="../../static/images/fi.png" alt="FI">
-              <input type="image" name="language" value="en" src="../../static/images/en.png" alt="EN">
-              <input type="image" name="language" value="sv" src="../../static/images/sv.png" alt="SV">
-            {% else %}
-              <input type="image" name="language" value="fi" src="../static/images/fi.png" alt="FI">
-              <input type="image" name="language" value="en" src="../static/images/en.png" alt="EN">
-              <input type="image" name="language" value="sv" src="../static/images/sv.png" alt="SV">
-            {% endif %}
+            <input type="image" name="language" value="fi" src="{% static 'images/fi.png' %}" alt="FI">
+            <input type="image" name="language" value="en" src="{% static 'images/en.png' %}" alt="EN">
+            <input type="image" name="language" value="sv" src="{% static 'images/sv.png' %}" alt="SV">
           </li>
           {% if user.is_authenticated %}
           <li><a href="/logout/"><span class="glyphicon glyphicon-log-out"></span>{% trans 'Kirjaudu ulos' %}</a></li>
@@ -115,8 +105,5 @@
   </div>
   {% block page_content %}{% endblock %}
 </div>
-<footer>
- <span class="copyright">&copy; {% trans '2016 ISOskaba' %}</span>
-</footer>
 </body>
 </html>
