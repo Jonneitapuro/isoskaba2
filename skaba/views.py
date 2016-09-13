@@ -280,6 +280,7 @@ def attend_event(request):
             messages.error(request, _('You have attended for the maximum amount'))
             return redirect('usereventlist')
 
+@user_passes_test(check_moderator)
 def verify_attendances(request):
 
     if request.POST:

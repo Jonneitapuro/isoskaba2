@@ -64,9 +64,6 @@
      </div>
      <div class="collapse navbar-collapse" id="myNavbar">
        <ul class="nav navbar-nav">
-          {% if user.is_superuser %}
-          <li><a href="/admin/events">{% trans 'Tapahtumat' %}</a></li>
-          {% endif %}
           {% if user.is_authenticated %}
           <li><a href="/events">{% trans 'Lisää tapahtuma' %}</a></li>
           <li><a href="/user">{% trans 'Omat tiedot' %}</a></li>
@@ -85,7 +82,9 @@
             <input type="image" name="language" value="sv" src="{% static 'images/sv.png' %}" alt="SV">
           </li>
           {% if user.is_authenticated %}
-          <li><a href="/logout/"><span class="glyphicon glyphicon-log-out"></span>{% trans 'Kirjaudu ulos' %}</a></li>
+          <li><a href="/logout/"><span class="glyphicon glyphicon-log-out"></span>{% trans 'Log out' %}</a></li>
+          {% else %}
+          <li><a href="/login">{% trans 'Log in' %}</a></li>
           {% endif %}
         </ul>
     </div>
