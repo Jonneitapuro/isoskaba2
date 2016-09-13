@@ -197,7 +197,6 @@ def list_user_events(request):
     events = Event.objects.filter(Q(guild__id = cur_user_profile.guild_id) | Q(guild__id = 1) | Q(guild__id = tf)).order_by(order_by_events)
     attendances = Attendance.objects.filter(Q(user__id = request.user.pk)).order_by(order_by_attendances)
     for event in events:
-        print (attendances.filter(event=event.pk).count())
         if attendances.filter(event=event.pk).count() >= event.repeats:
             events = events.exclude(pk=event.pk)
 

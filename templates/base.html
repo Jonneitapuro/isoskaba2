@@ -21,27 +21,27 @@
     <div id="login">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <strong>{% trans 'Kirjaudu sisään' %}</strong>
+          <strong>{% trans 'Log in' %}</strong>
         </div>
         <div id="login-body" class="panel-body">
           <form class="form-horizontal" role="form" action="/login" method="POST">
             {% csrf_token %}
             <div class="form-group">
-              <label for="inputEmail3" class="col-sm-4 control-label">{% trans 'Käyttäjätunnus' %}</label>
+              <label for="inputEmail3" class="col-sm-4 control-label">{% trans 'User ID' %}</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" id="username" name="username" placeholder="{% trans 'Käyttäjätunnus' %}" required="" value="{{ username }}"  />
+                <input type="text" class="form-control" id="username" name="username" placeholder="{% trans 'User ID' %}" required="" value="{{ username }}"  />
               </div>
             </div>
             <div class="form-group">
-              <label for="password" class="col-sm-4 control-label">{% trans 'Salasana' %}</label>
+              <label for="password" class="col-sm-4 control-label">{% trans 'Password' %}</label>
               <div class="col-sm-8">
-                <input type="password" class="form-control" id="password" name="password" placeholder="{% trans 'Salasana' %}" required="" value="" />
+                <input type="password" class="form-control" id="password" name="password" placeholder="{% trans 'Password' %}" required="" value="" />
               </div>
             </div>
             <div class="form-group last">
               <div class="col-sm-offset-3 col-sm-9">
-                <button type="submit" class="btn btn-success btn-sm">{% trans 'Kirjaudu sisään' %}</button>
-                <button type="reset" class="btn btn-default btn-sm">{% trans 'Tyhjennä' %}</button>
+                <button type="submit" class="btn btn-success btn-sm">{% trans 'Log in' %}</button>
+                <button type="reset" class="btn btn-default btn-sm">{% trans 'Empty' %}</button>
               </div>
             </div>
           </form>
@@ -65,10 +65,10 @@
      <div class="collapse navbar-collapse" id="myNavbar">
        <ul class="nav navbar-nav">
           {% if user.is_authenticated %}
-          <li><a href="/events">{% trans 'Lisää tapahtuma' %}</a></li>
-          <li><a href="/user">{% trans 'Omat tiedot' %}</a></li>
-          <li><a href="/">{% trans 'Killan leaderboard' %}</a></li>
-          <li><a href="/">{% trans 'Kiltojen välinen leaderboard' %}</a></li>
+          <li><a href="/events">{% trans 'Events' %}</a></li>
+          <li><a href="/user">{% trans 'User info' %}</a></li>
+          <li><a href="/">{% trans 'Guild leaderboard' %}</a></li>
+          <li><a href="/">{% trans 'Total leaderboard' %}</a></li>
           {% endif %}
           {% if user.is_superuser or user.profile.role == 'moderator' or user.profile.role == 'admin' %}
           <li><a href="/admin/">{% trans 'Admin panel' %}</a></li>
