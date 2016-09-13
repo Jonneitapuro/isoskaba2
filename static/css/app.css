@@ -16,21 +16,56 @@ div {
 .div-table{
   display:table;
   width:100%;
-  background-color:#eee;
   border:1px solid  #666666;
-  border-spacing:5px;/*cellspacing:poor IE support for  this*/
+  /*border-spacing:5px;/*cellspacing:poor IE support for  this*/
+  border-radius: 5px;
+  margin-top: 20px;
 }
 .div-table-row{
   display:table-row;
   width:100%;
   clear:both;
+  text-align: center
 }
+
+.div-table-row:nth-child(2n+2) {
+  background-color: #eee
+}
+.div-table-row:nth-child(2n+1) {
+  background-color: #ddd;
+} 
+
 .div-table-row > div{
   float:left;/*fix for  buggy browsers*/
   display:table-cell;
-  width:20%;
-  background-color:#ccc;
+  padding: 7px;
   text-align: center;
+  vertical-align: middle
+  /*border-top: 1px solid #666;*/
+}
+
+.div-table-heading > div, .div-table-heading > div > a {
+   vertical-align: middle;
+   border-top: 0px;
+   background-color: #4ebd71;
+   color: #fff;
+}
+
+.div-table div.link {
+   padding:0px;
+}
+.div-table div.link a {
+   display:block;
+   padding: 7px;
+}
+
+.div-table-heading div.link a:hover {
+   background-color: #4BDB78
+}
+
+.div-table-collapse {
+   background-color: #fff;
+   padding: 15px;
 }
 
 footer {
@@ -70,10 +105,6 @@ div.form-error {
 #login-body {
   height: 220px;
 }
-
-/*#login-nav {
-  display: none;
-}*/
 
 #lang input {
   position: relative;
@@ -119,4 +150,12 @@ div.form-error {
   #login-nav {
     display: inline;
   }
+}
+
+#top-nav {
+   border-radius: 0px;
+}
+
+#top-nav li a:hover {
+   color: #4ebd71;
 }

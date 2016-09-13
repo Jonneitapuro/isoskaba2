@@ -15,7 +15,7 @@
 <body>
   <div class="container-fluid">
     <div id="header" class="row">
-        <a href="/"><img id="headerpic" src="{% static 'images/isoskaba-kuva-pieni.jpg' %}" alt="ISOskaba"></a>
+        <a href="/"><img id="headerpic" src="{% static 'images/isoskaba-kuva-pienempi.jpg' %}" alt="ISOskaba"></a>
     </div>
     {% if not user.is_authenticated and view != 'login' %}
     <div id="login">
@@ -52,7 +52,7 @@
   </div>
   <form action="/i18n/setlang/" id="language-form" method="post">
   {% csrf_token %}
-  <nav class="navbar navbar-inverse">
+  <nav id="top-nav" class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -64,9 +64,12 @@
      </div>
      <div class="collapse navbar-collapse" id="myNavbar">
        <ul class="nav navbar-nav">
+<<<<<<< HEAD
           {% if user.is_superuser %}
           <li><a href="/admin/events">{% trans 'Events' %}</a></li>
           {% endif %}
+=======
+>>>>>>> master
           {% if user.is_authenticated %}
           <li><a href="/events">{% trans 'Events' %}</a></li>
           <li><a href="/user">{% trans 'User info' %}</a></li>
@@ -86,6 +89,11 @@
           </li>
           {% if user.is_authenticated %}
           <li><a href="/logout/"><span class="glyphicon glyphicon-log-out"></span>{% trans 'Log out' %}</a></li>
+<<<<<<< HEAD
+=======
+          {% else %}
+          <li><a href="/login">{% trans 'Log in' %}</a></li>
+>>>>>>> master
           {% endif %}
         </ul>
     </div>
