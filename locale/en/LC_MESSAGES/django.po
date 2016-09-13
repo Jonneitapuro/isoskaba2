@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-12 17:44+0000\n"
+"POT-Creation-Date: 2016-09-13 13:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,7 +69,7 @@ msgstr ""
 msgid "Logged out"
 msgstr ""
 
-#: skaba/views.py:280
+#: skaba/views.py:285
 msgid "You have attended for the maximum amount"
 msgstr ""
 
@@ -82,11 +82,12 @@ msgid "User"
 msgstr ""
 
 #: templates/admin_attendances.html:12 templates/admin_attendances.html:30
+#: templates/eventlist.html:63
 msgid "Event"
 msgstr ""
 
 #: templates/admin_attendances.html:13 templates/admin_attendances.html:31
-#: templates/admin_eventlist.html:39 templates/eventlist.html:39
+#: templates/admin_eventlist.html:39 templates/eventlist.html:41
 msgid "Date"
 msgstr ""
 
@@ -99,7 +100,7 @@ msgid "Verified attendances"
 msgstr ""
 
 #: templates/admin_base.html:7 templates/admin_eventlist.html:7
-#: templates/base.html:68 templates/base.html:71 templates/eventlist.html:7
+#: templates/base.html:68 templates/eventlist.html:7
 msgid "Events"
 msgstr ""
 
@@ -111,11 +112,11 @@ msgstr ""
 msgid "Attendances"
 msgstr ""
 
-#: templates/admin_eventlist.html:9 templates/eventlist.html:9
+#: templates/admin_eventlist.html:9 templates/eventlist.html:10
 msgid "Search events"
 msgstr ""
 
-#: templates/admin_eventlist.html:34 templates/eventlist.html:36
+#: templates/admin_eventlist.html:34 templates/eventlist.html:38
 #: templates/userlist.html:7
 msgid "Name"
 msgstr ""
@@ -124,13 +125,13 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: templates/admin_eventlist.html:36 templates/eventlist.html:37
+#: templates/admin_eventlist.html:36 templates/eventlist.html:39
 #: templates/user_info.html:23 templates/userlist.html:9
 msgid "Guild"
 msgstr ""
 
-#: templates/admin_eventlist.html:37 templates/eventlist.html:38
-#: templates/user_info.html:42
+#: templates/admin_eventlist.html:37 templates/eventlist.html:40
+#: templates/eventlist.html:64 templates/user_info.html:42
 msgid "Points"
 msgstr ""
 
@@ -142,16 +143,18 @@ msgstr ""
 msgid "Welcome to admin pages"
 msgstr ""
 
-#: templates/base.html:24 templates/base.html:43 templates/simple_login.html:27
-#: templates/simple_login.html:56
+#: templates/base.html:24 templates/base.html:43 templates/base.html:87
+#: templates/simple_login.html:27 templates/simple_login.html:56
 msgid "Log in"
 msgstr ""
 
-#: templates/base.html:30 templates/base.html:32 templates/simple_login.html:33
+#: templates/base.html:30 templates/base.html:32
+#: templates/simple_login.html:33
 msgid "User ID"
 msgstr ""
 
-#: templates/base.html:36 templates/base.html:38 templates/simple_login.html:39
+#: templates/base.html:36 templates/base.html:38
+#: templates/simple_login.html:39
 msgid "Password"
 msgstr ""
 
@@ -163,32 +166,44 @@ msgstr ""
 msgid "ISOskaba"
 msgstr ""
 
-#: templates/base.html:72 templates/user_info.html:4
+#: templates/base.html:69 templates/user_info.html:4
 msgid "User info"
 msgstr ""
 
-#: templates/base.html:73
+#: templates/base.html:70
 msgid "Guild leaderboard"
 msgstr ""
 
-#: templates/base.html:74
+#: templates/base.html:71
 msgid "Total leaderboard"
 msgstr ""
 
-#: templates/base.html:77
+#: templates/base.html:74
 msgid "Admin panel"
 msgstr ""
 
-#: templates/base.html:88
+#: templates/base.html:85
 msgid "Log out"
 msgstr ""
 
-#: templates/eventlist.html:35
+#: templates/eventlist.html:37
 msgid "Extra info"
 msgstr ""
 
-#: templates/eventlist.html:40
+#: templates/eventlist.html:42 templates/eventlist.html:52
 msgid "Attend"
+msgstr ""
+
+#: templates/eventlist.html:60 templates/user_info.html:38
+msgid "Attended events"
+msgstr ""
+
+#: templates/eventlist.html:65
+msgid "Created"
+msgstr ""
+
+#: templates/eventlist.html:66 templates/user_info.html:44
+msgid "Verified"
 msgstr ""
 
 #: templates/index.html:4
@@ -230,20 +245,12 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: templates/user_info.html:38
-msgid "Attended events"
-msgstr ""
-
 #: templates/user_info.html:41
 msgid "Event name"
 msgstr ""
 
 #: templates/user_info.html:43
 msgid "Date added"
-msgstr ""
-
-#: templates/user_info.html:44
-msgid "Verified"
 msgstr ""
 
 #: templates/userlist.html:10
