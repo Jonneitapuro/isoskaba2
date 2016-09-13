@@ -186,15 +186,22 @@ def logout_user(request):
     return redirect('index')
 
 def list_user_events(request):
-    order_by = request.GET.get('order_by', 'guild')
+    order_by_events = request.GET.get('events_order_by', 'guild')
+    order_by_attendances = request.GET.get('attendances_order_by', 'verified')
     cur_user = request.user
     cur_user_profile = UserProfile.objects.get(user_id  = cur_user.id)
     if cur_user_profile.is_tf == 1:
         tf = 14
     else:
         tf = 20
-    events = Event.objects.filter(Q(guild__id = cur_user_profile.guild_id) | Q(guild__id = 1) | Q(guild__id = tf)).order_by(order_by)
-    response = TemplateResponse(request, 'eventlist.html', {'events': events})
+    events = Event.objects.filter(Q(guild__id = cur_user_profile.guild_id) | Q(guild__id = 1) | Q(guild__id = tf)).order_by(order_by_events)
+    attendances = Attendance.objects.filter(Q(user__id = request.user.pk)).order_by(order_by_attendances)
+    for event in events:
+        print (attendances.filter(event=event.pk).count())
+        if attendances.filter(event=event.pk).count() >= event.repeats:
+            events = events.exclude(pk=event.pk)
+
+    response = TemplateResponse(request, 'eventlist.html', {'events': events, 'attendances': attendances})
     response.render()
     return response
 
@@ -265,20 +272,21 @@ def admin_edit(request, user_id):
     return render(request, 'admin_form.html', token)
 
 def attend_event(request):
-    if 'attend' in request.POST:
-        reps = request.POST.get('e_repeats')
-        reps = int(reps)
-        eventid = request.POST.get('e_id')
-        eventid = int(eventid)
+    # TODO: reformat redirection
+    if 'e_id' in request.POST:
+        eventid = int(request.POST.get('e_id'))
+        event = get_object_or_404(Event, pk=eventid)
         cur_user = UserProfile.objects.get(user_id = request.user.id)
-        repcount = Attendance.objects.filter(Q(user_id = cur_user.id) & Q(event_id = request.POST.get('e_id'))).count()
-        if  reps > repcount:
+        repcount = Attendance.objects.filter(Q(user_id = cur_user.id) & Q(event_id = eventid)).count()
+        if  event.repeats > repcount:
             a = Attendance(event_id = eventid, user_id = cur_user.id)
             a.save()
             return redirect('usereventlist')
         else:
             messages.error(request, _('You have attended for the maximum amount'))
             return redirect('usereventlist')
+    else:
+        return redirect('usereventlist')
 
 @user_passes_test(check_moderator)
 def verify_attendances(request):

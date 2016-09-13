@@ -15,7 +15,7 @@
 <body>
   <div class="container-fluid">
     <div id="header" class="row">
-        <a href="/"><img id="headerpic" src="{% static 'images/isoskaba-kuva-pieni.jpg' %}" alt="ISOskaba"></a>
+        <a href="/"><img id="headerpic" src="{% static 'images/isoskaba-kuva-pienempi.jpg' %}" alt="ISOskaba"></a>
     </div>
     {% if not user.is_authenticated and view != 'login' %}
     <div id="login">
@@ -52,7 +52,7 @@
   </div>
   <form action="/i18n/setlang/" id="language-form" method="post">
   {% csrf_token %}
-  <nav class="navbar navbar-inverse">
+  <nav id="top-nav" class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
