@@ -24,19 +24,19 @@
 </div>-->
       <div class="panel panel-default col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
         <div class="panel-heading panel-heading-transparent">
-          <strong>{% trans 'Kirjaudu sisään' %}</strong>
+          <strong>{% trans 'Log in' %}</strong>
         </div>
         <div id="login-body" class="panel-body">
           <form class="form-horizontal" role="form" action="/login" method="POST">
             {% csrf_token %}
             <div class="form-group">
-              <label for="inputEmail3" class="col-sm-3 control-label">{% trans 'Käyttäjätunnus' %}</label>
+              <label for="inputEmail3" class="col-sm-3 control-label">{% trans 'User ID' %}</label>
               <div class="col-sm-9">
                 <input type="text" class="form-control" id="username" name="username" placeholder="Käyttäjätunnus" required="" value="{{ username }}"  />
               </div>
             </div>
             <div class="form-group">
-              <label for="password" class="col-sm-3 control-label">{% trans 'Salasana' %}</label>
+              <label for="password" class="col-sm-3 control-label">{% trans 'Password' %}</label>
               <div class="col-sm-9">
                 <input type="password" class="form-control" id="password" name="password" placeholder="Salasana" required="" value="" />
               </div>
@@ -46,15 +46,15 @@
                 <div class="checkbox">
                   <label>
                     <input type="checkbox">
-                    Muista minut
+                    Remember me
                   </label>
                 </div>
               </div>
             </div>-->
             <div class="form-group last">
               <div class="col-sm-offset-3 col-sm-9">
-                <button type="submit" class="btn btn-success btn-sm">{% trans 'Kirjaudu sisään' %}</button>
-                <button type="reset" class="btn btn-default btn-sm">{% trans 'Tyhjennä' %}</button>
+                <button type="submit" class="btn btn-success btn-sm">{% trans 'Log in' %}</button>
+                <button type="reset" class="btn btn-default btn-sm">{% trans 'Empty' %}</button>
               </div>
             </div>
           </form>

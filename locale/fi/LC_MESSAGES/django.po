@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-25 20:55+0300\n"
+"POT-Creation-Date: 2016-09-12 17:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,46 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: skaba/views.py:61
+msgid "Event added"
+msgstr "Tapahtuma lisätty"
+
+#: skaba/views.py:73
+msgid "Create event"
+msgstr "Luo tapahtuma"
+
+#: skaba/views.py:74 templates/admin_base.html:8
+msgid "Add event"
+msgstr "Lisää tapahtuma"
+
+#: skaba/views.py:88
+#, fuzzy
+#| msgid "Events"
+msgid "Event saved"
+msgstr "Tapahtuma tallennettu"
+
+#: skaba/views.py:100
+#, fuzzy
+#| msgid "Events"
+msgid "Edit event"
+msgstr "Muokkaa tapahtumaa"
+
+#: skaba/views.py:101
+msgid "Save event"
+msgstr "Tallenna tapahtuma"
+
+#: skaba/views.py:137
+msgid "Creation successfull"
+msgstr "Luonti onnistunut"
+
+#: skaba/views.py:144
+msgid "Add User"
+msgstr "Lisää käyttäjä"
+
+#: skaba/views.py:145 templates/admin_base.html:10
+msgid "Add user"
+msgstr "Lisää käyttäjä"
 
 #: skaba/views.py:168
 msgid "Logged in successfully, welcome "
@@ -34,22 +74,208 @@ msgstr "Väärä käyttäjänimi ja/tai salasana"
 msgid "Logged out"
 msgstr "Kirjauduit ulos"
 
-#: templates/base.html:29
-msgid "Home"
-msgstr "Etusivu"
+#: skaba/views.py:280
+msgid "You have attended for the maximum amount"
+msgstr "Olet osallistunut maksimimäärän"
 
-#: templates/base.html:31
+#: templates/admin_attendances.html:5
+msgid "Unverified attendances"
+msgstr "Varmistamattomat osallistumiset"
+
+#: templates/admin_attendances.html:11 templates/admin_attendances.html:29
+msgid "User"
+msgstr "Käyttäjä"
+
+#: templates/admin_attendances.html:12 templates/admin_attendances.html:30
+#, fuzzy
+#| msgid "Events"
+msgid "Event"
+msgstr "Tapahtuma"
+
+#: templates/admin_attendances.html:13 templates/admin_attendances.html:31
+#: templates/admin_eventlist.html:39 templates/eventlist.html:39
+msgid "Date"
+msgstr "Päivämäärä"
+
+#: templates/admin_attendances.html:14
+msgid "Verify"
+msgstr "Varmista"
+
+#: templates/admin_attendances.html:26
+msgid "Verified attendances"
+msgstr "Varmistetut osallistumiset"
+
+#: templates/admin_base.html:7 templates/admin_eventlist.html:7
+#: templates/base.html:68 templates/base.html:71 templates/eventlist.html:7
 msgid "Events"
 msgstr "Tapahtumat"
 
-#: templates/base.html:42
-msgid "Log out"
-msgstr "Kirjaudu ulos"
+#: templates/admin_base.html:9 templates/userlist.html:4
+msgid "Users"
+msgstr "Käyttäjät"
 
-#: templates/base.html:44
+#: templates/admin_base.html:11
+msgid "Attendances"
+msgstr "Osallistumiset"
+
+#: templates/admin_eventlist.html:9 templates/eventlist.html:9
+msgid "Search events"
+msgstr "Etsi tapahtumaa"
+
+#: templates/admin_eventlist.html:34 templates/eventlist.html:36
+#: templates/userlist.html:7
+msgid "Name"
+msgstr "Nimi"
+
+#: templates/admin_eventlist.html:35
+msgid "Description"
+msgstr "Kuvaus"
+
+#: templates/admin_eventlist.html:36 templates/eventlist.html:37
+#: templates/user_info.html:23 templates/userlist.html:9
+msgid "Guild"
+msgstr "Kilta"
+
+#: templates/admin_eventlist.html:37 templates/eventlist.html:38
+#: templates/user_info.html:42
+msgid "Points"
+msgstr "Pisteet"
+
+#: templates/admin_eventlist.html:38
+msgid "Repeats"
+msgstr "Toistot"
+
+#: templates/admin_index.html:4
+msgid "Welcome to admin pages"
+msgstr "Tervetuloa ylläpito-sivuille"
+
+#: templates/base.html:24 templates/base.html:43 templates/simple_login.html:27
+#: templates/simple_login.html:56
 msgid "Log in"
 msgstr "Kirjaudu sisään"
 
+#: templates/base.html:30 templates/base.html:32 templates/simple_login.html:33
+#, fuzzy
+#| msgid "User"
+msgid "User ID"
+msgstr "Käyttäjä"
+
+#: templates/base.html:36 templates/base.html:38 templates/simple_login.html:39
+msgid "Password"
+msgstr "Salasana"
+
+#: templates/base.html:44 templates/simple_login.html:57
+msgid "Empty"
+msgstr "Tyhjä"
+
 #: templates/base.html:63
-msgid "Text"
-msgstr "Teksti"
+msgid "ISOskaba"
+msgstr "ISOskaba"
+
+#: templates/base.html:72 templates/user_info.html:4
+msgid "User info"
+msgstr "Käyttäjätiedot"
+
+#: templates/base.html:73
+msgid "Guild leaderboard"
+msgstr "Killan pisteet"
+
+#: templates/base.html:74
+msgid "Total leaderboard"
+msgstr "Kokonaispisteet"
+
+#: templates/base.html:77
+msgid "Admin panel"
+msgstr "Ylläpito"
+
+#: templates/base.html:88
+msgid "Log out"
+msgstr "Kirjaudu ulos"
+
+#: templates/eventlist.html:35
+msgid "Extra info"
+msgstr "Lisätietoa"
+
+#: templates/eventlist.html:40
+msgid "Attend"
+msgstr "Osallistu"
+
+#: templates/index.html:4
+#, fuzzy
+#| msgid "Welcome to admin pages"
+msgid "Welcome to ISOskaba!"
+msgstr "Tervetuloa ISOskabaan!"
+
+#: templates/index.html:5
+msgid ""
+"ISOskaba is a competition between the ISOs of Otaniemi, where the goal is to "
+"gather points by attending events. At the end of spring, the most active "
+"ISOs will be rewarded!"
+msgstr ""
+"ISOskaba on kilpailu Otaniemen ISOjen välillä. Skabassa kerätään pisteitä "
+"osallistumalla eri tapahtumiin ja kevään lopuksi aktiivisimmat ISOt "
+"palkitaan!"
+
+#: templates/user_info.html:7
+msgid "Username"
+msgstr "Käyttäjätunnus"
+
+#: templates/user_info.html:11
+msgid "First name"
+msgstr "Etunimi"
+
+#: templates/user_info.html:15
+msgid "Last name"
+msgstr "Sukunimi"
+
+#: templates/user_info.html:19 templates/userlist.html:8
+msgid "Email"
+msgstr "Sähköposti"
+
+#: templates/user_info.html:27
+msgid "TF status"
+msgstr "TF status"
+
+#: templates/user_info.html:31
+msgid "INTL status"
+msgstr "KV status"
+
+#: templates/user_info.html:36
+msgid "Edit"
+msgstr "Muokkaa"
+
+#: templates/user_info.html:38
+msgid "Attended events"
+msgstr "Osallistumiset"
+
+#: templates/user_info.html:41
+#, fuzzy
+#| msgid "Events"
+msgid "Event name"
+msgstr "Tapahtuman nimi"
+
+#: templates/user_info.html:43
+msgid "Date added"
+msgstr "Lisätty"
+
+#: templates/user_info.html:44
+msgid "Verified"
+msgstr "Varmennettu"
+
+#: templates/userlist.html:10
+msgid "Role"
+msgstr "Rooli"
+
+#: templates/userlist.html:11
+msgid "TF"
+msgstr "TF"
+
+#: templates/userlist.html:12
+msgid "KV"
+msgstr "KV"
+
+#~ msgid "Home"
+#~ msgstr "Etusivu"
+
+#~ msgid "Text"
+#~ msgstr "Teksti"

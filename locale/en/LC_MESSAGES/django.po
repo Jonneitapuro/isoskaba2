@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-25 20:55+0300\n"
+"POT-Creation-Date: 2016-09-12 17:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,42 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: skaba/views.py:61
+msgid "Event added"
+msgstr ""
+
+#: skaba/views.py:73
+msgid "Create event"
+msgstr ""
+
+#: skaba/views.py:74 templates/admin_base.html:8
+msgid "Add event"
+msgstr ""
+
+#: skaba/views.py:88
+msgid "Event saved"
+msgstr ""
+
+#: skaba/views.py:100
+msgid "Edit event"
+msgstr ""
+
+#: skaba/views.py:101
+msgid "Save event"
+msgstr ""
+
+#: skaba/views.py:137
+msgid "Creation successfull"
+msgstr ""
+
+#: skaba/views.py:144
+msgid "Add User"
+msgstr ""
+
+#: skaba/views.py:145 templates/admin_base.html:10
+msgid "Add user"
+msgstr ""
 
 #: skaba/views.py:168
 msgid "Logged in successfully, welcome "
@@ -33,22 +69,194 @@ msgstr ""
 msgid "Logged out"
 msgstr ""
 
-#: templates/base.html:29
-msgid "Home"
+#: skaba/views.py:280
+msgid "You have attended for the maximum amount"
 msgstr ""
 
-#: templates/base.html:31
+#: templates/admin_attendances.html:5
+msgid "Unverified attendances"
+msgstr ""
+
+#: templates/admin_attendances.html:11 templates/admin_attendances.html:29
+msgid "User"
+msgstr ""
+
+#: templates/admin_attendances.html:12 templates/admin_attendances.html:30
+msgid "Event"
+msgstr ""
+
+#: templates/admin_attendances.html:13 templates/admin_attendances.html:31
+#: templates/admin_eventlist.html:39 templates/eventlist.html:39
+msgid "Date"
+msgstr ""
+
+#: templates/admin_attendances.html:14
+msgid "Verify"
+msgstr ""
+
+#: templates/admin_attendances.html:26
+msgid "Verified attendances"
+msgstr ""
+
+#: templates/admin_base.html:7 templates/admin_eventlist.html:7
+#: templates/base.html:68 templates/base.html:71 templates/eventlist.html:7
 msgid "Events"
 msgstr ""
 
-#: templates/base.html:42
-msgid "Log out"
+#: templates/admin_base.html:9 templates/userlist.html:4
+msgid "Users"
 msgstr ""
 
-#: templates/base.html:44
+#: templates/admin_base.html:11
+msgid "Attendances"
+msgstr ""
+
+#: templates/admin_eventlist.html:9 templates/eventlist.html:9
+msgid "Search events"
+msgstr ""
+
+#: templates/admin_eventlist.html:34 templates/eventlist.html:36
+#: templates/userlist.html:7
+msgid "Name"
+msgstr ""
+
+#: templates/admin_eventlist.html:35
+msgid "Description"
+msgstr ""
+
+#: templates/admin_eventlist.html:36 templates/eventlist.html:37
+#: templates/user_info.html:23 templates/userlist.html:9
+msgid "Guild"
+msgstr ""
+
+#: templates/admin_eventlist.html:37 templates/eventlist.html:38
+#: templates/user_info.html:42
+msgid "Points"
+msgstr ""
+
+#: templates/admin_eventlist.html:38
+msgid "Repeats"
+msgstr ""
+
+#: templates/admin_index.html:4
+msgid "Welcome to admin pages"
+msgstr ""
+
+#: templates/base.html:24 templates/base.html:43 templates/simple_login.html:27
+#: templates/simple_login.html:56
 msgid "Log in"
 msgstr ""
 
+#: templates/base.html:30 templates/base.html:32 templates/simple_login.html:33
+msgid "User ID"
+msgstr ""
+
+#: templates/base.html:36 templates/base.html:38 templates/simple_login.html:39
+msgid "Password"
+msgstr ""
+
+#: templates/base.html:44 templates/simple_login.html:57
+msgid "Empty"
+msgstr ""
+
 #: templates/base.html:63
-msgid "Text"
-msgstr "Text"
+msgid "ISOskaba"
+msgstr ""
+
+#: templates/base.html:72 templates/user_info.html:4
+msgid "User info"
+msgstr ""
+
+#: templates/base.html:73
+msgid "Guild leaderboard"
+msgstr ""
+
+#: templates/base.html:74
+msgid "Total leaderboard"
+msgstr ""
+
+#: templates/base.html:77
+msgid "Admin panel"
+msgstr ""
+
+#: templates/base.html:88
+msgid "Log out"
+msgstr ""
+
+#: templates/eventlist.html:35
+msgid "Extra info"
+msgstr ""
+
+#: templates/eventlist.html:40
+msgid "Attend"
+msgstr ""
+
+#: templates/index.html:4
+msgid "Welcome to ISOskaba!"
+msgstr ""
+
+#: templates/index.html:5
+msgid ""
+"ISOskaba is a competition between the ISOs of Otaniemi, where the goal is to "
+"gather points by attending events. At the end of spring, the most active "
+"ISOs will be rewarded!"
+msgstr ""
+
+#: templates/user_info.html:7
+msgid "Username"
+msgstr ""
+
+#: templates/user_info.html:11
+msgid "First name"
+msgstr ""
+
+#: templates/user_info.html:15
+msgid "Last name"
+msgstr ""
+
+#: templates/user_info.html:19 templates/userlist.html:8
+msgid "Email"
+msgstr ""
+
+#: templates/user_info.html:27
+msgid "TF status"
+msgstr ""
+
+#: templates/user_info.html:31
+msgid "INTL status"
+msgstr ""
+
+#: templates/user_info.html:36
+msgid "Edit"
+msgstr ""
+
+#: templates/user_info.html:38
+msgid "Attended events"
+msgstr ""
+
+#: templates/user_info.html:41
+msgid "Event name"
+msgstr ""
+
+#: templates/user_info.html:43
+msgid "Date added"
+msgstr ""
+
+#: templates/user_info.html:44
+msgid "Verified"
+msgstr ""
+
+#: templates/userlist.html:10
+msgid "Role"
+msgstr ""
+
+#: templates/userlist.html:11
+msgid "TF"
+msgstr ""
+
+#: templates/userlist.html:12
+msgid "KV"
+msgstr ""
+
+#~ msgid "Text"
+#~ msgstr "Text"

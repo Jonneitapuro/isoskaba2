@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-25 20:55+0300\n"
+"POT-Creation-Date: 2016-09-12 17:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,42 +18,249 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: skaba/views.py:61
+msgid "Event added"
+msgstr ”Händelse tillsattes”
+
+#: skaba/views.py:73
+msgid "Create event"
+msgstr ”Skapa händelse”
+
+#: skaba/views.py:74 templates/admin_base.html:8
+msgid "Add event"
+msgstr ”Tillsätt händelse”
+
+#: skaba/views.py:88
+msgid "Event saved"
+msgstr ”Händelse sparas”
+
+#: skaba/views.py:100
+msgid "Edit event"
+msgstr ”Redigera händelse”
+
+#: skaba/views.py:101
+msgid "Save event"
+msgstr ”Spara händelse”
+
+#: skaba/views.py:137
+msgid "Creation successfull"
+msgstr ”Skapande framgångsrik”
+
+#: skaba/views.py:144
+msgid "Add User"
+msgstr ”Tillsätt användare”
+
+#: skaba/views.py:145 templates/admin_base.html:10
+msgid "Add user"
+msgstr ”Tillsätt användare”
+
 #: skaba/views.py:168
 msgid "Logged in successfully, welcome "
-msgstr ""
+msgstr "Loggat in framgångsrikt, välkomna"
 
 #: skaba/views.py:174
 msgid "Your account is not active."
-msgstr ""
+msgstr "Ditt konto är inte aktiv."
 
 #: skaba/views.py:177
 msgid "Invalid username and/or password."
-msgstr ""
+msgstr ”Ogiltig användarnamn och/eller lösenord”
 
 #: skaba/views.py:185
 msgid "Logged out"
-msgstr ""
+msgstr ”Loggat ut”
 
-#: templates/base.html:25
-msgid "shit"
-msgstr "skit"
+#: skaba/views.py:280
+msgid "You have attended for the maximum amount"
+msgstr ”Du har deltagit för det maximala beloppet”
 
-#: templates/base.html:29
-msgid "Home"
-msgstr ""
+#: templates/admin_attendances.html:5
+msgid "Unverified attendances"
+msgstr ”Overifierade deltagande”
 
-#: templates/base.html:31
+#: templates/admin_attendances.html:11 templates/admin_attendances.html:29
+msgid "User"
+msgstr ”Användare”
+
+#: templates/admin_attendances.html:12 templates/admin_attendances.html:30
+msgid "Event"
+msgstr ”Händelse”
+
+#: templates/admin_attendances.html:13 templates/admin_attendances.html:31
+#: templates/admin_eventlist.html:39 templates/eventlist.html:39
+msgid "Date"
+msgstr ”Datum”
+
+#: templates/admin_attendances.html:14
+msgid "Verify"
+msgstr ”Verifiera”
+
+#: templates/admin_attendances.html:26
+msgid "Verified attendances"
+msgstr ”Verifierat deltagande”
+
+#: templates/admin_base.html:7 templates/admin_eventlist.html:7
+#: templates/base.html:68 templates/base.html:71 templates/eventlist.html:7
 msgid "Events"
-msgstr ""
+msgstr ”Händelser”
 
-#: templates/base.html:42
-msgid "Log out"
-msgstr ""
+#: templates/admin_base.html:9 templates/userlist.html:4
+msgid "Users"
+msgstr ”Användare”
 
-#: templates/base.html:44
+#: templates/admin_base.html:11
+msgid "Attendances"
+msgstr ”Deltagande”
+
+#: templates/admin_eventlist.html:9 templates/eventlist.html:9
+msgid "Search events"
+msgstr ”Sök händelser”
+
+#: templates/admin_eventlist.html:34 templates/eventlist.html:36
+#: templates/userlist.html:7
+msgid "Name"
+msgstr ”Namn”
+
+#: templates/admin_eventlist.html:35
+msgid "Description"
+msgstr ”Beskrivning”
+
+#: templates/admin_eventlist.html:36 templates/eventlist.html:37
+#: templates/user_info.html:23 templates/userlist.html:9
+msgid "Guild"
+msgstr ”Gille”
+
+#: templates/admin_eventlist.html:37 templates/eventlist.html:38
+#: templates/user_info.html:42
+msgid "Points"
+msgstr ”Poäng”
+
+#: templates/admin_eventlist.html:38
+msgid "Repeats"
+msgstr ”Upprepningar”
+
+#: templates/admin_index.html:4
+msgid "Welcome to admin pages"
+msgstr ”Välkommen till admin sidor”
+
+#: templates/base.html:24 templates/base.html:43 templates/simple_login.html:27
+#: templates/simple_login.html:56
 msgid "Log in"
-msgstr ""
+msgstr ”Logga in”
+
+#: templates/base.html:30 templates/base.html:32 templates/simple_login.html:33
+msgid "User ID"
+msgstr ”Användare ID”
+
+#: templates/base.html:36 templates/base.html:38 templates/simple_login.html:39
+msgid "Password"
+msgstr ”Lösenord”
+
+#: templates/base.html:44 templates/simple_login.html:57
+msgid "Empty"
+msgstr ”Tom”
 
 #: templates/base.html:63
-msgid "Text"
-msgstr "Tekst"
+msgid "ISOskaba"
+msgstr ”ISOskaba”
+
+#: templates/base.html:72 templates/user_info.html:4
+msgid "User info"
+msgstr ”Användare info”
+
+#: templates/base.html:73
+msgid "Guild leaderboard"
+msgstr ”Gilles leaderboard”
+
+#: templates/base.html:74
+msgid "Total leaderboard"
+msgstr ”Total leaderboard”
+
+#: templates/base.html:77
+msgid "Admin panel"
+msgstr ”Admin panel”
+
+#: templates/base.html:88
+msgid "Log out"
+msgstr ”Logga ut”
+
+#: templates/eventlist.html:35
+msgid "Extra info"
+msgstr ”Extra info”
+
+#: templates/eventlist.html:40
+msgid "Attend"
+msgstr ”Delta”
+
+#: templates/index.html:4
+msgid "Welcome to ISOskaba!"
+msgstr ”Välkommen till ISOskaba”
+
+#: templates/index.html:5
+msgid ""
+"ISOskaba is a competition between the ISOs of Otaniemi, where the goal is to "
+"gather points by attending events. At the end of spring, the most active "
+"ISOs will be rewarded!"
+msgstr ”ISOskaba är en konkurrens mellan storasyskon av Otaniemi där målet är att samla poäng genom att delta i händelser. Vid slutet av våren den mest aktiva storasyskon kommer att belönas!”
+
+#: templates/user_info.html:7
+msgid "Username"
+msgstr ”Användarnamn”
+
+#: templates/user_info.html:11
+msgid "First name"
+msgstr ”Förnamn”
+
+#: templates/user_info.html:15
+msgid "Last name"
+msgstr ”Efternamn”
+
+#: templates/user_info.html:19 templates/userlist.html:8
+msgid "Email"
+msgstr ”E-post”
+
+#: templates/user_info.html:27
+msgid "TF status"
+msgstr ”TF status”
+
+#: templates/user_info.html:31
+msgid "INTL status"
+msgstr ”INTL status”
+
+#: templates/user_info.html:36
+msgid "Edit"
+msgstr ”Redigera”
+
+#: templates/user_info.html:38
+msgid "Attended events"
+msgstr ”Deltagit händelser”
+
+#: templates/user_info.html:41
+msgid "Event name"
+msgstr ”Händelsens namn”
+
+#: templates/user_info.html:43
+msgid "Date added"
+msgstr ”Datum tillagt”
+
+#: templates/user_info.html:44
+msgid "Verified"
+msgstr ”Verifierat”
+
+#: templates/userlist.html:10
+msgid "Role"
+msgstr ”Roll”
+
+#: templates/userlist.html:11
+msgid "TF"
+msgstr ”TF”
+
+#: templates/userlist.html:12
+msgid "KV"
+msgstr ”Internationell”
+
+#~ msgid "shit"
+#~ msgstr "skit"
+
+#~ msgid "Text"
+#~ msgstr "Text"
