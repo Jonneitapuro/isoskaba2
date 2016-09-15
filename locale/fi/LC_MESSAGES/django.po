@@ -104,7 +104,7 @@ msgstr "Varmista"
 
 #: templates/admin_attendances.html:26
 msgid "Verified attendances"
-msgstr "Varmistetut osallistumiset"
+msgstr "Vahvistetut osallistumiset"
 
 #: templates/admin_base.html:7 templates/admin_eventlist.html:7
 #: templates/base.html:68 templates/eventlist.html:7
@@ -148,7 +148,7 @@ msgstr "Toistot"
 
 #: templates/admin_index.html:4
 msgid "Welcome to admin pages"
-msgstr "Tervetuloa ylläpito-sivuille"
+msgstr "Tervetuloa ylläpitosivuille"
 
 #: templates/base.html:24 templates/base.html:43 templates/base.html:87
 #: templates/simple_login.html:27 templates/simple_login.html:56
@@ -169,7 +169,7 @@ msgstr "Salasana"
 
 #: templates/base.html:44 templates/simple_login.html:57
 msgid "Empty"
-msgstr "Tyhjä"
+msgstr "Tyhjennä"
 
 #: templates/base.html:63
 msgid "ISOskaba"
@@ -213,7 +213,7 @@ msgstr "Luotu"
 
 #: templates/eventlist.html:66 templates/user_info.html:44
 msgid "Verified"
-msgstr "Varmennettu"
+msgstr "Vahvistettu"
 
 #: templates/index.html:4
 #, fuzzy
@@ -249,11 +249,11 @@ msgstr "Sähköposti"
 
 #: templates/user_info.html:27
 msgid "TF status"
-msgstr "TF status"
+msgstr "TF-status"
 
 #: templates/user_info.html:31
 msgid "INTL status"
-msgstr "KV status"
+msgstr "KV-status"
 
 #: templates/user_info.html:36
 msgid "Edit"

@@ -20,31 +20,31 @@ msgstr ""
 
 #: skaba/views.py:61
 msgid "Event added"
-msgstr "Händelse tillsattes"
+msgstr "Evenemang tillsattes"
 
 #: skaba/views.py:73
 msgid "Create event"
-msgstr "Skapa händelse"
+msgstr "Skapa evenemang"
 
 #: skaba/views.py:74 templates/admin_base.html:8
 msgid "Add event"
-msgstr "Tillsätt händelse"
+msgstr "Tillsätt evenemang"
 
 #: skaba/views.py:88
 msgid "Event saved"
-msgstr "Händelse sparas"
+msgstr "Evenemang sparad"
 
 #: skaba/views.py:100
 msgid "Edit event"
-msgstr "Redigera händelse"
+msgstr "Ändra evenemang"
 
 #: skaba/views.py:101
 msgid "Save event"
-msgstr "Spara händelse"
+msgstr "Spara evenemang"
 
 #: skaba/views.py:137
 msgid "Creation successfull"
-msgstr "Skapande framgångsrik"
+msgstr "Skapandet lyckades"
 
 #: skaba/views.py:144
 msgid "Add User"
@@ -56,7 +56,7 @@ msgstr "Tillsätt användare"
 
 #: skaba/views.py:168
 msgid "Logged in successfully, welcome "
-msgstr "Loggat in framgångsrikt, välkomna"
+msgstr "Login lyckades, välkommen"
 
 #: skaba/views.py:174
 msgid "Your account is not active."
@@ -72,11 +72,11 @@ msgstr "Loggat ut"
 
 #: skaba/views.py:285
 msgid "You have attended for the maximum amount"
-msgstr "Du har deltagit för det maximala beloppet"
+msgstr "Du har deltagit för det maximala antalet"
 
 #: templates/admin_attendances.html:5
 msgid "Unverified attendances"
-msgstr "Overifierade deltagande"
+msgstr "Overifierade deltaganden"
 
 #: templates/admin_attendances.html:11 templates/admin_attendances.html:29
 msgid "User"
@@ -85,7 +85,7 @@ msgstr "Användare"
 #: templates/admin_attendances.html:12 templates/admin_attendances.html:30
 #: templates/eventlist.html:63
 msgid "Event"
-msgstr "Händelse"
+msgstr "Evenemang"
 
 #: templates/admin_attendances.html:13 templates/admin_attendances.html:31
 #: templates/admin_eventlist.html:39 templates/eventlist.html:41
@@ -98,12 +98,12 @@ msgstr "Verifiera"
 
 #: templates/admin_attendances.html:26
 msgid "Verified attendances"
-msgstr "Verifierat deltagande"
+msgstr "Verifierade deltaganden"
 
 #: templates/admin_base.html:7 templates/admin_eventlist.html:7
 #: templates/base.html:68 templates/eventlist.html:7
 msgid "Events"
-msgstr "Händelser"
+msgstr "Evenemang"
 
 #: templates/admin_base.html:9 templates/userlist.html:4
 msgid "Users"
@@ -111,11 +111,11 @@ msgstr "Användare"
 
 #: templates/admin_base.html:11
 msgid "Attendances"
-msgstr "Deltagande"
+msgstr "Deltaganden"
 
 #: templates/admin_eventlist.html:9 templates/eventlist.html:10
 msgid "Search events"
-msgstr "Sök händelser"
+msgstr "Sök evenemang"
 
 #: templates/admin_eventlist.html:34 templates/eventlist.html:38
 #: templates/userlist.html:7
@@ -142,7 +142,7 @@ msgstr "Upprepningar"
 
 #: templates/admin_index.html:4
 msgid "Welcome to admin pages"
-msgstr "Välkommen till admin sidor"
+msgstr "Välkommen till adminsidorna"
 
 #: templates/base.html:24 templates/base.html:43 templates/base.html:87
 #: templates/simple_login.html:27 templates/simple_login.html:56
@@ -152,7 +152,7 @@ msgstr "Logga in"
 #: templates/base.html:30 templates/base.html:32
 #: templates/simple_login.html:33
 msgid "User ID"
-msgstr "Användare ID"
+msgstr "Användar-ID"
 
 #: templates/base.html:36 templates/base.html:38
 #: templates/simple_login.html:39
@@ -161,7 +161,7 @@ msgstr "Lösenord"
 
 #: templates/base.html:44 templates/simple_login.html:57
 msgid "Empty"
-msgstr "Tom"
+msgstr "Töm"
 
 #: templates/base.html:63
 msgid "ISOskaba"
@@ -169,7 +169,7 @@ msgstr "ISOskaba"
 
 #: templates/base.html:69 templates/user_info.html:4
 msgid "User info"
-msgstr "Användare info"
+msgstr "Användarinfo"
 
 #: templates/base.html:70
 msgid "Guild leaderboard"
@@ -181,7 +181,7 @@ msgstr "Total leaderboard"
 
 #: templates/base.html:74
 msgid "Admin panel"
-msgstr "Admin panel"
+msgstr "Adminpanel"
 
 #: templates/base.html:85
 msgid "Log out"
@@ -197,7 +197,7 @@ msgstr "Delta"
 
 #: templates/eventlist.html:60 templates/user_info.html:38
 msgid "Attended events"
-msgstr "Deltagit händelser"
+msgstr "Deltagade evenemang"
 
 #: templates/eventlist.html:65
 #, fuzzy
@@ -219,9 +219,9 @@ msgid ""
 "gather points by attending events. At the end of spring, the most active "
 "ISOs will be rewarded!"
 msgstr ""
-"ISOskaba är en konkurrens mellan storasyskon av Otaniemi där målet är att "
-"samla poäng genom att delta i händelser. Vid slutet av våren den mest aktiva "
-"storasyskon kommer att belönas!"
+"ISOskaba är en tävling mellan storasyskon av Otnäs där målet är att "
+"samla poäng genom att delta i evenemang. Vid slutet av våren kommer de mest "
+"aktiva storasyskonen att belönas!"
 
 #: templates/user_info.html:7
 msgid "Username"
@@ -249,11 +249,11 @@ msgstr "INTL status"
 
 #: templates/user_info.html:36
 msgid "Edit"
-msgstr "Redigera"
+msgstr "Ändra"
 
 #: templates/user_info.html:41
 msgid "Event name"
-msgstr "Händelsens namn"
+msgstr "Evenemangs namn"
 
 #: templates/user_info.html:43
 msgid "Date added"
@@ -270,4 +270,3 @@ msgstr "TF"
 #: templates/userlist.html:12
 msgid "KV"
 msgstr "Internationell"
-
