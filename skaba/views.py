@@ -290,10 +290,14 @@ def attend_event(request):
 @user_passes_test(check_moderator)
 def verify_attendances(request):
 
-    if request.POST:
+    if 'attendance' in request.POST:
         attendance = Attendance.objects.get(pk=request.POST.get('attendance'))
         attendance.verified = True
         attendance.save()
+    
+    if 'delete' in request.POST:
+        attendance = Attendance.objects.get(pk=request.POST.get('delete'))
+        attendance.delete()
 
     order_by = request.GET.get('order_by', 'user')
     guild_users = User.objects.filter(userprofile__guild = request.user.userprofile.guild)
