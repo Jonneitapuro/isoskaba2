@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-13 13:39+0000\n"
+"POT-Creation-Date: 2016-09-15 10:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,14 +31,10 @@ msgid "Add event"
 msgstr "Lisää tapahtuma"
 
 #: skaba/views.py:88
-#, fuzzy
-#| msgid "Events"
 msgid "Event saved"
 msgstr "Tapahtuma tallennettu"
 
 #: skaba/views.py:100
-#, fuzzy
-#| msgid "Events"
 msgid "Edit event"
 msgstr "Muokkaa tapahtumaa"
 
@@ -59,7 +55,7 @@ msgid "Add user"
 msgstr "Lisää käyttäjä"
 
 #: skaba/views.py:168
-msgid "Logged in successfully, welcome "
+msgid "Logged in successfully, welcome"
 msgstr "Kirjauduit sisään, tervetuloa"
 
 #: skaba/views.py:174
@@ -88,8 +84,6 @@ msgstr "Käyttäjä"
 
 #: templates/admin_attendances.html:12 templates/admin_attendances.html:30
 #: templates/eventlist.html:63
-#, fuzzy
-#| msgid "Events"
 msgid "Event"
 msgstr "Tapahtuma"
 
@@ -157,8 +151,6 @@ msgstr "Kirjaudu sisään"
 
 #: templates/base.html:30 templates/base.html:32
 #: templates/simple_login.html:33
-#, fuzzy
-#| msgid "User"
 msgid "User ID"
 msgstr "Käyttäjä"
 
@@ -216,8 +208,6 @@ msgid "Verified"
 msgstr "Vahvistettu"
 
 #: templates/index.html:4
-#, fuzzy
-#| msgid "Welcome to admin pages"
 msgid "Welcome to ISOskaba!"
 msgstr "Tervetuloa ISOskabaan!"
 
@@ -260,8 +250,6 @@ msgid "Edit"
 msgstr "Muokkaa"
 
 #: templates/user_info.html:41
-#, fuzzy
-#| msgid "Events"
 msgid "Event name"
 msgstr "Tapahtuman nimi"
 
