@@ -9,4 +9,5 @@ __pycache__/
 *.py[cod]
 
 # compiled translation files
-*.mo
+# commented out because heroku can't find msgfmt (GNU gettext tools 0.15 or newer)
+#*.mo
