@@ -2,7 +2,8 @@
 {% load i18n %}
 {% block admin_content %}
 <h1>{% trans 'Users' %}</h1>
-<table style="width:100%">
+<form role="form" class="form-horizontal" action="/deleteuser" method="POST">
+  {% csrf_token %}
   <tr>
     <th>{% trans 'Name' %}</th>
     <th>{% trans 'Email' %}</th>
@@ -19,7 +20,8 @@
     <td>{{ user.profile.role }}</td>
     <td>{{ user.profile.is_tf }}</td>
     <td>{{ user.profile.is_kv }}</td>
+    <td><button type="submit" name="user_id" value="{{ user.id }}" onclick="confirm('{% trans 'Do you want to delete the user' %}')">{% trans 'Delete' %}</button></td>
   </tr>
   {% endfor %}
-</table>
+</form>
 {% endblock %}

@@ -303,3 +303,14 @@ def verify_attendances(request):
     response = TemplateResponse(request, 'admin_attendances.html', {'unverified': unverified, 'verified': verified})
     response.render()
     return response
+
+@user_passes_test(check_admin)
+def delete_user(request):
+    if 'user_id' in request.POST:
+        userid = int(request.POST.get('user_id'))
+        "user = get_object_or_404(user, pk=userid)"
+        User.objects.filter(id = userid).delete()
+        return redirect('userlist')
+    else:
+        messages.error(request, _('Something went wrong!'))
+        return redirect('userlist')
