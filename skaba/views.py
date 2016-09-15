@@ -314,3 +314,13 @@ def delete_user(request):
     else:
         messages.error(request, _('Something went wrong!'))
         return redirect('userlist')
+
+@user_passes_test(check_moderator)
+def delete_event(request):
+    if 'event_id' in request.POST:
+        eventid = int(request.POST.get('event_id'))
+        Event.objects.filter(id = eventid).delete()
+        return redirect('eventlist')
+    else:
+        messages.error(request, _('Something went wrong!'))
+        return redirect('eventlist')
