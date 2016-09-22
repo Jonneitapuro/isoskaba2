@@ -186,8 +186,8 @@ def logout_user(request):
     return redirect('index')
 
 def list_user_events(request):
-    order_by_events = request.GET.get('events_order_by', 'guild')
-    order_by_attendances = request.GET.get('attendances_order_by', 'verified')
+    order_by_events = request.GET.get('order_by_events', 'guild')
+    order_by_attendances = request.GET.get('order_by_attendances', 'verified')
     cur_user = request.user
     cur_user_profile = UserProfile.objects.get(user_id  = cur_user.id)
     if cur_user_profile.is_tf == 1:
@@ -200,7 +200,14 @@ def list_user_events(request):
         if attendances.filter(event=event.pk).count() >= event.repeats:
             events = events.exclude(pk=event.pk)
 
-    response = TemplateResponse(request, 'eventlist.html', {'events': events, 'attendances': attendances})
+    response = TemplateResponse(request, 
+            'eventlist.html',
+            {
+                'events': events, 'attendances': attendances,
+                'order_by_attendances': order_by_attendances,
+                'order_by_events': order_by_events
+            })
+
     response.render()
     return response
 
@@ -273,6 +280,12 @@ def admin_edit(request, user_id):
 def attend_event(request):
     # TODO: reformat redirection
     if 'e_id' in request.POST:
+        response = redirect('usereventlist')
+        response['Location'] += '?order_by_attendances=' + \
+                request.POST.get('order_by_attendances', 'verified') + \
+                '&order_by_events=' + \
+                request.POST.get('order_by_events', 'guild')
+
         eventid = int(request.POST.get('e_id'))
         event = get_object_or_404(Event, pk=eventid)
         cur_user = UserProfile.objects.get(user_id = request.user.id)
@@ -280,10 +293,10 @@ def attend_event(request):
         if  event.repeats > repcount:
             a = Attendance(event_id = eventid, user_id = cur_user.id)
             a.save()
-            return redirect('usereventlist')
+            return response
         else:
             messages.error(request, _('You have attended for the maximum amount'))
-            return redirect('usereventlist')
+            return response
     else:
         return redirect('usereventlist')
 
