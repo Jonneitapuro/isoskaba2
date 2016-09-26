@@ -7,13 +7,15 @@
 <h1>{% trans 'Events' %}</h1>
 <form role="form" class="form-horizontal" action="/attend" method="POST">
   {% csrf_token %}
+  <input type="hidden" name="order_by_events" value="{{ order_by_events }}" />
+  <input type="hidden" name="order_by_attendances" value="{{ order_by_attendances }}" />
   <div class="div-table">
     <div class="div-table-row div-table-heading">
       <div style="width: 10%">{% trans 'Extra info' %}</div>
-      <div style="width: 25%" class="link"><a href="?events_order_by=name">{% trans 'Name' %}</a></div>
-      <div style="width: 15%" class="link"><a href="?events_order_by=guild">{% trans 'Guild' %}</a></div>
-      <div style="width: 10%" class="link"><a href="?events_order_by=points">{% trans 'Points' %}</a></div>
-      <div style="width: 20%" class="link"><a href="?events_order_by=date">{% trans 'Date' %}</a></div>
+      <div style="width: 25%" class="link"><a href="?order_by_events=name">{% trans 'Name' %}</a></div>
+      <div style="width: 15%" class="link"><a href="?order_by_events=guild">{% trans 'Guild' %}</a></div>
+      <div style="width: 10%" class="link"><a href="?order_by_events=points">{% trans 'Points' %}</a></div>
+      <div style="width: 20%" class="link"><a href="?order_by_events=date">{% trans 'Date' %}</a></div>
       <div style="width: 20%">{% trans 'Attend' %}</div>
     </div>
 
@@ -35,10 +37,10 @@
 <h1>{% trans 'Attended events' %}</h1>
 <div class="div-table">
   <div class="div-table-row div-table-heading">
-    <div style="width: 30%" class="link"><a href="?attendances_order_by=event">{% trans 'Event' %}</a></div>
-    <div style="width: 20%" class="link"><a href="?attendances_order_by=event__points">{% trans 'Points' %}</a></div>
-    <div style="width: 30%" class="link"><a href="?attendances_order_by=created">{% trans 'Created' %}</a></div>
-    <div style="width: 20%" class="link"><a href="?attendances_order_by=verified">{% trans 'Verified' %}</a></div>
+    <div style="width: 30%" class="link"><a href="?order_by_attendances=event">{% trans 'Event' %}</a></div>
+    <div style="width: 20%" class="link"><a href="?order_by_attendances=event__points">{% trans 'Points' %}</a></div>
+    <div style="width: 30%" class="link"><a href="?order_by_attendances=created">{% trans 'Created' %}</a></div>
+    <div style="width: 20%" class="link"><a href="?order_by_attendances=verified">{% trans 'Verified' %}</a></div>
   </div>
 
   {% for attendance in attendances %}

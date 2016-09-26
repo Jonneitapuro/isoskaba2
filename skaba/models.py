@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.contrib.auth.models import BaseUserManager
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     is_tf = models.BooleanField(default=False)
     is_kv = models.BooleanField(default=False)
     role = models.CharField(max_length=9, default="user")
@@ -22,7 +22,7 @@ def create_user_profile(sender, instance, created, **kwargs):
 
 post_save.connect(create_user_profile, sender=User)
 
-class Guild(models.Model):
+class Guild(models.Model):	
     name = models.CharField(max_length=64)
     abbreviation = models.CharField(max_length=8)
 

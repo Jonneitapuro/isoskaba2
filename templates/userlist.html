@@ -2,24 +2,28 @@
 {% load i18n %}
 {% block admin_content %}
 <h1>{% trans 'Users' %}</h1>
-<table style="width:100%">
-  <tr>
-    <th>{% trans 'Name' %}</th>
-    <th>{% trans 'Email' %}</th>
-    <th>{% trans 'Guild' %}</th>
-    <th>{% trans 'Role' %}</th>
-    <th>{% trans 'TF' %}</th>
-    <th>{% trans 'KV' %}</th>
-  </tr>
-  {% for user in users %}
-  <tr>
-    <td><a href="/admin/users/edit/{{ user.pk }}" title="Edit User Info">{{ user.username }}</a></td>
-    <td>{{ user.email }}</td>
-    <td>{{ user.profile.guild }}</td>
-    <td>{{ user.profile.role }}</td>
-    <td>{{ user.profile.is_tf }}</td>
-    <td>{{ user.profile.is_kv }}</td>
-  </tr>
-  {% endfor %}
-</table>
+<form role="form" class="form-horizontal" action="/deleteuser" method="POST">
+  {% csrf_token %}
+  <table style="width:100%">
+    <tr>
+      <th>{% trans 'Name' %}</th>
+      <th>{% trans 'Email' %}</th>
+      <th>{% trans 'Guild' %}</th>
+      <th>{% trans 'Role' %}</th>
+      <th>{% trans 'TF' %}</th>
+      <th>{% trans 'KV' %}</th>
+    </tr>
+    {% for user in users %}
+    <tr>
+      <td><a href="/admin/users/edit/{{ user.pk }}" title="Edit User Info">{{ user.username }}</a></td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.profile.guild }}</td>
+      <td>{{ user.profile.role }}</td>
+      <td>{{ user.profile.is_tf }}</td>
+      <td>{{ user.profile.is_kv }}</td>
+      <td><button type="submit" name="user_id" value="{{ user.id }}" onclick="confirm('{% trans 'Do you want to delete the user' %}')">{% trans 'Delete' %}</button></td>
+    </tr>
+    {% endfor %}
+  </table>
+</form>
 {% endblock %}

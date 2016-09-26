@@ -186,8 +186,8 @@ def logout_user(request):
     return redirect('index')
 
 def list_user_events(request):
-    order_by_events = request.GET.get('events_order_by', 'guild')
-    order_by_attendances = request.GET.get('attendances_order_by', 'verified')
+    order_by_events = request.GET.get('order_by_events', 'guild')
+    order_by_attendances = request.GET.get('order_by_attendances', 'verified')
     cur_user = request.user
     cur_user_profile = UserProfile.objects.get(user_id  = cur_user.id)
     if cur_user_profile.is_tf == 1:
@@ -200,7 +200,14 @@ def list_user_events(request):
         if attendances.filter(event=event.pk).count() >= event.repeats:
             events = events.exclude(pk=event.pk)
 
-    response = TemplateResponse(request, 'eventlist.html', {'events': events, 'attendances': attendances})
+    response = TemplateResponse(request, 
+            'eventlist.html',
+            {
+                'events': events, 'attendances': attendances,
+                'order_by_attendances': order_by_attendances,
+                'order_by_events': order_by_events
+            })
+
     response.render()
     return response
 
@@ -273,6 +280,12 @@ def admin_edit(request, user_id):
 def attend_event(request):
     # TODO: reformat redirection
     if 'e_id' in request.POST:
+        response = redirect('usereventlist')
+        response['Location'] += '?order_by_attendances=' + \
+                request.POST.get('order_by_attendances', 'verified') + \
+                '&order_by_events=' + \
+                request.POST.get('order_by_events', 'guild')
+
         eventid = int(request.POST.get('e_id'))
         event = get_object_or_404(Event, pk=eventid)
         cur_user = UserProfile.objects.get(user_id = request.user.id)
@@ -280,20 +293,24 @@ def attend_event(request):
         if  event.repeats > repcount:
             a = Attendance(event_id = eventid, user_id = cur_user.id)
             a.save()
-            return redirect('usereventlist')
+            return response
         else:
             messages.error(request, _('You have attended for the maximum amount'))
-            return redirect('usereventlist')
+            return response
     else:
         return redirect('usereventlist')
 
 @user_passes_test(check_moderator)
 def verify_attendances(request):
 
-    if request.POST:
+    if 'attendance' in request.POST:
         attendance = Attendance.objects.get(pk=request.POST.get('attendance'))
         attendance.verified = True
         attendance.save()
+    
+    if 'delete' in request.POST:
+        attendance = Attendance.objects.get(pk=request.POST.get('delete'))
+        attendance.delete()
 
     order_by = request.GET.get('order_by', 'user')
     guild_users = User.objects.filter(userprofile__guild = request.user.userprofile.guild)
@@ -303,3 +320,24 @@ def verify_attendances(request):
     response = TemplateResponse(request, 'admin_attendances.html', {'unverified': unverified, 'verified': verified})
     response.render()
     return response
+
+@user_passes_test(check_admin)
+def delete_user(request):
+    if 'user_id' in request.POST:
+        userid = int(request.POST.get('user_id'))
+        "user = get_object_or_404(user, pk=userid)"
+        User.objects.filter(id = userid).delete()
+        return redirect('userlist')
+    else:
+        messages.error(request, _('Something went wrong!'))
+        return redirect('userlist')
+
+@user_passes_test(check_moderator)
+def delete_event(request):
+    if 'event_id' in request.POST:
+        eventid = int(request.POST.get('event_id'))
+        Event.objects.filter(id = eventid).delete()
+        return redirect('eventlist')
+    else:
+        messages.error(request, _('Something went wrong!'))
+        return redirect('eventlist')
