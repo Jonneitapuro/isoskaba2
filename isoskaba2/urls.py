@@ -39,7 +39,9 @@ urlpatterns = [
     url(r'^user/$', skabaviews.user_info, name='userinfo'),
     url(r'^user/edit/$', skabaviews.user_edit, name='user_edit'),
     url(r'^events/$', skabaviews.list_user_events, name='usereventlist'),
-    url(r'^attend', skabaviews.attend_event, name='attend')
+    url(r'^attend', skabaviews.attend_event, name='attend'),
+    url(r'^deleteuser', skabaviews.delete_user, name='delete_user'),
+    url(r'^deleteevent', skabaviews.delete_event, name='delete_event')
 ]
 
 if settings.DEBUG:

@@ -29,24 +29,28 @@
     });
   });
 </script>
-<table style="width:100%">
-  <tr>
-    <th><a href="?order_by=name">{% trans 'Name' %}</a></th>
-    <th><a href="?order_by=description">{% trans 'Description' %}</a></th>
-    <th><a href="?order_by=guild">{% trans 'Guild' %}</a></th>
-    <th><a href="?order_by=points">{% trans 'Points' %}</a></th>
-    <th><a href="?order_by=repeats">{% trans 'Repeats' %}</a></th>
-    <th><a href="?order_by=date">{% trans 'Date' %}</a></th>
-  </tr>
+<form role="form" class="form-horizontal" action="/deleteevent" method="POST">
+  {% csrf_token %}
+  <table style="width:100%">
+    <tr>
+      <th><a href="?order_by=name">{% trans 'Name' %}</a></th>
+      <th><a href="?order_by=description">{% trans 'Description' %}</a></th>
+      <th><a href="?order_by=guild">{% trans 'Guild' %}</a></th>
+      <th><a href="?order_by=points">{% trans 'Points' %}</a></th>
+      <th><a href="?order_by=repeats">{% trans 'Repeats' %}</a></th>
+      <th><a href="?order_by=date">{% trans 'Date' %}</a></th>
+    </tr>
   {% for event in events %}
-  <tr>
-    <td><a href="/admin/events/edit/{{ event.slug }}/" title="Edit Event">{{ event.name }}</a></td>
-    <td>{{ event.description }}</td>
-    <td>{{ event.guild }}</td>
-    <td>{{ event.points }}</td>
-    <td>{{ event.repeats }}</td>
-    <td>{{ event.date|date:'d.m.Y' }}</td>
-  </tr>
-  {% endfor %}
-</table>
+    <tr>
+      <td><a href="/admin/events/edit/{{ event.slug }}/" title="Edit Event">{{ event.name }}</a></td>
+      <td>{{ event.description }}</td>
+      <td>{{ event.guild }}</td>
+      <td>{{ event.points }}</td>
+      <td>{{ event.repeats }}</td>
+      <td>{{ event.date|date:'d.m.Y' }}</td>
+      <td><button type="submit" name="event_id" value="{{ event.id }}" onclick="confirm('{% trans 'Do you want to delete the event' %}')">{% trans 'Delete' %}</button></td>
+    </tr>
+    {% endfor %}
+  </table>
+</form>
 {% endblock %}

@@ -19,23 +19,26 @@
       <td>{{ attendance.event }}</td>
       <td>{{ attendance.date|date:'d.m.Y' }}</td>
       <td><input type="submit" name="attendance" value="{{ attendance.pk }}"></td>
+      <td><button type="submit" name="delete" value="{{ attendance.pk }}">{% trans 'Delete' %}</button></td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <h1>{% trans 'Verified attendances' %}</h1>
+  <table style="width:100%">
+    <tr>
+      <th><a href="?order_by=user">{% trans 'User' %}</a></th>
+      <th><a href="?order_by=event">{% trans 'Event' %}</a></th>
+      <th><a href="?order_by=created">{% trans 'Date' %}</a></th>
+    </tr>
+    {% for attendance in verified %}
+    <tr>
+      <td>{{ attendance.user }}</td>
+      <td>{{ attendance.event }}</td>
+      <td>{{ attendance.date|date:'d.m.Y' }}</td>
+      <td><button type="submit" name="delete" value="{{ attendance.pk }}">{% trans 'Delete' %}</button></td>
     </tr>
     {% endfor %}
   </table>
 </form>
-<h1>{% trans 'Verified attendances' %}</h1>
-<table style="width:100%">
-  <tr>
-    <th><a href="?order_by=user">{% trans 'User' %}</a></th>
-    <th><a href="?order_by=event">{% trans 'Event' %}</a></th>
-    <th><a href="?order_by=created">{% trans 'Date' %}</a></th>
-  </tr>
-  {% for attendance in verified %}
-  <tr>
-    <td>{{ attendance.user }}</td>
-    <td>{{ attendance.event }}</td>
-    <td>{{ attendance.date|date:'d.m.Y' }}</td>
-  </tr>
-  {% endfor %}
-</table>
 {% endblock %}
