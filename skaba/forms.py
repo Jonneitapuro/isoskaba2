@@ -9,7 +9,10 @@ class EventForm(forms.ModelForm):
         fields = ['name', 'description', 'slug', 'date', 'points', 'guild', 'repeats']
 
     name = forms.CharField(label='Event name', max_length=128, min_length=1)
-    description = forms.CharField(label='Description')
+    description = forms.CharField(label='Description', widget=forms.Textarea(attrs={
+        'rows': 2,
+        'cols': 19
+        }))
     guild = forms.ModelChoiceField(queryset=Guild.objects.all(), empty_label=None)
     date = forms.DateField(widget=forms.SelectDateWidget())
     repeats = forms.IntegerField(label='Repeats', initial=1, min_value=0)

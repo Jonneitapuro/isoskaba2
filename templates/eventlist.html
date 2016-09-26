@@ -5,31 +5,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
 <h1>{% trans 'Events' %}</h1>
-<!-- DISABLED UNTIL FIXED
-<div class="search-events">
-  <label for="search-input">{% trans 'Search events' %}</label>
-  <input id="search-input" />
-</div>
-<script>
-  $(document).ready(function() {
-    events = [];
-    {% for event in events %}
-      events.push({'value': '{{ event.slug }}', 'label': '{{ event.name }}'});
-    {% endfor %}
-    console.log(events);
-    $('#search-input').autocomplete({
-      minlengdiv: 2,
-      source: events,
-            focus: function(event, ui) {
-              $('#search-input').val(ui.item.label);
-              return false;
-          },
-            select: function(event, ui) {
-              window.location.href = '/events/attend/' + ui.item.value + '/';
-            }
-    });
-  });
-</script>-->
 <form role="form" class="form-horizontal" action="/attend" method="POST">
   {% csrf_token %}
   <div class="div-table">
@@ -52,7 +27,7 @@
       <div style="width: 20%"><button type="submit" name="e_id" value="{{ event.id }}">{% trans 'Attend' %}</button></div>
     </div>
     <div id="{{ event.slug }}" class="collapse div-table-collapse">
-      {{ event.description }}
+      {{ event.description|linebreaks }}
     </div>
     {% endfor %}
   </div>
