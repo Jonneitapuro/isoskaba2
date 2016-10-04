@@ -25,12 +25,12 @@ def csv_user_import(csv_file, guild):
     csvf = StringIO(csv_file.read().decode())
     csvreader = csv.DictReader(csvf, delimiter=';',
     	fieldnames=['firstname', 'lastname', 'email', 'is_kv', 'is_tf', 'password'])
+
     for row in csvreader:
         if row['password']:
             pw = row['password']
         else:
             pw = 'ISO2016'
-        print(row)
         user = User.objects.create_user(username = generate_username(row['firstname'], row['lastname']),
             email = row['email'],
             password = pw
@@ -47,6 +47,7 @@ def csv_user_import(csv_file, guild):
     
 def generate_username(first, last):
     name = first + '.' + last
+    name = name.lower()
     if User.objects.filter(username=name).exists():
         name = generate_username(first, last + '1')
     return name
