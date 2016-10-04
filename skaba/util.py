@@ -32,6 +32,8 @@ def csv_user_import(csv_file, guild):
         else:
             pw = 'ISO2016'
         user = User.objects.create_user(username = generate_username(row['firstname'], row['lastname']),
+            first_name = row['firstname'],
+            last_name = row['lastname'],
             email = row['email'],
             password = pw
             )
