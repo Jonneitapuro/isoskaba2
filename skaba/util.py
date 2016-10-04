@@ -18,3 +18,6 @@ def check_moderator(user):
         return True
     return False
 
+def csv_user_import(csv_file):
+	pass
+

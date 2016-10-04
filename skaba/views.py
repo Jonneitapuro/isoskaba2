@@ -14,7 +14,7 @@ from django.db.models import Count
 
 from skaba.forms import *
 from skaba.models import Event, Guild, User, UserProfile, Attendance
-from skaba.util import check_moderator, check_admin
+from skaba.util import check_moderator, check_admin, csv_user_import
 
 def index(request):
     response = TemplateResponse(request, 'index.html', {})
@@ -145,6 +145,26 @@ def user_add(request):
 	args['submit_text'] = _('Add user')
 	args['form_action'] = '/admin/users/add'
 	return render(request, 'admin_form.html', args)
+
+def user_import(request):
+    if request.method == 'POST':
+        form = ImportUserForm(request.POST)
+        if form.is_valid():
+            if csv_user_import(request.FILES['csv_file']):
+                messages.success(request, _('Import successful'))
+            else:
+                messages.error(request, _('Import failed'))                
+            return redirect('index')
+    else:
+        form = ImportUserForm()
+
+    args = {}
+    args.update(csrf(request))
+    args['forms'] = [form]
+    args['site_title'] = _('Import users')
+    args['submit_text'] = _('Import')
+    args['form_action'] = '/admin/users/import'
+    return render(request, 'admin_form.html', args)
 
 def login_user(request):
     c = RequestContext(request)
