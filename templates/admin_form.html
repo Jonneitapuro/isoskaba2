@@ -14,8 +14,12 @@
 <h2>{{ site_title }}</h2>
 	<div class="panel panel-primary">
 		<div class="panel-heading"></div>
-		<form role="form" clas="form-horizontal" action="{{ form_action }}" method="POST">
-			{% csrf_token %}
+    {% if submit_text == 'Import' %}
+      <form role="form" enctype="multipart/form-data" class="form-horizontal" action="{{ form_action }}" method="POST">
+    {% else %}
+		  <form role="form" class="form-horizontal" action="{{ form_action }}" method="POST">
+		{% endif %}	
+      {% csrf_token %}
       {% for form in forms %}
   			{% for field in form %}
   			<div class="input-container">
