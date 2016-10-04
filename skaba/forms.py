@@ -70,6 +70,10 @@ class EditUserForm(forms.ModelForm):
 
         return user
 
+class ImportUserForm(forms.Form):
+    guild = forms.ModelChoiceField(queryset=Guild.objects.all(), empty_label=None)
+    csv_file = forms.FileField()
+
 
 # Admins/moderators can modify all user info
 # Optimally the admin edit form would just be one form,
