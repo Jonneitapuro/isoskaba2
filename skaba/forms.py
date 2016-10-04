@@ -72,7 +72,8 @@ class EditUserForm(forms.ModelForm):
 
 class ImportUserForm(forms.Form):
     guild = forms.ModelChoiceField(queryset=Guild.objects.all(), empty_label=None)
-    csv_file = forms.FileField()
+    csv_file = forms.FileField(label='CSV file',
+        help_text='Order is First name, Last name, e-mail, is_KV, is_TF, Password')
 
 
 # Admins/moderators can modify all user info

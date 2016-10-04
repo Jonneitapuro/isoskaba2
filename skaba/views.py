@@ -148,13 +148,13 @@ def user_add(request):
 
 def user_import(request):
     if request.method == 'POST':
-        form = ImportUserForm(request.POST)
+        form = ImportUserForm(request.POST, request.FILES)
         if form.is_valid():
-            if csv_user_import(request.FILES['csv_file']):
+            if csv_user_import(request.FILES['csv_file'], request.POST.get('guild')):
                 messages.success(request, _('Import successful'))
             else:
                 messages.error(request, _('Import failed'))                
-            return redirect('index')
+            return redirect('/admin/users/')
     else:
         form = ImportUserForm()
 
