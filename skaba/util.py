@@ -1,4 +1,4 @@
-from skaba.models import User
+from skaba.models import User, Event
 import csv
 from io import StringIO
 
@@ -43,6 +43,26 @@ def csv_user_import(csv_file, guild):
         profile.is_tf = row['is_tf'] == '1'
         profile.guild_id = guild
         profile.save()
+
+    return True
+
+def csv_event_import(csv_file, guild):
+    # assume columns to be Event name, desc(fi), desc(en), desc(swe), Points, url, repeats, date
+    csvf = StringIO(csv_file.read().decode())
+    csvreader = csv.DictReader(csvf, delimiter=';',
+    	fieldnames=['eventname', 'descfi', 'descen', 'descswe', 'points', 'url', 'repeats', 'date'])
+
+    for row in csvreader:
+        event = Event.objects.create(
+            name = row['eventname'],
+            description = row['descfi'],
+            points = row['points'],
+            guild_id = guild,
+            slug = row['url'],
+            repeats = row['repeats'],
+            date = row['date']
+            )
+        event.save()
 
     return True
 
