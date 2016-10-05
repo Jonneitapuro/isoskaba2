@@ -9,8 +9,7 @@ from django.template import RequestContext
 from django.template.context_processors import csrf
 from django.forms import model_to_dict
 from django.utils.translation import ugettext as _
-from django.db.models import Q
-from django.db.models import Count
+from django.db.models import Q, Count, Sum
 
 from skaba.forms import *
 from skaba.models import Event, Guild, User, UserProfile, Attendance
@@ -205,6 +204,7 @@ def logout_user(request):
     messages.success(request, _('Logged out'))
     return redirect('index')
 
+@login_required
 def list_user_events(request):
     order_by_events = request.GET.get('order_by_events', 'guild')
     order_by_attendances = request.GET.get('order_by_attendances', 'verified')
@@ -361,3 +361,48 @@ def delete_event(request):
     else:
         messages.error(request, _('Something went wrong!'))
         return redirect('eventlist')
+
+def guild_ranking(request):
+    guilds = Guild.objects.all()
+    score_list = []
+    n = 0
+    for guild in guilds:
+        if guild.id != 1 and guild.id != 14: 
+            score_list.append([])
+            score_list[n].append(guild.name)
+            users = User.objects.filter(userprofile__guild_id = guild.id)
+            attendances = Attendance.objects.filter(Q(user__in = users) & Q(verified = True))
+            points = 0
+            for att in attendances:
+                event = Event.objects.get(id = att.event_id)
+                addpoints = event.points
+                addpoints = int(addpoints)
+                points = points + addpoints
+            score_list[n].append(points)
+            n = n + 1
+    response = TemplateResponse(request, 'guildrank.html', {'score_list': score_list})
+    response.render()
+    return response
+
+@login_required
+def user_ranking(request):
+    
+    users = User.objects.filter(Q(userprofile__guild = request.user.userprofile.guild) & Q(userprofile__role = 'user'))
+    score_list = []
+    n = 0
+    for user in users:
+        score_list.append([])
+        score_list[n].append(user.first_name)
+        score_list[n].append(user.last_name)
+        attendances = Attendance.objects.filter(Q(user_id = user.id) & Q(verified = True))
+        points = 0
+        for att in attendances:
+            event = Event.objects.get(id = att.event_id)
+            addpoints = event.points
+            addpoints = int(addpoints)
+            points = points + addpoints
+        score_list[n].append(points)
+        n = n + 1
+    response = TemplateResponse(request, 'userrank.html', {'score_list': score_list})
+    response.render()
+    return response
