@@ -7,15 +7,15 @@
 <h1>{% trans 'Scoreboard' %}</h1>
 
 <div class="div-table">
-  <div class="div-table-row">
-    <div style="width: 20%">{% trans 'Guild' %}</div>
-    <div style="width: 20%">{% trans 'Points' %}</div>
+  <div class="div-table-row div-table-heading">
+    <div style="width: 50%">{% trans 'Guild' %}</div>
+    <div style="width: 50%">{% trans 'Points' %}</div>
   </div>
 
   {% for score in score_list %}
   <div class="div-table-row">
-    <div style="width: 20%">{{ score.0 }}</div>
-    <div style="width: 20%">{{ score.1 }}</div>
+    <div style="width: 50%">{{ score.0 }}</div>
+    <div style="width: 50%">{{ score.1 }}</div>
   </div>
   {% endfor %}
 </table>
