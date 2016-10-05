@@ -380,7 +380,9 @@ def guild_ranking(request):
                 points = points + addpoints
             score_list[n].append(points)
             n = n + 1
+    score_list = sorted(score_list, key=lambda points: points[1], reverse=True)
     response = TemplateResponse(request, 'guildrank.html', {'score_list': score_list})
+    
     response.render()
     return response
 
@@ -403,6 +405,7 @@ def user_ranking(request):
             points = points + addpoints
         score_list[n].append(points)
         n = n + 1
+    score_list = sorted(score_list, key=lambda points: points[1], reverse=True)
     response = TemplateResponse(request, 'userrank.html', {'score_list': score_list})
     response.render()
     return response
