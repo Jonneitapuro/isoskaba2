@@ -13,7 +13,7 @@ from django.db.models import Q, Count, Sum
 
 from skaba.forms import *
 from skaba.models import Event, Guild, User, UserProfile, Attendance
-from skaba.util import check_moderator, check_admin, csv_user_import
+from skaba.util import check_moderator, check_admin, csv_user_import, csv_event_import
 
 def index(request):
     response = TemplateResponse(request, 'index.html', {})
@@ -28,6 +28,10 @@ def list_users(request):
 	"""
 	order_by = request.GET.get('order_by', 'username')
 	users = User.objects.all().order_by(order_by)
+	if check_moderator:
+		users = User.objects.filter(userprofile__guild = request.user.userprofile.guild).order_by(order_by)
+	if check_admin:
+		users = User.objects.all().order_by(order_by)
 	response = TemplateResponse(request, 'userlist.html', {'users': users})
 	response.render()
 	return response
@@ -163,6 +167,26 @@ def user_import(request):
     args['site_title'] = _('Import users')
     args['submit_text'] = _('Import')
     args['form_action'] = '/admin/users/import'
+    return render(request, 'admin_form.html', args)
+
+def event_import(request):
+    if request.method == 'POST':
+        form = ImportEventForm(request.POST, request.FILES)
+        if form.is_valid():
+            if csv_event_import(request.FILES['csv_file'], request.POST.get('guild')):
+                messages.success(request, _('Import successful'))
+            else:
+                messages.error(request, _('Import failed'))                
+            return redirect('/admin/events/')
+    else:
+        form = ImportEventForm()
+
+    args = {}
+    args.update(csrf(request))
+    args['forms'] = [form]
+    args['site_title'] = _('Import events')
+    args['submit_text'] = _('Import')
+    args['form_action'] = '/admin/events/import'
     return render(request, 'admin_form.html', args)
 
 def login_user(request):

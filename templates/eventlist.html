@@ -29,7 +29,7 @@
       <div style="width: 20%"><button type="submit" name="e_id" value="{{ event.id }}">{% trans 'Attend' %}</button></div>
     </div>
     <div id="{{ event.slug }}" class="collapse div-table-collapse">
-      {{ event.description|linebreaks }}
+      {{ event.description|safe }}
     </div>
     {% endfor %}
   </div>

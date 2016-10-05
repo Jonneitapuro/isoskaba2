@@ -43,8 +43,8 @@
   {% for event in events %}
     <tr>
       <td><a href="/admin/events/edit/{{ event.slug }}/" title="Edit Event">{{ event.name }}</a></td>
-      <td>{{ event.description }}</td>
-      <td>{{ event.guild }}</td>
+      <td>{{ event.description|safe}}</td>
+      <td>{{ event.guild}}</td>
       <td>{{ event.points }}</td>
       <td>{{ event.repeats }}</td>
       <td>{{ event.date|date:'d.m.Y' }}</td>

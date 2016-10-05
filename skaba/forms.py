@@ -75,6 +75,10 @@ class ImportUserForm(forms.Form):
     csv_file = forms.FileField(label='CSV file',
         help_text='Order is First name, Last name, e-mail, is_KV, is_TF, Password')
 
+class ImportEventForm(forms.Form):
+    guild = forms.ModelChoiceField(queryset=Guild.objects.all(), empty_label=None)
+    csv_file = forms.FileField(label='CSV file',
+        help_text='Order is Event name, desc(fi), desc(en), desc(swe), Points, url, repeats, date')
 
 # Admins/moderators can modify all user info
 # Optimally the admin edit form would just be one form,

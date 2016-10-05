@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^admin/attendances/$', skabaviews.verify_attendances, name='verify_attendances'),
     url(r'^admin/users/add', skabaviews.user_add, name='user_add'),
     url(r'^admin/users/import', skabaviews.user_import, name='user_import'),
+    url(r'^admin/events/import', skabaviews.event_import, name='event_import'),
     url(r'^admin/users/edit/(?P<user_id>([0-9]+))/$', skabaviews.admin_edit, name='admin_edit'),
     url(r'^admin/guilds/populate', skabaviews.guilds_populate, name='guilds_populate'),
     url(r'^logout/$', skabaviews.logout_user, name='logout'),
