@@ -28,6 +28,10 @@ def list_users(request):
 	"""
 	order_by = request.GET.get('order_by', 'username')
 	users = User.objects.all().order_by(order_by)
+	if check_moderator:
+		users = User.objects.filter(userprofile__guild = request.user.userprofile.guild).order_by(order_by)
+	if check_admin:
+		users = User.objects.all().order_by(order_by)
 	response = TemplateResponse(request, 'userlist.html', {'users': users})
 	response.render()
 	return response

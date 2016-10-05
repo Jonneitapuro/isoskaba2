@@ -55,7 +55,7 @@ def csv_event_import(csv_file, guild):
     for row in csvreader:
         event = Event.objects.create(
             name = row['eventname'],
-            description = row['descfi'],
+            description = str(row['descfi']) + "<br /><br />" + str(row['descen']) + "<br /><br />" + str(row['descswe']),
             points = row['points'],
             guild_id = guild,
             slug = row['url'],
