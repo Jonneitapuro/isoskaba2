@@ -25,11 +25,11 @@
   </tr>
   <tr>
     <th>{% trans 'TF status' %}:</th>
-    <td>{{ profile.is_tf }}</td>
+    <td><span class="glyphicon glyphicon-{{ profile.is_tf|yesno:'ok-circle text-success,ban-circle text-danger' }}"></span></td>
   </tr>
   <tr>
     <th>{% trans 'INTL status' %}:</th>
-    <td>{{ profile.is_kv }}</td>
+    <td><span class="glyphicon glyphicon-{{ profile.is_kv|yesno:'ok-circle text-success,ban-circle text-danger' }}"></span></td>
   </tr>
 </table>
 
