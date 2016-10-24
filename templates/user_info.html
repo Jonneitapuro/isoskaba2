@@ -2,7 +2,7 @@
 {% load i18n %}
 {% block page_content %}
 <h1>{% trans 'User info' %}</h1>
-<table style="width:25%">
+<table style="width:100%">
   <tr>
     <th>{% trans 'Username' %}:</th>
     <td>{{ profile.user.username }}</td>
@@ -36,19 +36,7 @@
 <a href="/user/edit/"><button type="button">{% trans 'Edit' %}</button></a>
 
 <h2>{% trans 'Attended events' %}</h2>
-<table style="width:25%">
-  <tr>
-    <th>{% trans 'Event name' %}</th>
-    <th>{% trans 'Points' %}</th>
-    <th>{% trans 'Date added' %}</th>
-    <th>{% trans 'Verified' %}</th>
-  </tr>
-{% for att in attendances %}
-<tr>
-  <td>{{ att.event.name }}</td>
-  <td>{{ att.event.points }}</td>
-  <td>{{ att.created|date:"d.m.Y H:i" }}</td>
-  <td>{{ att.verified }}</td>
-</tr>
-{% endfor %}
+
+{% include "user_attendances.html" with attendances=attendances %}
+
 {% endblock %}
