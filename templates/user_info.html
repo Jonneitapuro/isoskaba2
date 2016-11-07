@@ -2,7 +2,7 @@
 {% load i18n %}
 {% block page_content %}
 <h1>{% trans 'User info' %}</h1>
-<table style="width:25%">
+<table style="width:100%">
   <tr>
     <th>{% trans 'Username' %}:</th>
     <td>{{ profile.user.username }}</td>
@@ -25,30 +25,18 @@
   </tr>
   <tr>
     <th>{% trans 'TF status' %}:</th>
-    <td>{{ profile.is_tf }}</td>
+    <td><span class="glyphicon glyphicon-{{ profile.is_tf|yesno:'ok-circle text-success,ban-circle text-danger' }}"></span></td>
   </tr>
   <tr>
     <th>{% trans 'INTL status' %}:</th>
-    <td>{{ profile.is_kv }}</td>
+    <td><span class="glyphicon glyphicon-{{ profile.is_kv|yesno:'ok-circle text-success,ban-circle text-danger' }}"></span></td>
   </tr>
 </table>
 
 <a href="/user/edit/"><button type="button">{% trans 'Edit' %}</button></a>
 
 <h2>{% trans 'Attended events' %}</h2>
-<table style="width:25%">
-  <tr>
-    <th>{% trans 'Event name' %}</th>
-    <th>{% trans 'Points' %}</th>
-    <th>{% trans 'Date added' %}</th>
-    <th>{% trans 'Verified' %}</th>
-  </tr>
-{% for att in attendances %}
-<tr>
-  <td>{{ att.event.name }}</td>
-  <td>{{ att.event.points }}</td>
-  <td>{{ att.created|date:"d.m.Y H:i" }}</td>
-  <td>{{ att.verified }}</td>
-</tr>
-{% endfor %}
+
+{% include "user_attendances.html" with attendances=attendances %}
+
 {% endblock %}

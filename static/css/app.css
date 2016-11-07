@@ -159,3 +159,12 @@ div.form-error {
 #top-nav li a:hover {
    color: #4ebd71;
 }
+
+/* Icon styles */
+red {
+  color: red !important;
+}
+
+green {
+  color: green;
+}

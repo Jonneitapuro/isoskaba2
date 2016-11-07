@@ -1,0 +1,18 @@
+{% load i18n %}
+<div class="div-table">
+  <div class="div-table-row div-table-heading">
+    <div style="width: 30%" class="link"><a href="?order_by_attendances=event">{% trans 'Event' %}</a></div>
+    <div style="width: 20%" class="link"><a href="?order_by_attendances=event__points">{% trans 'Points' %}</a></div>
+    <div style="width: 30%" class="link"><a href="?order_by_attendances=created">{% trans 'Created' %}</a></div>
+    <div style="width: 20%" class="link"><a href="?order_by_attendances=verified">{% trans 'Verified' %}</a></div>
+  </div>
+
+  {% for attendance in attendances %}
+    <div class="div-table-row">
+      <div style="width: 30%">{{ attendance.event }}</div>
+      <div style="width: 20%">{{ attendance.event.points }}</div>
+      <div style="width: 30%">{{ attendance.created|date:"d.m.Y H:i" }}</div>
+      <div style="width: 20%"><span class="glyphicon glyphicon-{{ attendance.verified|yesno:'ok-circle text-success,ban-circle text-danger'}}"></span></div>
+    </div>
+  {% endfor %}
+</div>
