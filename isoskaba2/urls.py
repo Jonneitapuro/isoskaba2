@@ -45,7 +45,8 @@ urlpatterns = [
     url(r'^deleteuser', skabaviews.delete_user, name='delete_user'),
     url(r'^deleteevent', skabaviews.delete_event, name='delete_event'),
     url(r'^guildranking/', skabaviews.guild_ranking, name='guild_ranking'),
-    url(r'^userranking/', skabaviews.user_ranking, name='user_ranking')
+    url(r'^userranking/', skabaviews.user_ranking, name='user_ranking'),
+    url(r'^fixevents/', skabaviews.fix_events, name='fix_events')
 ]
 
 if settings.DEBUG:

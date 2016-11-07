@@ -106,6 +106,14 @@ def event_edit(request, event_slug):
 
     return render(request, 'admin_form.html', token)
 
+@user_passes_test(check_moderator)
+def fix_events(request):
+    e = Event.objects.all()
+    for i in e:
+        i.slug = i.slug.replace('_','-')
+        i.save()
+    return redirect('index')
+
 @user_passes_test(check_admin)
 def guilds_populate(request):
 	if Guild.objects.all().exists():
@@ -156,7 +164,7 @@ def user_import(request):
             if csv_user_import(request.FILES['csv_file'], request.POST.get('guild')):
                 messages.success(request, _('Import successful'))
             else:
-                messages.error(request, _('Import failed'))                
+                messages.error(request, _('Import failed'))
             return redirect('/admin/users/')
     else:
         form = ImportUserForm()
@@ -176,7 +184,7 @@ def event_import(request):
             if csv_event_import(request.FILES['csv_file'], request.POST.get('guild')):
                 messages.success(request, _('Import successful'))
             else:
-                messages.error(request, _('Import failed'))                
+                messages.error(request, _('Import failed'))
             return redirect('/admin/events/')
     else:
         form = ImportEventForm()
@@ -244,7 +252,7 @@ def list_user_events(request):
         if attendances.filter(event=event.pk).count() >= event.repeats:
             events = events.exclude(pk=event.pk)
 
-    response = TemplateResponse(request, 
+    response = TemplateResponse(request,
             'eventlist.html',
             {
                 'events': events, 'attendances': attendances,
@@ -351,7 +359,7 @@ def verify_attendances(request):
         attendance = Attendance.objects.get(pk=request.POST.get('attendance'))
         attendance.verified = True
         attendance.save()
-    
+
     if 'delete' in request.POST:
         attendance = Attendance.objects.get(pk=request.POST.get('delete'))
         attendance.delete()
@@ -391,7 +399,7 @@ def guild_ranking(request):
     score_list = []
     n = 0
     for guild in guilds:
-        if guild.id != 1 and guild.id != 14: 
+        if guild.id != 1 and guild.id != 14:
             score_list.append([])
             score_list[n].append(guild.name)
             users = User.objects.filter(userprofile__guild_id = guild.id)
@@ -406,13 +414,13 @@ def guild_ranking(request):
             n = n + 1
     score_list = sorted(score_list, key=lambda points: points[1], reverse=True)
     response = TemplateResponse(request, 'guildrank.html', {'score_list': score_list})
-    
+
     response.render()
     return response
 
 @login_required
 def user_ranking(request):
-    
+
     users = User.objects.filter(Q(userprofile__guild = request.user.userprofile.guild) & Q(userprofile__role = 'user'))
     score_list = []
     n = 0
