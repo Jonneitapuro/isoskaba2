@@ -398,19 +398,49 @@ def guild_ranking(request):
     guilds = Guild.objects.all()
     score_list = []
     n = 0
-    for guild in guilds:
-        if guild.id != 1 and guild.id != 14:
+    for g in guilds:
+        if g.id != 1 and g.id != 14: #add guilds to list
             score_list.append([])
-            score_list[n].append(guild.name)
-            users = User.objects.filter(userprofile__guild_id = guild.id)
-            attendances = Attendance.objects.filter(Q(user__in = users) & Q(verified = True))
-            points = 0
-            for att in attendances:
-                event = Event.objects.get(id = att.event_id)
-                addpoints = event.points
-                addpoints = int(addpoints)
-                points = points + addpoints
-            score_list[n].append(points)
+            score_list[n].append(g.name)
+            users = User.objects.filter(Q(userprofile__guild_id = g.id) & Q(userprofile__role = 'user'))
+            usercount = users.count()
+            usermed = 0.75 * usercount
+            usermed = int(usermed)
+            guild_list = []
+            general_list = []
+            guildatts = 0
+            guipoints = 0
+            genpoints = 0
+            for user in users: 
+                attendances = Attendance.objects.filter(Q(user_id = user.id) & Q(verified = True))
+
+                for att in attendances:
+                    event = Event.objects.get(id = att.event_id)
+                    if event.guild_id == g.id:
+                        guildatts = guildatts + 1
+                        addpoints = event.points
+                        addpoints = int(addpoints)
+                        guipoints = guipoints + addpoints
+                    if event.guild_id == 1:
+                        addpoints = event.points
+                        addpoints = int(addpoints)
+                        genpoints = genpoints + addpoints    
+                guild_list.append(guipoints)
+                general_list.append(genpoints)
+            guild_list = sorted(guild_list)
+            general_list = sorted(general_list)
+            if len(guild_list) > 0 and len(general_list) > 0: 
+                guildpoints = guild_list[usermed]
+                generalpoints = general_list[usermed]
+                guildmaxatts = Event.objects.filter(guild_id = g.id).count()
+                guildmaxatts = guildmaxatts * usercount
+                if guildatts is not 0:
+                    guildattendance = guildatts/guildmaxatts
+                else:
+                    guildattendance = 0
+                points = int(generalpoints * guildpoints * guildattendance)
+                score_list[n].append(points)
+            else: score_list[n].append(0)
             n = n + 1
     score_list = sorted(score_list, key=lambda points: points[1], reverse=True)
     response = TemplateResponse(request, 'guildrank.html', {'score_list': score_list})
