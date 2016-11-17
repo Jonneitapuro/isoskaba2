@@ -432,8 +432,20 @@ def guild_ranking(request):
             if len(guild_list) > 0 and len(general_list) > 0: 
                 guildpoints = guild_list[usermed]
                 generalpoints = general_list[usermed]
-                guildmaxatts = Event.objects.filter(guild_id = g.id).count()
-                guildmaxatts = guildmaxatts * usercount
+                events = Event.objects.filter(guild_id = g.id)
+                genevents = Event.objects.filter(guild_id = 1)
+                guildpointsum = 0
+                genpointsum = 0
+                for e in events:
+                    guildpointsum = guildpointsum + e.points
+                for e in genevents:
+                    genpointsum = genpointsum + e.points
+                if guildpointsum is not 0:
+                    scalingfactor = genpointsum / guildpointsum
+                else:
+                    scalingfactor = 0
+                guildpoints = scalingfactor * guildpoints
+                guildmaxatts = events.count() * usercount
                 if guildatts is not 0:
                     guildattendance = guildatts/guildmaxatts
                 else:
