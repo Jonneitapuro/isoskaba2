@@ -460,7 +460,8 @@ def guild_ranking(request):
                 for e in genevents:
                     genpointsum = genpointsum + e.points
                 if guildpointsum is not 0:
-                    scalingfactor = genpointsum / float(guildpointsum)
+                    #scalingfactor = genpointsum / float(guildpointsum)
+                    scalingfactor = 1
                 else:
                     scalingfactor = 0
                 guildpoints = scalingfactor * guildpoints
