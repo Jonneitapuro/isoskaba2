@@ -415,15 +415,16 @@ def guild_ranking(request):
             guild_list = []
             general_list = []
             guildatts = 0
-            guipoints = 0
-            genpoints = 0
             for user in guild_users: 
                 user_attendances = []
                 for attendance in attendances: 
                     if attendance.user_id == user.id:
                         user_attendances.append(attendance)
+                guipoints = 0
+                genpoints = 0
                 for att in user_attendances:
                     event = 0
+                    
                     for e in events:
                         if e.id == att.event_id:
                             event = e
