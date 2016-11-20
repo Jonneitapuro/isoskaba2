@@ -424,7 +424,6 @@ def guild_ranking(request):
                 genpoints = 0
                 for att in user_attendances:
                     event = 0
-                    
                     for e in events:
                         if e.id == att.event_id:
                             event = e
@@ -461,8 +460,7 @@ def guild_ranking(request):
                 for e in genevents:
                     genpointsum = genpointsum + e.points
                 if guildpointsum is not 0:
-                    #scalingfactor = genpointsum / float(guildpointsum)
-                    scalingfactor = 1
+                    scalingfactor = genpointsum / float(guildpointsum)
                 else:
                     scalingfactor = 0
                 guildpoints = scalingfactor * guildpoints
@@ -471,8 +469,7 @@ def guild_ranking(request):
                     guildattendance = guildatts/guildmaxatts
                 else:
                     guildattendance = 0
-                #points = int(generalpoints * guildpoints * guildattendance)
-                points = generalpoints
+                points = int(generalpoints * guildpoints * guildattendance)
                 score_list[n].append(points)
             else: score_list[n].append(0)
             n = n + 1
