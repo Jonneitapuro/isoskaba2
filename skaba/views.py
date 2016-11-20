@@ -406,7 +406,7 @@ def guild_ranking(request):
             score_list.append([])
             score_list[n].append(g.name)
             guild_users = []
-            for user in users:
+            for user in users: #list user of the guild
                 if user.profile.guild_id == g.id:
                     guild_users.append(user)
             usercount = len(guild_users)
@@ -419,10 +419,11 @@ def guild_ranking(request):
             genpoints = 0
             for user in guild_users: 
                 user_attendances = []
-                for attendance in attendances:
+                for attendance in attendances: 
                     if attendance.user_id == user.id:
                         user_attendances.append(attendance)
                 for att in user_attendances:
+                    event = 0
                     for e in events:
                         if e.id == att.event_id:
                             event = e
