@@ -436,7 +436,7 @@ def guild_ranking(request):
                             addpoints = event.points
                             addpoints = int(addpoints)
                             genpoints = genpoints + addpoints
-                    except (AttributeError, UnboundLocalError):
+                    except (UnboundLocalError):
                         pass
                 guild_list.append(guipoints)
                 general_list.append(genpoints)
