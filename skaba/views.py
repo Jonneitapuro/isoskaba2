@@ -469,7 +469,7 @@ def guild_ranking(request):
                     guildattendance = guildatts/guildmaxatts
                 else:
                     guildattendance = 0
-                points = int(generalpoints * guildpoints * guildattendance)
+                points = int(guildpoints * guildattendance + generalpoints)
                 score_list[n].append(points)
             else: score_list[n].append(0)
             n = n + 1
