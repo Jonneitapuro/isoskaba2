@@ -398,12 +398,18 @@ def guild_ranking(request):
     guilds = Guild.objects.all()
     score_list = []
     n = 0
+    users = User.objects.filter(userprofile__role = 'user')
+    attendances = Attendance.objects.filter(verified = True)
+    events = Event.objects.all()
     for g in guilds:
         if g.id != 1 and g.id != 14: #add guilds to list
             score_list.append([])
             score_list[n].append(g.name)
-            users = User.objects.filter(Q(userprofile__guild_id = g.id) & Q(userprofile__role = 'user'))
-            usercount = users.count()
+            guild_users = []
+            for user in users:
+                if user.profile.guild_id == g.id:
+                    guild_users.append(user)
+            usercount = len(guild_users)
             usermed = 0.75 * usercount
             usermed = int(usermed)
             guild_list = []
@@ -411,20 +417,27 @@ def guild_ranking(request):
             guildatts = 0
             guipoints = 0
             genpoints = 0
-            for user in users: 
-                attendances = Attendance.objects.filter(Q(user_id = user.id) & Q(verified = True))
-
-                for att in attendances:
-                    event = Event.objects.get(id = att.event_id)
-                    if event.guild_id == g.id:
-                        guildatts = guildatts + 1
-                        addpoints = event.points
-                        addpoints = int(addpoints)
-                        guipoints = guipoints + addpoints
-                    if event.guild_id == 1:
-                        addpoints = event.points
-                        addpoints = int(addpoints)
-                        genpoints = genpoints + addpoints    
+            for user in guild_users: 
+                user_attendances = []
+                for attendance in attendances:
+                    if attendance.user_id == user.id:
+                        user_attendances.append(attendance)
+                for att in user_attendances:
+                    for e in events:
+                        if e.id == att.event_id:
+                            event = e
+                    try:
+                        if event.guild_id == g.id:
+                            guildatts = guildatts + 1
+                            addpoints = event.points
+                            addpoints = int(addpoints)
+                            guipoints = guipoints + addpoints
+                        if event.guild_id == 1:
+                            addpoints = event.points
+                            addpoints = int(addpoints)
+                            genpoints = genpoints + addpoints
+                    except (AttributeError, UnboundLocalError):
+                        pass
                 guild_list.append(guipoints)
                 general_list.append(genpoints)
             guild_list = sorted(guild_list)
@@ -432,20 +445,25 @@ def guild_ranking(request):
             if len(guild_list) > 0 and len(general_list) > 0: 
                 guildpoints = guild_list[usermed]
                 generalpoints = general_list[usermed]
-                events = Event.objects.filter(guild_id = g.id)
-                genevents = Event.objects.filter(guild_id = 1)
+                guildevents = []                
+                genevents = []
+                for e in events:
+                    if e.guild_id == g.id:
+                        guildevents.append(e)
+                    if e.guild_id == 1:
+                        genevents.append(e)
                 guildpointsum = 0
                 genpointsum = 0
-                for e in events:
+                for e in guildevents:
                     guildpointsum = guildpointsum + e.points
                 for e in genevents:
                     genpointsum = genpointsum + e.points
                 if guildpointsum is not 0:
-                    scalingfactor = genpointsum / guildpointsum
+                    scalingfactor = genpointsum / float(guildpointsum)
                 else:
                     scalingfactor = 0
                 guildpoints = scalingfactor * guildpoints
-                guildmaxatts = events.count() * usercount
+                guildmaxatts = len(guildevents) * usercount
                 if guildatts is not 0:
                     guildattendance = guildatts/guildmaxatts
                 else:
