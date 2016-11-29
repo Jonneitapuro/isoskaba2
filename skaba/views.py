@@ -410,7 +410,8 @@ def guild_ranking(request):
     points = Guildpoints.objects.all().order_by(order_by).reverse()
     response = TemplateResponse(request, 'guildrank.html', {'points':points})
     return response
-    
+
+@user_passes_test(check_moderator)
 def guild_points_update(request):
     guilds = Guildpoints.objects.all()
     n = 0
