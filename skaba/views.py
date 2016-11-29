@@ -424,30 +424,30 @@ def guild_points_update(request):
             if user.profile.guild_id == g.guild_id:
                guild_users.append(user)
         usercount = len(guild_users)
-        usermed = 0.75 * usercount
-        usermed = int(usermed)
+        useravg = 0.5 * usercount
+        useravg = int(useravg)
         guild_list = []
         general_list = []
         guildatts = 0
-        for user in guild_users: 
+        for user in guild_users: #list attendances
             user_attendances = []
             for attendance in attendances: 
                 if attendance.user_id == user.id:
                     user_attendances.append(attendance)
             guipoints = 0
             genpoints = 0
-            for att in user_attendances:
+            for att in user_attendances: #go through attendances
                 event = 0
-                for e in events:
+                for e in events: #crossreference to events
                     if e.id == att.event_id:
                         event = e
                 try:
-                    if event.guild_id == g.guild_id:
+                    if event.guild_id == g.guild_id: #add guild eventpoints
                         guildatts = guildatts + 1
                         addpoints = event.points
                         addpoints = int(addpoints)
                         guipoints = guipoints + addpoints
-                    if event.guild_id == 1:
+                    if event.guild_id == 1: #add general eventpoints
                         addpoints = event.points
                         addpoints = int(addpoints)
                         genpoints = genpoints + addpoints
@@ -458,8 +458,18 @@ def guild_points_update(request):
         guild_list = sorted(guild_list)
         general_list = sorted(general_list)
         if len(guild_list) > 0 and len(general_list) > 0: 
-            guildpoints = guild_list[usermed]
-            generalpoints = general_list[usermed]
+            guildpoints = 0
+            generalpoints = 0
+            count = 0
+            for x in range(useravg, usercount):
+                count = count + 1
+                guildpoints = guildpoints + guild_list[x]
+            guildpoints = guildpoints/count
+            count = 0
+            for x in range(useravg, usercount):
+                count = count + 1
+                generalpoints = generalpoints + general_list[x]
+            generalpoints = generalpoints/count
             guildevents = []                
             genevents = []
             for e in events:
