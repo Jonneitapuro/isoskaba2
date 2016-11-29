@@ -5,18 +5,19 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
 <h1>{% trans 'Scoreboard' %}</h1>
-
+{% csrf_token %}
 <div class="div-table">
   <div class="div-table-row div-table-heading">
     <div style="width: 50%">{% trans 'Guild' %}</div>
-    <div style="width: 50%">{% trans 'Points' %}</div>
+    <div style="width: 50%"">{% trans 'Points' %}</div>
   </div>
 
-  {% for score in score_list %}
+  {% for guild in points %}
   <div class="div-table-row">
-    <div style="width: 50%">{{ score.0 }}</div>
-    <div style="width: 50%">{{ score.1 }}</div>
+    <div style="width: 50%">{{ guild.guild.name }}</div>
+    <div style="width: 50%">{{ guild.points }}</div>
   </div>
   {% endfor %}
-</table>
+</div>
+
 {% endblock %}

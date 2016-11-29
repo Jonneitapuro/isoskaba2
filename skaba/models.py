@@ -47,3 +47,7 @@ class Attendance(models.Model):
 	verified = models.BooleanField(default=False)
 	event = models.ForeignKey('Event', on_delete=models.CASCADE)
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+class Guildpoints(models.Model):
+	guild = models.ForeignKey('Guild', on_delete=models.CASCADE, blank=True, null=True)
+	points = models.IntegerField(default=1)
