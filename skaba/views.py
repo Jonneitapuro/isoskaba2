@@ -11,6 +11,7 @@ from django.forms import model_to_dict
 from django.utils.translation import ugettext as _
 from django.db.models import Q, Count, Sum
 
+from datetime import datetime, date, timedelta
 from skaba.forms import *
 from skaba.models import Event, Guild, User, UserProfile, Attendance, Guildpoints
 from skaba.util import check_moderator, check_admin, csv_user_import, csv_event_import
@@ -417,7 +418,7 @@ def guild_points_update(request):
     n = 0
     users = User.objects.filter(userprofile__role = 'user')
     attendances = Attendance.objects.filter(verified = True)
-    events = Event.objects.all()
+    events = Event.objects.filter(eventdate__lte= date.today())
     for g in guilds:
         guild_users = []
         for user in users: #list user of the guild
@@ -441,18 +442,19 @@ def guild_points_update(request):
                 for e in events: #crossreference to events
                     if e.id == att.event_id:
                         event = e
-                try:
-                    if event.guild_id == g.guild_id: #add guild eventpoints
-                        guildatts = guildatts + 1
-                        addpoints = event.points
-                        addpoints = int(addpoints)
-                        guipoints = guipoints + addpoints
-                    if event.guild_id == 1: #add general eventpoints
-                        addpoints = event.points
-                        addpoints = int(addpoints)
-                        genpoints = genpoints + addpoints
-                except (UnboundLocalError):
-                    pass
+                if event is not 0:
+                    try:
+                        if event.guild_id == g.guild_id: #add guild eventpoints
+                            guildatts = guildatts + 1
+                            addpoints = event.points
+                            addpoints = int(addpoints)
+                            guipoints = guipoints + addpoints
+                        if event.guild_id == 1: #add general eventpoints
+                            addpoints = event.points
+                            addpoints = int(addpoints)
+                            genpoints = genpoints + addpoints
+                    except (UnboundLocalError):
+                        pass
             guild_list.append(guipoints)
             general_list.append(genpoints)
         guild_list = sorted(guild_list)
@@ -493,7 +495,7 @@ def guild_points_update(request):
                 guildattendance = guildatts/guildmaxatts
             else:
                 guildattendance = 0
-            points = int(guildpoints * guildattendance + generalpoints)
+            points = 15 * int(guildpoints * guildattendance + generalpoints)
             Guildpoints.objects.filter(guild_id = g.guild_id).update(points = points)
         else: 
             pass
@@ -513,10 +515,12 @@ def user_ranking(request):
         attendances = Attendance.objects.filter(Q(user_id = user.id) & Q(verified = True))
         points = 0
         for att in attendances:
-            event = Event.objects.get(id = att.event_id)
-            addpoints = event.points
-            addpoints = int(addpoints)
-            points = points + addpoints
+            event = 0
+            event = Event.objects.filter(Q(id = att.event_id) & Q(eventdate__lte= date.today()))
+            if event is not 0:
+                addpoints = event.points
+                addpoints = int(addpoints)
+                points = points + addpoints
         score_list[n].append(points)
         n = n + 1
     score_list = sorted(score_list, key=lambda points: points[2], reverse=True)

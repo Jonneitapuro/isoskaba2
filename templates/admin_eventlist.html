@@ -38,7 +38,7 @@
       <th><a href="?order_by=guild">{% trans 'Guild' %}</a></th>
       <th><a href="?order_by=points">{% trans 'Points' %}</a></th>
       <th><a href="?order_by=repeats">{% trans 'Repeats' %}</a></th>
-      <th><a href="?order_by=date">{% trans 'Date' %}</a></th>
+      <th><a href="?order_by=eventdate">{% trans 'Date' %}</a></th>
     </tr>
   {% for event in events %}
     <tr>
@@ -47,7 +47,7 @@
       <td>{{ event.guild}}</td>
       <td>{{ event.points }}</td>
       <td>{{ event.repeats }}</td>
-      <td>{{ event.date|date:'d.m.Y' }}</td>
+      <td>{{ event.eventdate|date:'d.m.Y' }}</td>
       <td><button type="submit" name="event_id" value="{{ event.id }}" onclick="confirm('{% trans 'Do you want to delete the event' %}')">{% trans 'Delete' %}</button></td>
     </tr>
     {% endfor %}
