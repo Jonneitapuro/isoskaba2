@@ -515,7 +515,7 @@ def user_ranking(request):
         attendances = Attendance.objects.filter(Q(user_id = user.id) & Q(verified = True))
         points = 0
         for att in attendances:
-            event = Event.objects.filter(id = att.event_id)
+            event = Event.objects.get(id = att.event_id)
             addpoints = event.points
             addpoints = int(addpoints)
             points = points + addpoints
