@@ -516,9 +516,10 @@ def user_ranking(request):
         points = 0
         for att in attendances:
             event = Event.objects.get(id = att.event_id)
-            addpoints = event.points
-            addpoints = int(addpoints)
-            points = points + addpoints
+            if event.eventdate__lte= date.today()
+                addpoints = event.points
+                addpoints = int(addpoints)
+                points = points + addpoints
         score_list[n].append(points)
         n = n + 1
     score_list = sorted(score_list, key=lambda points: points[2], reverse=True)
