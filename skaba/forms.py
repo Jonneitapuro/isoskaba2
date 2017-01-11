@@ -14,7 +14,7 @@ class EventForm(forms.ModelForm):
         'cols': 19
         }))
     guild = forms.ModelChoiceField(queryset=Guild.objects.all(), empty_label=None)
-    eventdate = forms.DateField(widget=forms.SelectDateWidget())
+    eventdate = forms.DateField(widget=forms.SelectDateWidget(years={2016, 2017}))
     repeats = forms.IntegerField(label='Repeats', initial=1, min_value=0)
     points = forms.IntegerField(label='Points', min_value=0)
 
