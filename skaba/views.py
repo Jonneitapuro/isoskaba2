@@ -368,13 +368,16 @@ def attend_event(request):
 def verify_attendances(request):
 
     if 'attendance' in request.POST:
-        attendance = Attendance.objects.get(pk=request.POST.get('attendance'))
-        attendance.verified = True
-        attendance.save()
+        for member in request.POST.getlist('attendance'):
+            """attendance = Attendance.objects.get(pk=request.POST.get('attendance'))"""
+            attendance = Attendance.objects.get(pk=member)
+            attendance.verified = True
+            attendance.save()
 
     if 'delete' in request.POST:
-        attendance = Attendance.objects.get(pk=request.POST.get('delete'))
-        attendance.delete()
+        for member in request.POST.getlist('delete'):
+            attendance = Attendance.objects.get(pk=member)
+            attendance.delete()
 
     order_by = request.GET.get('order_by', 'user')
     guild_users = User.objects.filter(userprofile__guild = request.user.userprofile.guild)
@@ -432,7 +435,7 @@ def guild_points_update(request):
         guildatts = 0
         for user in guild_users: #list attendances
             user_attendances = []
-            for attendance in attendances: 
+            for attendance in attendances:
                 if attendance.user_id == user.id:
                     user_attendances.append(attendance)
             guipoints = 0
@@ -459,7 +462,7 @@ def guild_points_update(request):
             general_list.append(genpoints)
         guild_list = sorted(guild_list)
         general_list = sorted(general_list)
-        if len(guild_list) > 0 and len(general_list) > 0: 
+        if len(guild_list) > 0 and len(general_list) > 0:
             guildpoints = 0
             generalpoints = 0
             count = 0
@@ -472,7 +475,7 @@ def guild_points_update(request):
                 count = count + 1
                 generalpoints = generalpoints + general_list[x]
             generalpoints = generalpoints/count
-            guildevents = []                
+            guildevents = []
             genevents = []
             for e in events:
                 if e.guild_id == g.guild_id:
@@ -497,7 +500,7 @@ def guild_points_update(request):
                 guildattendance = 0
             points = 15 * int(guildpoints * guildattendance + generalpoints)
             Guildpoints.objects.filter(guild_id = g.guild_id).update(points = points)
-        else: 
+        else:
             pass
         n = n + 1
     return redirect('guild_ranking')

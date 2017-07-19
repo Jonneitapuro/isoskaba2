@@ -3,9 +3,25 @@
 {% load i18n %}
 
 <h1>{% trans 'Unverified attendances' %}</h1>
-
 <form action="/admin/attendances/" method="POST">
-  {% csrf_token %}
+{% csrf_token %}
+  <script>
+
+  $(function(){
+    $('#selectAll').change(function(){
+      if($(this).is(':checked')) {
+          $("input[name='attendance']").each(function(){
+            $(this).prop('checked',true)
+          })
+      } else {
+          $("input[name='attendance']").each(function(){
+            $(this).prop('checked',false)
+          })
+      }
+    })
+  });
+  </script>
+
   <table style="width:100%">
     <tr>
       <th><a href="?order_by=user">{% trans 'User' %}</a></th>
@@ -14,16 +30,29 @@
       <th>{% trans 'Verify' %}</th>
     </tr>
     {% for attendance in unverified %}
-    <tr>
-      <td>{{ attendance.user }}</td>
-      <td>{{ attendance.event }}</td>
-      <td>{{ attendance.date|date:'d.m.Y' }}</td>
-      <td><input type="submit" name="attendance" value="{{ attendance.pk }}"></td>
-      <td><button type="submit" name="delete" value="{{ attendance.pk }}">{% trans 'Delete' %}</button></td>
-    </tr>
-    {% endfor %}
-  </table>
+      <tr>
+          <td>{{ attendance.user }}</td>
+          <td>{{ attendance.event }}</td>
+          <td>{{ attendance.date|date:'d.m.Y' }}</td>
+          <td><input type="checkbox" name="attendance" value="{{ attendance.pk }}"></td>
+          <td>
+            <button type="submit" name="delete" value="{{ attendance.pk }}">{% trans 'Delete' %}</button>
+        </td>
+      </tr>
 
+    {% endfor %}
+    <tr>
+      <td/>
+      <td/>
+      <td/>
+      <td><input type="checkbox" id="selectAll" >Select All</input></td>
+      <td><button type="submit" id="submitButton" >Submit checked</button></td>
+      <!--<td><button type="submit" name="delete" value="{{ attendance.pk }}">Delete selected</button></td>-->
+      <!--<td><button type="button" id="submitButton" onclick=submitForms()>Submit checked</button></td> -->
+    </tr>
+
+  </table>
+  <button type="submit">
   <h1>{% trans 'Verified attendances' %}</h1>
   <table style="width:100%">
     <tr>
@@ -36,7 +65,7 @@
       <td>{{ attendance.user }}</td>
       <td>{{ attendance.event }}</td>
       <td>{{ attendance.date|date:'d.m.Y' }}</td>
-      <td><button type="submit" name="delete" value="{{ attendance.pk }}">{% trans 'Delete' %}</button></td>
+
     </tr>
     {% endfor %}
   </table>
