@@ -432,7 +432,7 @@ def guild_points_update(request):
         guildatts = 0
         for user in guild_users: #list attendances
             user_attendances = []
-            for attendance in attendances: 
+            for attendance in attendances:
                 if attendance.user_id == user.id:
                     user_attendances.append(attendance)
             guipoints = 0
@@ -459,7 +459,7 @@ def guild_points_update(request):
             general_list.append(genpoints)
         guild_list = sorted(guild_list)
         general_list = sorted(general_list)
-        if len(guild_list) > 0 and len(general_list) > 0: 
+        if len(guild_list) > 0 and len(general_list) > 0:
             guildpoints = 0
             generalpoints = 0
             count = 0
@@ -472,7 +472,7 @@ def guild_points_update(request):
                 count = count + 1
                 generalpoints = generalpoints + general_list[x]
             generalpoints = generalpoints/count
-            guildevents = []                
+            guildevents = []
             genevents = []
             for e in events:
                 if e.guild_id == g.guild_id:
@@ -497,7 +497,7 @@ def guild_points_update(request):
                 guildattendance = 0
             points = 15 * int(guildpoints * guildattendance + generalpoints)
             Guildpoints.objects.filter(guild_id = g.guild_id).update(points = points)
-        else: 
+        else:
             pass
         n = n + 1
     return redirect('guild_ranking')
@@ -524,4 +524,14 @@ def user_ranking(request):
     score_list = sorted(score_list, key=lambda points: points[2], reverse=True)
     response = TemplateResponse(request, 'userrank.html', {'score_list': score_list})
     response.render()
+    return response
+
+def reset(request):
+    if request.method == 'POST':
+        email = User.objects.get(email = request.POST)
+        messages.add_message(request, messages.INFO, _('This email has not been registered to any user!'))
+        messages.add_message(request, messages.INFO, _('Email with reset link sent'))
+    response = TemplateResponse(request, 'reset.html', {})
+    response.render()
+    print(request.LANGUAGE_CODE)
     return response
