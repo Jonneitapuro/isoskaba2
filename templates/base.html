@@ -67,10 +67,6 @@
           {% if user.is_authenticated %}
           <li><a href="/attend"> {%trans 'Attend'%}</a></li>
           <li><a href="/scoreboard">{%trans 'Scoreboard'%}</a></li>
-          <li><a href="/events">{% trans 'Events' %}</a></li>
-          <li><a href="/user">{% trans 'User info' %}</a></li>
-          <li><a href="/userranking">{% trans 'Guild leaderboard' %}</a></li>
-          <li><a href="/guildranking">{% trans 'Total leaderboard' %}</a></li>
           {% endif %}
           {% if user.is_superuser or user.profile.role == 'moderator' or user.profile.role == 'admin' %}
           <li><a href="/admin/">{% trans 'Admin panel' %}</a></li>
