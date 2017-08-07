@@ -32,8 +32,8 @@
     <td><span class="glyphicon glyphicon-{{ profile.is_kv|yesno:'ok-circle text-success,ban-circle text-danger' }}"></span></td>
   </tr>
   <tr>
-	<th>{% trans 'Total Points' %}:</th>
-	<td>{{ total_points | default:"0"}}</td>
+    <th>{% trans 'Total Points' %}:</th>
+    <td>{{ total_user_points | default:"0"}}</td>
  </tr>
 </table>
 

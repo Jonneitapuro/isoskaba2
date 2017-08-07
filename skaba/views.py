@@ -280,16 +280,13 @@ def user_info(request):
     cur_user = request.user
     cur_user_profile = UserProfile.objects.get(user_id = cur_user.id)
     attendances = Attendance.objects.filter(user = cur_user)
-    
-    #TODO: implement way to count user points and pass it to view.
-    total_points = 0
+
+    total_user_points = 0
     for item in attendances:
         if item.user == cur_user and item.verified :
-            total_points += item.event.points
-        
-    
+            total_user_points += item.event.points
 
-    response = TemplateResponse(request, 'user_info.html', {'profile': cur_user_profile, 'attendances': attendances, 'total_points': total_points})
+    response = TemplateResponse(request, 'user_info.html', {'profile': cur_user_profile, 'attendances': attendances, 'total_user_points': total_user_points})
     response.render()
 
     return response
