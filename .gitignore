@@ -11,3 +11,7 @@ __pycache__/
 # compiled translation files
 # commented out because heroku can't find msgfmt (GNU gettext tools 0.15 or newer)
 #*.mo
+
+# Install files and settings (for now)
+requirements.txt
+isoskaba2/settings.py
