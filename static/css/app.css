@@ -160,6 +160,10 @@ div.form-error {
    color: #4ebd71;
 }
 
+button.attend-event[disabled] {
+  background-color: red;
+}
+
 /* Icon styles */
 red {
   color: red !important;
