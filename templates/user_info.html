@@ -31,6 +31,9 @@
     <th>{% trans 'INTL status' %}:</th>
     <td><span class="glyphicon glyphicon-{{ profile.is_kv|yesno:'ok-circle text-success,ban-circle text-danger' }}"></span></td>
   </tr>
+    <th>{% trans 'Total points' %}:</th>
+    <td>{{ user_points }}</td>
+  </tr>
 </table>
 
 <a href="/user/edit/"><button type="button">{% trans 'Edit' %}</button></a>
