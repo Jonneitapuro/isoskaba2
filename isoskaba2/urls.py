@@ -22,7 +22,8 @@ from django.conf.urls.i18n import i18n_patterns
 
 
 urlpatterns = [
-    url(r'^$', skabaviews.index, name='index'),
+    url(r'^$', skabaviews.login_user, name='index'),
+    url(r'^login', skabaviews.login_user, name='login'),
     url(r'^siteadmin/', admin.site.urls),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^admin/$', skabaviews.admin_index, name='admin_index'),
@@ -39,7 +40,6 @@ urlpatterns = [
     url(r'^admin/guildpoints/populate', skabaviews.guild_points_populate, name='guild_points_populate'),
     url(r'^admin/guildpoints/update', skabaviews.guild_points_update, name='guild_points_update'),
     url(r'^logout/$', skabaviews.logout_user, name='logout'),
-    url(r'^login', skabaviews.login_user, name='login'),
     url(r'^user/$', skabaviews.user_info, name='userinfo'),
     url(r'^user/edit/$', skabaviews.user_edit, name='user_edit'),
     url(r'^events/$', skabaviews.list_user_events, name='usereventlist'),

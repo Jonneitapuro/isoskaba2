@@ -214,7 +214,7 @@ def login_user(request):
     redirectURL = request.GET.get('next', None)
 
     if (request.user and request.user.is_authenticated()):
-        return redirect('index')
+        return redirect('usereventlist')
 
     username = password = ''
     status = 200
