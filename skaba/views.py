@@ -282,7 +282,12 @@ def user_info(request):
     cur_user = request.user
     cur_user_profile = UserProfile.objects.get(user_id = cur_user.id)
     attendances = Attendance.objects.filter(user = cur_user)
-    response = TemplateResponse(request, 'user_info.html', {'profile': cur_user_profile, 'attendances': attendances})
+    points = sum([x.event.points for x in attendances])
+    response = TemplateResponse(request, 'user_info.html', {
+        'profile': cur_user_profile,
+        'attendances': attendances,
+        'user_points': points
+    })
     response.render()
     return response
 
