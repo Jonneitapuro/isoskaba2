@@ -156,3 +156,10 @@ MESSAGE_TAGS = {
 AUTH_PROFILE_MODULE = 'skaba.UserProfile'
 
 LOGIN_URL = '/login'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'isoskaba@gmail.com'
+EMAIL_HOST_PASSWORD = 'doldemar16'
+EMAIL_PORT = 587

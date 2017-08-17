@@ -49,7 +49,7 @@ urlpatterns = [
     url(r'^guildranking/', skabaviews.guild_ranking, name='guild_ranking'),
     url(r'^userranking/', skabaviews.user_ranking, name='user_ranking'),
     url(r'^fixevents/', skabaviews.fix_events, name='fix_events'),
-    url(r'^reset/', skabaviews.reset, name='reset')
+    url('^', include('django.contrib.auth.urls')),
 ]
 
 if settings.DEBUG:

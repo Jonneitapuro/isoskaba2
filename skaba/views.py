@@ -10,6 +10,8 @@ from django.template.context_processors import csrf
 from django.forms import model_to_dict
 from django.utils.translation import ugettext as _
 from django.db.models import Q, Count, Sum
+from django.core.mail import send_mail
+
 
 from datetime import datetime, date, timedelta
 from skaba.forms import *
@@ -526,11 +528,26 @@ def user_ranking(request):
     response.render()
     return response
 
+#Password reset
 def reset(request):
+    messages
     if request.method == 'POST':
-        email = User.objects.get(email = request.POST)
-        messages.add_message(request, messages.INFO, _('This email has not been registered to any user!'))
-        messages.add_message(request, messages.INFO, _('Email with reset link sent'))
+        usermail = request.POST.get("email", "")
+        try:
+            email = User.objects.get(email = usermail)
+        except:
+            messages.add_message(request, messages.INFO, _('This email has not been registered to any user!'))
+        try:
+            send_mail(
+                'Password reset',
+                'Test message',
+                'isoskaba@gmail.com',
+                [usermail],
+                fail_silently=False
+            )
+            messages.add_message(request, messages.INFO, _('Email with reset link sent'))
+        except Exception as e:
+            messages.add_message(request, messages.INFO, _('Failed to send the link'))
     response = TemplateResponse(request, 'reset.html', {})
     response.render()
     print(request.LANGUAGE_CODE)
