@@ -251,24 +251,22 @@ def logout_user(request):
 @login_required
 def list_user_events(request):
     order_by_events = request.GET.get('order_by_events', 'guild')
-    order_by_attendances = request.GET.get('order_by_attendances', 'verified')
-    cur_user = request.user
-    cur_user_profile = UserProfile.objects.get(user_id  = cur_user.id)
-    if cur_user_profile.is_tf == 1:
+    user = request.user
+    if user.profile.is_tf == 1:
         tf = 14
     else:
-        tf = 20
-    events = Event.objects.filter(Q(guild__id = cur_user_profile.guild_id) | Q(guild__id = 1) | Q(guild__id = tf)).order_by(order_by_events)
-    attendances = Attendance.objects.filter(Q(user__id = request.user.pk)).order_by(order_by_attendances)
+        tf = 20 # ???
+    events = Event.objects.filter(Q(guild__id = user.profile.guild_id) | Q(guild__id = 1) | Q(guild__id = tf)).order_by(order_by_events)
+    attendances = Attendance.objects.filter(Q(user__id = request.user.pk))
     for event in events:
-        if attendances.filter(event=event.pk).count() >= event.repeats:
-            events = events.exclude(pk=event.pk)
+        event.times_attended = attendances.filter(event=event.pk).count()
+        # check if event is attended more than it's allowed amount and disable attending it if so
+        event.disabled = event.times_attended >= event.repeats
 
     response = TemplateResponse(request,
             'eventlist.html',
             {
-                'events': events, 'attendances': attendances,
-                'order_by_attendances': order_by_attendances,
+                'events': events,
                 'order_by_events': order_by_events
             })
 
@@ -367,7 +365,7 @@ def attend_event(request):
             messages.error(request, _('You have attended for the maximum amount'))
             return response
     else:
-        return redirect('usereventlist')
+        return redirect('usereventlist')    
 
 @user_passes_test(check_moderator)
 def verify_attendances(request):
