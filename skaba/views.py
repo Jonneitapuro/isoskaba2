@@ -10,6 +10,8 @@ from django.template.context_processors import csrf
 from django.forms import model_to_dict
 from django.utils.translation import ugettext as _
 from django.db.models import Q, Count, Sum
+from django.core.mail import send_mail
+
 
 from datetime import datetime, date, timedelta
 from skaba.forms import *
@@ -437,7 +439,7 @@ def guild_points_update(request):
         guildatts = 0
         for user in guild_users: #list attendances
             user_attendances = []
-            for attendance in attendances: 
+            for attendance in attendances:
                 if attendance.user_id == user.id:
                     user_attendances.append(attendance)
             guipoints = 0
@@ -464,7 +466,7 @@ def guild_points_update(request):
             general_list.append(genpoints)
         guild_list = sorted(guild_list)
         general_list = sorted(general_list)
-        if len(guild_list) > 0 and len(general_list) > 0: 
+        if len(guild_list) > 0 and len(general_list) > 0:
             guildpoints = 0
             generalpoints = 0
             count = 0
@@ -477,7 +479,7 @@ def guild_points_update(request):
                 count = count + 1
                 generalpoints = generalpoints + general_list[x]
             generalpoints = generalpoints/count
-            guildevents = []                
+            guildevents = []
             genevents = []
             for e in events:
                 if e.guild_id == g.guild_id:
@@ -502,7 +504,7 @@ def guild_points_update(request):
                 guildattendance = 0
             points = 15 * int(guildpoints * guildattendance + generalpoints)
             Guildpoints.objects.filter(guild_id = g.guild_id).update(points = points)
-        else: 
+        else:
             pass
         n = n + 1
     return redirect('guild_ranking')
@@ -529,4 +531,29 @@ def user_ranking(request):
     score_list = sorted(score_list, key=lambda points: points[2], reverse=True)
     response = TemplateResponse(request, 'userrank.html', {'score_list': score_list})
     response.render()
+    return response
+
+#Password reset
+def reset(request):
+    messages
+    if request.method == 'POST':
+        usermail = request.POST.get("email", "")
+        try:
+            email = User.objects.get(email = usermail)
+        except:
+            messages.add_message(request, messages.INFO, _('This email has not been registered to any user!'))
+        try:
+            send_mail(
+                'Password reset',
+                'Test message',
+                'isoskaba@gmail.com',
+                [usermail],
+                fail_silently=False
+            )
+            messages.add_message(request, messages.INFO, _('Email with reset link sent'))
+        except Exception as e:
+            messages.add_message(request, messages.INFO, _('Failed to send the link'))
+    response = TemplateResponse(request, 'reset.html', {})
+    response.render()
+    print(request.LANGUAGE_CODE)
     return response
