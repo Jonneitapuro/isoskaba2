@@ -16,6 +16,8 @@ from skaba.forms import *
 from skaba.models import Event, Guild, User, UserProfile, Attendance, Guildpoints
 from skaba.util import check_moderator, check_admin, csv_user_import, csv_event_import
 
+general_id = 3
+
 def index(request):
     response = TemplateResponse(request, 'index.html', {})
     response.render()
@@ -146,7 +148,7 @@ def guild_points_populate(request):
         return redirect('index')
     guilds = Guild.objects.all()
     for guild in guilds:
-        if guild.id != 1 and guild.id != 14:
+        if guild.id != general_id and guild.id != 14:
             new_guild = Guildpoints(guild=guild, points = 0)
             new_guild.save()
     return redirect('index')
@@ -256,7 +258,7 @@ def list_user_events(request):
         tf = 14
     else:
         tf = 20 # ???
-    events = Event.objects.filter(Q(guild__id = user.profile.guild_id) | Q(guild__id = 1) | Q(guild__id = tf)).order_by(order_by_events)
+    events = Event.objects.filter(Q(guild__id = user.profile.guild_id) | Q(guild__id = general_id) | Q(guild__id = tf)).order_by(order_by_events)
     attendances = Attendance.objects.filter(Q(user__id = request.user.pk))
     for event in events:
         event.times_attended = attendances.filter(event=event.pk).count()
@@ -426,7 +428,6 @@ def guild_points_update(request):
     attendances = Attendance.objects.filter(verified = True)
     events = Event.objects.filter(eventdate__lte= date.today())
     for g in guilds:
-        print('guilds:', g.guild);
         guild_users = []
         for user in users: #list user of the guild
             if user.profile.guild_id == g.guild_id:
@@ -456,7 +457,7 @@ def guild_points_update(request):
                             addpoints = event.points
                             addpoints = int(addpoints)
                             guipoints = guipoints + addpoints
-                        if event.guild_id == 1: #add general eventpoints
+                        if event.guild_id == general_id: #add general eventpoints
                             addpoints = event.points
                             addpoints = int(addpoints)
                             genpoints = genpoints + addpoints
@@ -469,12 +470,12 @@ def guild_points_update(request):
         if len(guild_list) > 0 and len(general_list) > 0:
             guildpoints = 0
             generalpoints = 0
-            count = 0
+            count = 1
             for x in range(useravg, usercount):
                 count = count + 1
                 guildpoints = guildpoints + guild_list[x]
             guildpoints = guildpoints/count
-            count = 0
+            count = 1
             for x in range(useravg, usercount):
                 count = count + 1
                 generalpoints = generalpoints + general_list[x]
@@ -484,7 +485,7 @@ def guild_points_update(request):
             for e in events:
                 if e.guild_id == g.guild_id:
                     guildevents.append(e)
-                if e.guild_id == 1:
+                if e.guild_id == general_id:
                     genevents.append(e)
             guildpointsum = 0
             genpointsum = 0
