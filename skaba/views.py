@@ -117,28 +117,28 @@ def fix_events(request):
 
 @user_passes_test(check_admin)
 def guilds_populate(request):
-	if Guild.objects.all().exists():
-		return redirect('index')
-	guilds = [
-		{'name': 'Yleinen', 'abbr': 'Yleinen'},
-		{'name': 'Arkkitehtikilta', 'abbr': 'AK'},
-		{'name': 'Automaatio- ja systeemitekniikan kilta', 'abbr': 'AS'},
-		{'name': 'Athene', 'abbr': 'Athene'},
-		{'name': 'Fyysikkokilta', 'abbr': 'FK'},
-		{'name': 'Inkubio', 'abbr': 'Bio'},
-		{'name': 'Koneinsinöörikilta', 'abbr': 'KIK'},
-		{'name': 'Maanmittarikilta', 'abbr': 'MK'},
-		{'name': 'Prodeko', 'abbr': 'Prodeko'},
-		{'name': 'Prosessiteekkarit', 'abbr': 'PT'},
-		{'name': 'Rakennusinsinöörikilta', 'abbr': 'IK'},
-		{'name': 'Sähköinsinöörikilta', 'abbr': 'SIK'},
-		{'name': 'Tietokilta', 'abbr': 'TiK'},
-		{'name': 'Teknologföreningen', 'abbr': 'TF'}
-	]
-	for guild in guilds:
-		new_guild = Guild(name=guild['name'], abbreviation = guild['abbr'])
-		new_guild.save()
-	return redirect('index')
+    if Guild.objects.all().exists():
+        return redirect('index')
+    guilds = [
+        {'name': 'Yleinen', 'abbr': 'Yleinen'},
+        {'name': 'Arkkitehtikilta', 'abbr': 'AK'},
+        {'name': 'Automaatio- ja systeemitekniikan kilta', 'abbr': 'AS'},
+        {'name': 'Athene', 'abbr': 'Athene'},
+        {'name': 'Fyysikkokilta', 'abbr': 'FK'},
+        {'name': 'Inkubio', 'abbr': 'Bio'},
+        {'name': 'Koneinsinöörikilta', 'abbr': 'KIK'},
+        {'name': 'Maanmittarikilta', 'abbr': 'MK'},
+        {'name': 'Prodeko', 'abbr': 'Prodeko'},
+        {'name': 'Prosessiteekkarit', 'abbr': 'PT'},
+        {'name': 'Rakennusinsinöörikilta', 'abbr': 'IK'},
+        {'name': 'Sähköinsinöörikilta', 'abbr': 'SIK'},
+        {'name': 'Tietokilta', 'abbr': 'TiK'},
+        {'name': 'Teknologföreningen', 'abbr': 'TF'}
+    ]
+    for guild in guilds:
+        new_guild = Guild(name=guild['name'], abbreviation = guild['abbr'])
+        new_guild.save()
+    return redirect('index')
 
 @user_passes_test(check_admin)
 def guild_points_populate(request):
@@ -426,6 +426,7 @@ def guild_points_update(request):
     attendances = Attendance.objects.filter(verified = True)
     events = Event.objects.filter(eventdate__lte= date.today())
     for g in guilds:
+        print('guilds:', g.guild);
         guild_users = []
         for user in users: #list user of the guild
             if user.profile.guild_id == g.guild_id:

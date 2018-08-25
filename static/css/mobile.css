@@ -1,0 +1,68 @@
+@media only screen and (max-width: 1024px) {
+  body {
+    width: 100%;
+  }
+
+  h1 {
+    font-size: 25px;
+  }
+
+  h2, h3 {
+    font-size: 18px;
+  }
+
+  #header {
+    margin-top: 0;
+  }
+
+  .div-table {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .navbar-toggle {
+    border-style: none;
+  }
+
+  .admin-nav {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  .admin-nav li {
+    padding: 5px;
+  }
+
+  #lang {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 0 10px 10px 10px;
+  }
+
+  #login {
+    display: none;
+  }
+
+  #login-nav {
+    display: block;
+  }
+
+}
+
+@media screen and (max-width: 767px) {
+  #user-dropdown a {
+    color: white;
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  #login {
+    top: 3%;
+    right: 4%;
+  }
+
+  #login-body {
+    height: 170px;
+  }
+}

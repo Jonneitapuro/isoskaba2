@@ -1,11 +1,11 @@
-#content {
-   margin-bottom: 60px;
-}
-
 body {
+  background: url("../images/floating-cogs.svg");
+  background-color: #333333 ;
+  font-family: "Lato", sans-serif;
   position: relative;
-  margin-left: 0;
+  margin: auto;
   padding-left: 0;
+  width: 85%;
 }
 
 div {
@@ -13,13 +13,35 @@ div {
   padding: 0;
 }
 
+a {
+  color: #606060	
+}
+
+h1, h2, h3, h4 {
+  letter-spacing: 1px;
+  margin-bottom: 25px;
+}
+
+#header {
+  margin-top: 15px;
+}
+
+#content {
+  background: #D3D3D3;
+  padding-bottom: 50px;
+  padding-top: 20px;
+  margin-bottom: 60px;
+  position: relative;
+  top: -20px;
+  -webkit-box-shadow: 0 10px 6px -6px #221e1e;
+	-moz-box-shadow: 0 10px 6px -6px #221e1e;
+	box-shadow: 0 10px 6px -6px #221e1e;
+}
+
 .div-table{
   display:table;
-  width:100%;
-  border:1px solid  #666666;
-  /*border-spacing:5px;/*cellspacing:poor IE support for  this*/
-  border-radius: 5px;
-  margin-top: 20px;
+  width:90%;
+  margin: auto 20px;
 }
 .div-table-row{
   display:table-row;
@@ -47,8 +69,9 @@ div {
 .div-table-heading > div, .div-table-heading > div > a {
    vertical-align: middle;
    border-top: 0px;
-   background-color: #4ebd71;
+   background-color: #990033;
    color: #fff;
+   letter-spacing: 1px;
 }
 
 .div-table div.link {
@@ -60,7 +83,7 @@ div {
 }
 
 .div-table-heading div.link a:hover {
-   background-color: #4BDB78
+   background-color: #990033;
 }
 
 .div-table-collapse {
@@ -88,12 +111,14 @@ div.input-container label {
 }
 
 div.form-error {
-  color: red;
+  color: #990033;
 }
 
 
 #headerpic {
   width: 100%;
+  max-height: 260px;
+  object-fit: cover;
 }
 
 #login {
@@ -118,6 +143,10 @@ div.form-error {
   padding: 0;
 }
 
+.cute-header {
+  /* background-color: pink; */
+}
+
 .panel-default {
  opacity: 0.9;
  margin-top: 40px;
@@ -131,42 +160,50 @@ div.form-error {
  margin-bottom: 40px;
 }
 
-@media screen and (max-width: 1500px) {
-  #login {
-    top: 3%;
-    right: 4%;
-  }
-
-  #login-body {
-  height: 170px;
-}
-}
-
-@media screen and (max-width: 1200px) {
-  #login {
-    display: none;
-  }
-
-  #login-nav {
-    display: inline;
-  }
-}
-
 #top-nav {
-   border-radius: 0px;
+  background-color: #990033;
+  border:none;
+  border-radius: 0px;
 }
 
-#top-nav li a:hover {
-   color: #4ebd71;
+#top-nav a {
+  color: white;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+#top-nav a:hover {
+  color: #000;
+  font-weight: bold;
+}
+
+#myNavbar {
+  border: none;
+}
+
+.dropdown-menu {
+  border-radius: 0;
+  min-width: 200px;
+}
+
+#user-dropdown a {
+  color: black;
+  padding: 15px;
+}
+
+/* I'm sorry for this spaghetti I'm in a super hurry :(( */
+#top-nav .navbar-nav > .open > a {
+  background-color: #990033;
 }
 
 button.attend-event[disabled] {
-  background-color: red;
+  background-color: #C0C0C0;
 }
 
 /* Icon styles */
 red {
-  color: red !important;
+  color: #990033 !important;
 }
 
 green {
