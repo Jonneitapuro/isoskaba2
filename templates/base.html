@@ -7,7 +7,9 @@
   <meta charset="UTF-8">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'css/app.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/mobile.css' %}" />
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -15,7 +17,7 @@
 <body>
   <div class="container-fluid">
     <div id="header" class="row">
-        <a href="/"><img id="headerpic" src="{% static 'images/isoskaba-kuva-pienempi.jpg' %}" alt="ISOskaba"></a>
+        <a href="/"><img id="headerpic" src="{% static 'images/itmk18.JPG' %}" alt="ISOskaba" id="headeric"></a>
     </div>
   </div>
   <form action="/i18n/setlang/" id="language-form" method="post">
@@ -34,7 +36,8 @@
        <ul class="nav navbar-nav">
           {% if user.is_authenticated %}
           <li><a href="/attend"> {%trans 'Attend'%}</a></li>
-          <li><a href="/scoreboard">{%trans 'Scoreboard'%}</a></li>
+          <li><a href="/guildranking">{%trans 'Guild ranking'%}</a></li>
+          <li><a href="/userranking"> {%trans 'User ranking'%}</a></li>
           {% endif %}
           {% if user.is_superuser or user.profile.role == 'moderator' or user.profile.role == 'admin' %}
           <li><a href="/admin/">{% trans 'Admin panel' %}</a></li>
@@ -42,11 +45,6 @@
        </ul>
 
         <ul id="login-nav" class="nav navbar-nav navbar-right">
-          <li id="lang">
-            <input type="image" name="language" value="fi" src="{% static 'images/fi.png' %}" alt="FI">
-            <input type="image" name="language" value="en" src="{% static 'images/en.png' %}" alt="EN">
-            <input type="image" name="language" value="sv" src="{% static 'images/sv.png' %}" alt="SV">
-          </li>
           {% if user.is_authenticated %}
           <li class="dropdown">
             <a class="dropdown-toggle" href="#" data-toggle="dropdown"
@@ -54,7 +52,7 @@
               {%trans 'Profile'%}
               <span class="caret"></span>
             </a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu" id="user-dropdown">
               <li><a href="/logout/">{% trans 'Log out' %} <span class="glyphicon glyphicon-log-out"></span></a></li>
               <li><a href="/user">{%trans 'User info'%}</a></li>
             </ul>
@@ -62,6 +60,11 @@
           {% else %}
           <li><a href="/login">{% trans 'Log in' %}</a></li>
           {% endif %}
+          <li id="lang">
+            <input type="image" name="language" value="fi" src="{% static 'images/fi.png' %}" alt="FI">
+            <input type="image" name="language" value="en" src="{% static 'images/en.png' %}" alt="EN">
+            <input type="image" name="language" value="sv" src="{% static 'images/sv.png' %}" alt="SV">
+          </li>
         </ul>
     </div>
   </div>
