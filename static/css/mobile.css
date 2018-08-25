@@ -61,6 +61,9 @@
   #user-dropdown a {
     color: white;
   }
+    .panel-default {
+    min-height: 270px;
+  }
 }
 
 @media screen and (max-width: 1500px) {

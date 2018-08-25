@@ -201,6 +201,10 @@ button.attend-event[disabled] {
   background-color: #C0C0C0;
 }
 
+.padded {
+  padding: 0 10px;
+}
+
 /* Icon styles */
 red {
   color: #990033 !important;
