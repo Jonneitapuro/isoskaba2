@@ -1,5 +1,6 @@
 @media only screen and (max-width: 1024px) {
   body {
+    background: #D3D3D3;
     width: 100%;
   }
 
@@ -46,6 +47,12 @@
 
   #login-nav {
     display: block;
+  }
+
+  #content {
+    box-shadow: 0;
+    -webkit-box-shadow: none;
+	  -moz-box-shadow: none;
   }
 
 }
