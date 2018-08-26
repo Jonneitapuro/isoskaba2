@@ -48,7 +48,7 @@
       <td>{{ event.points }}</td>
       <td>{{ event.repeats }}</td>
       <td>{{ event.eventdate|date:'d.m.Y' }}</td>
-      <td><button type="submit" name="event_id" value="{{ event.id }}" onclick="confirm('{% trans 'Do you want to delete the event' %}')">{% trans 'Delete' %}</button></td>
+      <td><button type="submit" class="skaba-button button-smaller" name="event_id" value="{{ event.id }}" onclick="confirm('{% trans 'Do you want to delete the event' %}')">{% trans 'Delete' %}</button></td>
     </tr>
     {% endfor %}
   </table>

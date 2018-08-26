@@ -155,10 +155,26 @@ div.form-error {
   padding: 0;
 }
 
-#submit-events-button {
-  margin: 10px;
+.skaba-button {
+  background-color: #990033;
+  color: white;
+  padding: 10px 15px;
+}
+
+.skaba-button[disabled]{
+  background-color: #C0C0C0;
+  color: #9D9D9D;
+}
+
+.button-submit-events {
+  margin: 10px auto;
   position: absolute;
-  right: 0px;
+  right: 15px
+}
+
+.button-smaller {
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .scoreboard {
@@ -215,10 +231,6 @@ div.form-error {
 /* I'm sorry for this spaghetti I'm in a super hurry :(( */
 #top-nav .navbar-nav > .open > a {
   background-color: #990033;
-}
-
-button.attend-event[disabled] {
-  background-color: #C0C0C0;
 }
 
 .padded {
