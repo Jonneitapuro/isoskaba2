@@ -2,7 +2,7 @@
 
 
 activate () {
-      . .env/bin/activate
+      . .env/Scripts/activate
 }
 clear
 
