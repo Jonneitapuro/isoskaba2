@@ -30,17 +30,18 @@
          <span class="icon-bar"></span>
          <span class="icon-bar"></span>
        </button>
-       <a class="navbar-brand" href="/">{% trans 'ISOskaba' %}</a>
      </div>
      <div class="collapse navbar-collapse" id="myNavbar">
        <ul class="nav navbar-nav">
           {% if user.is_authenticated %}
-          <li><a href="/attend"> {%trans 'Attend'%}</a></li>
-          <li><a href="/guildranking">{%trans 'Guild ranking'%}</a></li>
-          <li><a href="/userranking"> {%trans 'User ranking'%}</a></li>
+            <li><a href="/attend"> {%trans 'Attend'%}</a></li>
+            <li><a href="/guildranking">{%trans 'Guild ranking'%}</a></li>
+            <li><a href="/userranking"> {%trans 'User ranking'%}</a></li>
+          {% else %}
+            <a class="navbar-brand" href="/">{% trans 'ISOskaba' %}</a>
           {% endif %}
           {% if user.is_superuser or user.profile.role == 'moderator' or user.profile.role == 'admin' %}
-          <li><a href="/admin/">{% trans 'Admin panel' %}</a></li>
+            <li><a href="/admin/">{% trans 'Admin panel' %}</a></li>
           {% endif %}
        </ul>
 

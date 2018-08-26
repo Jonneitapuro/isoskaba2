@@ -349,23 +349,28 @@ def admin_edit(request, user_id):
 def attend_event(request):
     # TODO: reformat redirection
     if 'e_id' in request.POST:
-        response = redirect('usereventlist')
-        response['Location'] += '?order_by_attendances=' + \
-                request.POST.get('order_by_attendances', 'verified') + \
-                '&order_by_events=' + \
-                request.POST.get('order_by_events', 'guild')
+        for singleEvent in request.POST.getlist('e_id'):
+            print('event:', singleEvent)
+            response = redirect('usereventlist')
+            response['Location'] += '?order_by_attendances=' + \
+                    request.POST.get('order_by_attendances', 'verified') + \
+                    '&order_by_events=' + \
+                    request.POST.get('order_by_events', 'guild')
 
-        eventid = int(request.POST.get('e_id'))
-        event = get_object_or_404(Event, pk=eventid)
-        cur_user = UserProfile.objects.get(user_id = request.user.id)
-        repcount = Attendance.objects.filter(Q(user_id = cur_user.id) & Q(event_id = eventid)).count()
-        if  event.repeats > repcount:
-            a = Attendance(event_id = eventid, user_id = cur_user.id)
-            a.save()
-            return response
-        else:
-            messages.error(request, _('You have attended for the maximum amount'))
-            return response
+            eventid = singleEvent
+            print('eventid:', eventid)
+            event = get_object_or_404(Event, pk=eventid)
+            cur_user = UserProfile.objects.get(user_id = request.user.id)
+            repcount = Attendance.objects.filter(Q(user_id = cur_user.id) & Q(event_id = eventid)).count()
+            
+            if  event.repeats > repcount:
+                a = Attendance(event_id = eventid, user_id = cur_user.id)
+                a.save()
+                #return response
+            #else:
+                #messages.error(request, _('You have attended for the maximum amount'))
+                #return response
+        return response
     else:
         return redirect('usereventlist')    
 

@@ -16,6 +16,16 @@
     margin-top: 0;
   }
 
+  .div-table-row > .hidden-on-mobile {
+    display: none;
+  }
+
+  /* 'Attend'- and 'Event-name'- columns */
+  .bigger-on-mobile {
+    width: 40%;
+  }
+
+
   .div-table {
     width: 100%;
     margin: 0 auto;

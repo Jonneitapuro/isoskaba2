@@ -4,20 +4,18 @@
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/divemes/smoodivness/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
-<h1>{% trans 'Scoreboard' %}</h1>
+<h1 class="scoreboard">{% trans 'Scoreboard' %}</h1>
 
 <div class="div-table">
   <div class="div-table-row div-table-heading">
-    <div style="width: 33%">{% trans 'First name' %}</div>
-    <div style="width: 33%">{% trans 'Last Name' %}</div>
-    <div style="width: 34%">{% trans 'Points' %}</div>
+    <div style="width: 50%">{% trans 'Name' %}</div>
+    <div style="width: 50%">{% trans 'Points' %}</div>
   </div>
 
   {% for score in score_list %}
   <div class="div-table-row">
-    <div style="width: 33%">{{ score.0 }}</div>
-    <div style="width: 33%">{{ score.1 }}</div>
-    <div style="width: 34%">{{ score.2 }}</div>
+    <div style="width: 50%">{{ score.0 }} {{score.1}}</div>
+    <div style="width: 50%">{{ score.2 }}</div>
   </div>
   {% endfor %}
 </table>

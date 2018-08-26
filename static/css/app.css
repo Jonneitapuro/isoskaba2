@@ -41,7 +41,8 @@ h1, h2, h3, h4 {
 .div-table{
   display:table;
   width:90%;
-  margin: auto 20px;
+  margin: auto;
+  
 }
 .div-table-row{
   display:table-row;
@@ -67,7 +68,6 @@ h1, h2, h3, h4 {
 }
 
 .div-table-heading > div, .div-table-heading > div > a {
-   vertical-align: middle;
    border-top: 0px;
    background-color: #990033;
    color: #fff;
@@ -143,8 +143,10 @@ div.form-error {
   padding: 0;
 }
 
-.cute-header {
-  /* background-color: pink; */
+.scoreboard {
+  font-weight: 900;
+  text-align: center;
+  text-transform: uppercase;  
 }
 
 .panel-default {
@@ -203,6 +205,11 @@ button.attend-event[disabled] {
 
 .padded {
   padding: 0 10px;
+}
+
+/* 'Attend'- and 'Event-name'- columns */
+.bigger-on-mobile {
+  width: 30%;
 }
 
 /* Icon styles */
