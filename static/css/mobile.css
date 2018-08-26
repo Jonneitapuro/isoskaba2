@@ -22,13 +22,14 @@
 
   /* 'Attend'- and 'Event-name'- columns */
   .bigger-on-mobile {
-    width: 40%;
+    width: 35%;
   }
 
 
   .div-table {
     width: 100%;
     margin: 0 auto;
+    text-align: start;
   }
 
   .navbar-toggle {

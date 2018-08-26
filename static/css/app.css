@@ -143,6 +143,12 @@ div.form-error {
   padding: 0;
 }
 
+#submit-events-button {
+  margin: 10px;
+  position: absolute;
+  right: 0px;
+}
+
 .scoreboard {
   font-weight: 900;
   text-align: center;
@@ -209,7 +215,7 @@ button.attend-event[disabled] {
 
 /* 'Attend'- and 'Event-name'- columns */
 .bigger-on-mobile {
-  width: 30%;
+  width: 25%;
 }
 
 /* Icon styles */

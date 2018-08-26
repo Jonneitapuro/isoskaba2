@@ -11,9 +11,9 @@
   <input type="hidden" name="order_by_attendances" value="{{ order_by_attendances }}" />
   <div class="div-table">
     <div class="div-table-row div-table-heading">
-      <div style="width: 5%">More</div>
+      <div style="width: 10%">More</div>
       <div class="bigger-on-mobile" class="link"><a href="?order_by_events=name">{% trans 'Name' %}</a></div>
-      <div style="width: 5%" class="link"><a href="?order_by_events=points">{% trans 'Points' %}</a></div>
+      <div style="width: 10%" class="link"><a href="?order_by_events=points">{% trans 'Points' %}</a></div>
       <div style="width: 20%" class="link hidden-on-mobile"><a href="?order_by_events=eventdate">{% trans 'Date' %}</a></div>
       <div class="bigger-on-mobile">{% trans 'Attend' %}</div>
       <div style="width: 10%">Check</div>
@@ -21,9 +21,9 @@
 
     {% for event in events %}
     <div class="div-table-row">
-      <div style="width: 5%" class="link"><a href="#{{ event.slug }}" data-toggle="collapse" class="accordion-toggle">+</a></div>
+      <div style="width: 10%" class="link"><a href="#{{ event.slug }}" data-toggle="collapse" class="accordion-toggle">+</a></div>
       <div class="bigger-on-mobile">{{ event.name }}</div>
-      <div style="width: 5%">{{ event.points }}</div>
+      <div style="width: 10%">{{ event.points }}</div>
       <div style="width: 20%" class="hidden-on-mobile">{{ event.eventdate|date:'d.m.Y' }}</div>
       <div class="bigger-on-mobile">
         <button class="attend-event" type="submit" name="e_id" value="{{ event.id }}" {% if event.disabled %}disabled{% endif %}>{% trans 'Attend' %}</button>

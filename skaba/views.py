@@ -515,16 +515,16 @@ def guild_points_update(request):
         n = n + 1
     return redirect('guild_ranking')
 
-@login_required
-def user_ranking(request):
-
-    users = User.objects.filter(Q(userprofile__guild = request.user.userprofile.guild) & Q(userprofile__role = 'user'))
+# Helper function for user__ranking
+def get_user_ranking(users):
+    #TODO: Points should probably be saved in userprofile too?
     score_list = []
     n = 0
     for user in users:
         score_list.append([])
         score_list[n].append(user.first_name)
         score_list[n].append(user.last_name)
+        score_list[n].append(user.userprofile.guild.name)
         attendances = Attendance.objects.filter(Q(user_id = user.id) & Q(verified = True))
         points = 0
         for att in attendances:
@@ -534,7 +534,17 @@ def user_ranking(request):
             points = points + addpoints
         score_list[n].append(points)
         n = n + 1
-    score_list = sorted(score_list, key=lambda points: points[2], reverse=True)
-    response = TemplateResponse(request, 'userrank.html', {'score_list': score_list})
+    return score_list
+
+@login_required
+def user_ranking(request):
+
+    usersGuild = User.objects.filter(Q(userprofile__guild = request.user.userprofile.guild) & Q(userprofile__role = 'user'))
+    usersAll = User.objects.filter(Q(userprofile__role = 'user'))
+    score_list_guild = get_user_ranking(usersGuild)
+    score_list_guild = sorted(score_list_guild, key=lambda points: points[3], reverse=True)
+    score_list_all = get_user_ranking(usersAll)
+    score_list_all = sorted(score_list_all, key=lambda points: points[3], reverse=True)[:20]
+    response = TemplateResponse(request, 'userrank.html', {'score_list_guild': score_list_guild, 'score_list_all': score_list_all})
     response.render()
     return response
