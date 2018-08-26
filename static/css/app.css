@@ -114,6 +114,18 @@ div.form-error {
   color: #990033;
 }
 
+.form-horizontal {
+  padding: 15px;
+}
+
+.panel-primary > .panel-heading {
+  background-color: #990033;
+  border-color: #990033;
+}
+
+.panel-primary {
+  border-color: #990033;
+}
 
 #headerpic {
   width: 100%;
