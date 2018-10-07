@@ -186,6 +186,10 @@ div.form-error {
 .panel-default {
  opacity: 0.9;
  margin-top: 40px;
+ margin-left: auto;
+ margin-right: auto;
+ min-height: 250px;
+ width: 70%;
 }
 
 .panel-heading-transparent {

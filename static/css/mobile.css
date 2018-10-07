@@ -73,7 +73,8 @@
     color: white;
   }
     .panel-default {
-    min-height: 270px;
+    min-height: 290px;
+    width: 90%;
   }
 }
 
