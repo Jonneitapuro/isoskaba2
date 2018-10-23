@@ -25,9 +25,9 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = '_&6y(o9h%c=_fc)3q2d#u8(e9xxx+74*572y+i61f==(r%nm2a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*',]
 
 
 # Application definition
@@ -157,10 +157,9 @@ AUTH_PROFILE_MODULE = 'skaba.UserProfile'
 
 LOGIN_URL = '/login'
 
-#TODO: Add email host & password to local variables
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = EMAIL
-EMAIL_HOST_PASSWORD = EMAIL_PASSWORD
+EMAIL_HOST_USER = EMAILUSER
+EMAIL_HOST_PASSWORD = EMAILPASSWORD
