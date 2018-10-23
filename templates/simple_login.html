@@ -22,7 +22,7 @@
 		</div>
 	</div> 
 </div>-->
-      <div class="panel panel-default col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
+      <div class="panel panel-default">
         <div class="panel-heading panel-heading-transparent">
           <strong>{% trans 'Log in' %}</strong>
         </div>
@@ -53,8 +53,9 @@
             </div>-->
             <div class="form-group last">
               <div class="col-sm-offset-3 col-sm-9">
-                <button type="submit" class="btn btn-success btn-sm">{% trans 'Log in' %}</button>
-                <button type="reset" class="btn btn-default btn-sm">{% trans 'Empty' %}</button>
+                <button type="submit" class="skaba-button">{% trans 'Log in' %}</button>
+                <button type="reset" class="skaba-button">{% trans 'Empty' %}</button>
+                <br> <a href="password_reset">{% trans 'Forgotten password?' %}</a>
               </div>
             </div>
           </form>

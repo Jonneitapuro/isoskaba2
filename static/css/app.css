@@ -1,11 +1,11 @@
-#content {
-   margin-bottom: 60px;
-}
-
 body {
+  background: url("../images/floating-cogs.svg");
+  background-color: #333333 ;
+  font-family: "Lato", sans-serif;
   position: relative;
-  margin-left: 0;
+  margin: auto;
   padding-left: 0;
+  width: 85%;
 }
 
 div {
@@ -13,13 +13,36 @@ div {
   padding: 0;
 }
 
+a {
+  color: #606060	
+}
+
+h1, h2, h3, h4 {
+  letter-spacing: 1px;
+  margin-bottom: 25px;
+}
+
+#header {
+  margin-top: 15px;
+}
+
+#content {
+  background: #D3D3D3;
+  padding-bottom: 50px;
+  padding-top: 20px;
+  margin-bottom: 60px;
+  position: relative;
+  top: -20px;
+  -webkit-box-shadow: 0 10px 6px -6px #221e1e;
+	-moz-box-shadow: 0 10px 6px -6px #221e1e;
+	box-shadow: 0 10px 6px -6px #221e1e;
+}
+
 .div-table{
   display:table;
-  width:100%;
-  border:1px solid  #666666;
-  /*border-spacing:5px;/*cellspacing:poor IE support for  this*/
-  border-radius: 5px;
-  margin-top: 20px;
+  width:90%;
+  margin: auto;
+  
 }
 .div-table-row{
   display:table-row;
@@ -45,10 +68,10 @@ div {
 }
 
 .div-table-heading > div, .div-table-heading > div > a {
-   vertical-align: middle;
    border-top: 0px;
-   background-color: #4ebd71;
+   background-color: #990033;
    color: #fff;
+   letter-spacing: 1px;
 }
 
 .div-table div.link {
@@ -60,7 +83,7 @@ div {
 }
 
 .div-table-heading div.link a:hover {
-   background-color: #4BDB78
+   background-color: #990033;
 }
 
 .div-table-collapse {
@@ -88,12 +111,26 @@ div.input-container label {
 }
 
 div.form-error {
-  color: red;
+  color: #990033;
 }
 
+.form-horizontal {
+  padding: 15px;
+}
+
+.panel-primary > .panel-heading {
+  background-color: #990033;
+  border-color: #990033;
+}
+
+.panel-primary {
+  border-color: #990033;
+}
 
 #headerpic {
   width: 100%;
+  max-height: 260px;
+  object-fit: cover;
 }
 
 #login {
@@ -118,9 +155,41 @@ div.form-error {
   padding: 0;
 }
 
+.skaba-button {
+  background-color: #990033;
+  color: white;
+  padding: 10px 15px;
+}
+
+.skaba-button[disabled]{
+  background-color: #C0C0C0;
+  color: #9D9D9D;
+}
+
+.button-submit-events {
+  margin: 10px auto;
+  position: absolute;
+  right: 15px
+}
+
+.button-smaller {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.scoreboard {
+  font-weight: 900;
+  text-align: center;
+  text-transform: uppercase;  
+}
+
 .panel-default {
  opacity: 0.9;
  margin-top: 40px;
+ margin-left: auto;
+ margin-right: auto;
+ min-height: 250px;
+ width: 70%;
 }
 
 .panel-heading-transparent {
@@ -131,42 +200,55 @@ div.form-error {
  margin-bottom: 40px;
 }
 
-@media screen and (max-width: 1500px) {
-  #login {
-    top: 3%;
-    right: 4%;
-  }
-
-  #login-body {
-  height: 170px;
-}
-}
-
-@media screen and (max-width: 1200px) {
-  #login {
-    display: none;
-  }
-
-  #login-nav {
-    display: inline;
-  }
-}
-
 #top-nav {
-   border-radius: 0px;
+  background-color: #990033;
+  border:none;
+  border-radius: 0px;
 }
 
-#top-nav li a:hover {
-   color: #4ebd71;
+#top-nav a {
+  color: white;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-button.attend-event[disabled] {
-  background-color: red;
+#top-nav a:hover {
+  color: #000;
+  font-weight: bold;
+}
+
+#myNavbar {
+  border: none;
+}
+
+.dropdown-menu {
+  border-radius: 0;
+  min-width: 200px;
+}
+
+#user-dropdown a {
+  color: black;
+  padding: 15px;
+}
+
+/* I'm sorry for this spaghetti I'm in a super hurry :(( */
+#top-nav .navbar-nav > .open > a {
+  background-color: #990033;
+}
+
+.padded {
+  padding: 0 10px;
+}
+
+/* 'Attend'- and 'Event-name'- columns */
+.bigger-on-mobile {
+  width: 25%;
 }
 
 /* Icon styles */
 red {
-  color: red !important;
+  color: #990033 !important;
 }
 
 green {

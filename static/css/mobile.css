@@ -1,0 +1,90 @@
+@media only screen and (max-width: 1024px) {
+  body {
+    background: #D3D3D3;
+    width: 100%;
+  }
+
+  h1 {
+    font-size: 25px;
+  }
+
+  h2, h3 {
+    font-size: 18px;
+  }
+
+  #header {
+    margin-top: 0;
+  }
+
+  .div-table-row > .hidden-on-mobile {
+    display: none;
+  }
+
+  /* 'Attend'- and 'Event-name'- columns */
+  .bigger-on-mobile {
+    width: 35%;
+  }
+
+
+  .div-table {
+    width: 100%;
+    margin: 0 auto;
+    text-align: start;
+  }
+
+  .navbar-toggle {
+    border-style: none;
+  }
+
+  .admin-nav {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  .admin-nav li {
+    padding: 5px;
+  }
+
+  #lang {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 0 10px 10px 10px;
+  }
+
+  #login {
+    display: none;
+  }
+
+  #login-nav {
+    display: block;
+  }
+
+  #content {
+    box-shadow: 0;
+    -webkit-box-shadow: none;
+	  -moz-box-shadow: none;
+  }
+
+}
+
+@media screen and (max-width: 767px) {
+  #user-dropdown a {
+    color: white;
+  }
+    .panel-default {
+    min-height: 290px;
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  #login {
+    top: 3%;
+    right: 4%;
+  }
+
+  #login-body {
+    height: 170px;
+  }
+}
