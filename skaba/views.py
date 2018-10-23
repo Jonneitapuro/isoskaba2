@@ -425,99 +425,67 @@ def guild_ranking(request):
     response = TemplateResponse(request, 'guildrank.html', {'points':points})
     return response
 
+#Helper function for getting user's points.
+def get_user_points(u):
+    points = 0
+    #Fetch all the attendances and events all at once
+    attendances = list(Attendance.objects.prefetch_related('event').filter(verified = True, user = u))
+    attended_events = []
+    for attendance in attendances:
+        if attendance.event.eventdate <= date.today():
+            points += attendance.event.points
+    return points
+
+def get_guild_point_list(guild_users):
+    score_list = []
+    n = 0
+    for user in guild_users:
+        score_list.append(get_user_points(user))
+        n += 1
+
+    score_list.sort(reverse=True)
+    return score_list
+
+# This algorithm is completely improvised and no responsibility
+# whatsoever is taken for unexpected results
 @user_passes_test(check_moderator)
 def guild_points_update(request):
     guilds = Guildpoints.objects.all()
-    n = 0
-    users = User.objects.filter(userprofile__role = 'user')
-    attendances = Attendance.objects.filter(verified = True)
-    events = Event.objects.filter(eventdate__lte= date.today())
+
+    #Weight multipliers to hopefully even the guild points
+    biggest_weight = 1 #For the best 30%
+    medium_weight = 0.5 #For the second best 30%
+    min_weight = 0.2 #For the third best 30% Last 10% is brutally ignored
+    
     for g in guilds:
-        guild_users = []
-        for user in users: #list user of the guild
-            if user.profile.guild_id == g.guild_id:
-               guild_users.append(user)
+        guild_users = list(User.objects.filter(userprofile__role = 'user', userprofile__guild = g.guild_id))
+
         usercount = len(guild_users)
-        useravg = 0.5 * usercount
-        useravg = int(useravg)
-        guild_list = []
-        general_list = []
-        guildatts = 0
-        for user in guild_users: #list attendances
-            user_attendances = []
-            for attendance in attendances:
-                if attendance.user_id == user.id:
-                    user_attendances.append(attendance)
-            guipoints = 0
-            genpoints = 0
-            for att in user_attendances: #go through attendances
-                event = 0
-                for e in events: #crossreference to events
-                    if e.id == att.event_id:
-                        event = e
-                if event is not 0:
-                    try:
-                        if event.guild_id == g.guild_id: #add guild eventpoints
-                            guildatts = guildatts + 1
-                            addpoints = event.points
-                            addpoints = int(addpoints)
-                            guipoints = guipoints + addpoints
-                        if event.guild_id == general_id: #add general eventpoints
-                            addpoints = event.points
-                            addpoints = int(addpoints)
-                            genpoints = genpoints + addpoints
-                    except (UnboundLocalError):
-                        pass
-            guild_list.append(guipoints)
-            general_list.append(genpoints)
-        guild_list = sorted(guild_list)
-        general_list = sorted(general_list)
-        if len(guild_list) > 0 and len(general_list) > 0:
-            guildpoints = 0
-            generalpoints = 0
-            count = 1
-            for x in range(useravg, usercount):
-                count = count + 1
-                guildpoints = guildpoints + guild_list[x]
-            guildpoints = guildpoints/count
-            count = 1
-            for x in range(useravg, usercount):
-                count = count + 1
-                generalpoints = generalpoints + general_list[x]
-            generalpoints = generalpoints/count
-            guildevents = []
-            genevents = []
-            for e in events:
-                if e.guild_id == g.guild_id:
-                    guildevents.append(e)
-                if e.guild_id == general_id:
-                    genevents.append(e)
-            guildpointsum = 0
-            genpointsum = 0
-            for e in guildevents:
-                guildpointsum = guildpointsum + e.points
-            for e in genevents:
-                genpointsum = genpointsum + e.points
-            if guildpointsum is not 0:
-                scalingfactor = genpointsum / float(guildpointsum)
-            else:
-                scalingfactor = 0
-            guildpoints = scalingfactor * guildpoints
-            guildmaxatts = len(guildevents) * usercount
-            if guildatts is not 0:
-                guildattendance = guildatts/guildmaxatts
-            else:
-                guildattendance = 0
-            points = 15 * int(guildpoints * guildattendance + generalpoints)
-            Guildpoints.objects.filter(guild_id = g.guild_id).update(points = points)
-        else:
-            pass
-        n = n + 1
+        one_third = max(1, int(0.3 * usercount))
+        two_thirds = 2 * one_third
+        three_thirds = 3 * one_third
+        points_list = get_guild_point_list(guild_users)
+        guild_points = 0
+
+        n = 0
+        if usercount > 0:
+            for points in points_list:
+                if n < one_third:
+                    guild_points += (biggest_weight * points) / usercount
+                elif n < 2 * two_thirds:
+                    guild_points += (medium_weight * points) / usercount
+                elif n < 3 * three_thirds:
+                    guild_points += (min_weight * points) / usercount
+
+                n += 1
+        
+        guild_points = int(guild_points)
+        Guildpoints.objects.filter(guild_id = g.guild_id).update(points = guild_points)
+
     return redirect('guild_ranking')
 
 # Helper function for user__ranking
 def get_user_ranking(users):
-    #TODO: Points should probably be saved in userprofile too?
     score_list = []
     n = 0
     for user in users:
@@ -525,14 +493,7 @@ def get_user_ranking(users):
         score_list[n].append(user.first_name)
         score_list[n].append(user.last_name)
         score_list[n].append(user.userprofile.guild.name)
-        attendances = Attendance.objects.filter(Q(user_id = user.id) & Q(verified = True))
-        points = 0
-        for att in attendances:
-            event = Event.objects.get(id = att.event_id)
-            addpoints = event.points
-            addpoints = int(addpoints)
-            points = points + addpoints
-        score_list[n].append(points)
+        score_list[n].append(get_user_points(user))
         n = n + 1
     return score_list
 
@@ -540,11 +501,11 @@ def get_user_ranking(users):
 def user_ranking(request):
 
     usersGuild = User.objects.filter(Q(userprofile__guild = request.user.userprofile.guild) & Q(userprofile__role = 'user'))
-    usersAll = User.objects.filter(Q(userprofile__role = 'user'))
+    #usersAll = User.objects.filter(Q(userprofile__role = 'user'))
     score_list_guild = get_user_ranking(usersGuild)
     score_list_guild = sorted(score_list_guild, key=lambda points: points[3], reverse=True)
-    score_list_all = get_user_ranking(usersAll)
-    score_list_all = sorted(score_list_all, key=lambda points: points[3], reverse=True)[:20]
-    response = TemplateResponse(request, 'userrank.html', {'score_list_guild': score_list_guild, 'score_list_all': score_list_all})
+    #score_list_all = get_user_ranking(usersAll) This shit will likely crash the whole site
+    #score_list_all = sorted(score_list_all, key=lambda points: points[3], reverse=True)[:20]
+    response = TemplateResponse(request, 'userrank.html', {'score_list_guild': score_list_guild})
     response.render()
     return response
