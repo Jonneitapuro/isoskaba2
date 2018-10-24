@@ -21,7 +21,6 @@ from django.conf.urls.static import static
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib.auth import views as auth_views
 
-
 urlpatterns = [
     url(r'^$', skabaviews.login_user, name='index'),
     url(r'^login', skabaviews.login_user, name='login'),
@@ -57,6 +56,7 @@ urlpatterns = [
     url(r'^reset/done/$', auth_views.password_reset_complete, name='password_reset_complete'),
 #    url(r'^scoreboard', skabaviews.scoreboard, name='scoreboard'),
 ]
+
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
