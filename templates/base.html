@@ -34,9 +34,9 @@
      <div class="collapse navbar-collapse" id="myNavbar">
        <ul class="nav navbar-nav">
           {% if user.is_authenticated %}
-            <li><a href="/attend"> {%trans 'Attend'%}</a></li>
-            <li><a href="/guildranking">{%trans 'Guild ranking'%}</a></li>
-            <li><a href="/userranking"> {%trans 'User ranking'%}</a></li>
+            <li><a href="/attend"> {% trans 'Attend' %}</a></li>
+            <li><a href="/guildranking">{% trans 'Guild ranking' %}</a></li>
+            <li><a href="/userranking"> {% trans 'User ranking' %}</a></li>
           {% else %}
             <a class="navbar-brand" href="/">{% trans 'ISOskaba' %}</a>
           {% endif %}
@@ -50,7 +50,7 @@
           <li class="dropdown">
             <a class="dropdown-toggle" href="#" data-toggle="dropdown"
               role="button" aria-haspopup="true" aria-expanded="false">
-              {%trans 'Profile'%}
+              {% trans 'Profile' %}
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu" id="user-dropdown">
@@ -61,11 +61,13 @@
           {% else %}
           <li><a href="/login">{% trans 'Log in' %}</a></li>
           {% endif %}
-          <li id="lang">
-            <input type="image" name="language" value="fi" src="{% static 'images/fi.png' %}" alt="FI">
-            <input type="image" name="language" value="en" src="{% static 'images/en.png' %}" alt="EN">
-            <input type="image" name="language" value="sv" src="{% static 'images/sv.png' %}" alt="SV">
-          </li>
+          <form action="i18n/setlang/" id="language-form" method="post">
+            <li id="lang">
+              <button type="submit" name="language" class="button-switch-language" value="fi" alt="FI"><img src="{% static 'images/fi.png' %}" /></button>
+              <button type="submit" name="language" class="button-switch-language" value="en" alt="EN"><img src="{% static 'images/en.png' %}" /></button>
+              <button type="submit" name="language" class="button-switch-language" value="sv" alt="SV"><img src="{% static 'images/sv.png' %}" /></button>
+            </li>
+          </form>
         </ul>
     </div>
   </div>
@@ -77,7 +79,7 @@
     {% if messages %}
     <ul class="messages">
       {% for message in messages %}
-      <li{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</li>
+      <li {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</li>
       {% endfor %}
     </ul>
     {% endif %}
