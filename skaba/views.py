@@ -16,7 +16,7 @@ from skaba.forms import *
 from skaba.models import Event, Guild, User, UserProfile, Attendance, Guildpoints
 from skaba.util import check_moderator, check_admin, csv_user_import, csv_event_import
 
-general_id = 3
+general_id = 1
 
 def index(request):
     response = TemplateResponse(request, 'index.html', {})
