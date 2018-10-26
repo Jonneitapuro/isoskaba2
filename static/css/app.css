@@ -246,6 +246,13 @@ div.form-error {
   width: 25%;
 }
 
+.error_img {
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+  height: auto;
+}
+
 /* Icon styles */
 red {
   color: #990033 !important;
