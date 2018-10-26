@@ -401,10 +401,9 @@ def verify_attendances(request):
 @user_passes_test(check_admin)
 def delete_user(request):
     if 'user_id' in request.POST:
-        #userid = int(request.POST.get('user_id'))
-        #"user = get_object_or_404(user, pk=userid)"
-        #User.objects.filter(id = userid).delete()
-        User.objects.all().delete()
+        userid = int(request.POST.get('user_id'))
+        "user = get_object_or_404(user, pk=userid)"
+        User.objects.filter(id = userid).delete()
         return redirect('userlist')
     else:
         messages.error(request, _('Something went wrong!'))
@@ -413,9 +412,8 @@ def delete_user(request):
 @user_passes_test(check_moderator)
 def delete_event(request):
     if 'event_id' in request.POST:
-        #eventid = int(request.POST.get('event_id'))
-        #Event.objects.filter(id = eventid).delete()
-        Event.objects.all().delete()
+        eventid = int(request.POST.get('event_id'))
+        Event.objects.filter(id = eventid).delete()
         return redirect('eventlist')
     else:
         messages.error(request, _('Something went wrong!'))
