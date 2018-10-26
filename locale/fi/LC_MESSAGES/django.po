@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-15 10:59+0000\n"
+"POT-Creation-Date: 2018-10-26 20:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,194 +18,237 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: skaba/views.py:61
+#: skaba/views.py:68
 msgid "Event added"
 msgstr "Tapahtuma lisätty"
 
-#: skaba/views.py:73
+#: skaba/views.py:80
 msgid "Create event"
 msgstr "Luo tapahtuma"
 
-#: skaba/views.py:74 templates/admin_base.html:8
+#: skaba/views.py:81 templates/admin_base.html:8
 msgid "Add event"
 msgstr "Lisää tapahtuma"
 
-#: skaba/views.py:88
+#: skaba/views.py:95
 msgid "Event saved"
 msgstr "Tapahtuma tallennettu"
 
-#: skaba/views.py:100
+#: skaba/views.py:107
 msgid "Edit event"
 msgstr "Muokkaa tapahtumaa"
 
-#: skaba/views.py:101
+#: skaba/views.py:108
 msgid "Save event"
 msgstr "Tallenna tapahtuma"
 
-#: skaba/views.py:137
+#: skaba/views.py:163
 msgid "Creation successfull"
 msgstr "Luonti onnistunut"
 
-#: skaba/views.py:144
+#: skaba/views.py:170
 msgid "Add User"
 msgstr "Lisää käyttäjä"
 
-#: skaba/views.py:145 templates/admin_base.html:10
+#: skaba/views.py:171 templates/admin_base.html:11
 msgid "Add user"
 msgstr "Lisää käyttäjä"
 
-#: skaba/views.py:168
+#: skaba/views.py:180 skaba/views.py:200
+#, fuzzy
+#| msgid "Creation successfull"
+msgid "Import successful"
+msgstr "Luonti onnistunut"
+
+#: skaba/views.py:182 skaba/views.py:202
+msgid "Import failed"
+msgstr ""
+
+#: skaba/views.py:190 templates/admin_base.html:12
+msgid "Import users"
+msgstr ""
+
+#: skaba/views.py:191 skaba/views.py:211
+msgid "Import"
+msgstr ""
+
+#: skaba/views.py:210 templates/admin_base.html:9
+#, fuzzy
+#| msgid "Create event"
+msgid "Import events"
+msgstr "Luo tapahtuma"
+
+#: skaba/views.py:234
 msgid "Logged in successfully, welcome"
 msgstr "Kirjauduit sisään, tervetuloa"
 
-#: skaba/views.py:174
+#: skaba/views.py:240
 msgid "Your account is not active."
 msgstr "Käyttäjätilisi ei ole aktiivinen"
 
-#: skaba/views.py:177
+#: skaba/views.py:243
 msgid "Invalid username and/or password."
 msgstr "Väärä käyttäjänimi ja/tai salasana"
 
-#: skaba/views.py:185
+#: skaba/views.py:251
 msgid "Logged out"
 msgstr "Kirjauduit ulos"
 
-#: skaba/views.py:285
-msgid "You have attended for the maximum amount"
-msgstr "Olet osallistunut maksimimäärän"
+#: skaba/views.py:301 skaba/views.py:331
+#, fuzzy
+#| msgid "Password"
+msgid "Changes saved"
+msgstr "Salasana"
+
+#: skaba/views.py:313
+#, fuzzy
+#| msgid "User info"
+msgid "Edit user info"
+msgstr "Käyttäjätiedot"
+
+#: skaba/views.py:314
+#, fuzzy
+#| msgid "User info"
+msgid "Save user info"
+msgstr "Käyttäjätiedot"
+
+#: skaba/views.py:410 skaba/views.py:420
+msgid "Something went wrong!"
+msgstr ""
 
 #: templates/admin_attendances.html:5
 msgid "Unverified attendances"
 msgstr "Varmistamattomat osallistumiset"
 
-#: templates/admin_attendances.html:11 templates/admin_attendances.html:29
+#: templates/admin_attendances.html:27 templates/admin_attendances.html:59
 msgid "User"
 msgstr "Käyttäjä"
 
-#: templates/admin_attendances.html:12 templates/admin_attendances.html:30
-#: templates/eventlist.html:63
+#: templates/admin_attendances.html:28 templates/admin_attendances.html:60
+#: templates/user_attendances.html:4
 msgid "Event"
 msgstr "Tapahtuma"
 
-#: templates/admin_attendances.html:13 templates/admin_attendances.html:31
-#: templates/admin_eventlist.html:39 templates/eventlist.html:41
+#: templates/admin_attendances.html:29 templates/admin_attendances.html:61
+#: templates/admin_eventlist.html:41 templates/eventlist.html:18
 msgid "Date"
 msgstr "Päivämäärä"
 
-#: templates/admin_attendances.html:14
+#: templates/admin_attendances.html:30
 msgid "Verify"
 msgstr "Varmista"
 
-#: templates/admin_attendances.html:26
+#: templates/admin_attendances.html:39 templates/admin_eventlist.html:51
+#: templates/userlist.html:24
+msgid "Delete"
+msgstr "Poista"
+
+#: templates/admin_attendances.html:56
 msgid "Verified attendances"
 msgstr "Vahvistetut osallistumiset"
 
 #: templates/admin_base.html:7 templates/admin_eventlist.html:7
-#: templates/base.html:68 templates/eventlist.html:7
+#: templates/eventlist.html:7
 msgid "Events"
 msgstr "Tapahtumat"
 
-#: templates/admin_base.html:9 templates/userlist.html:4
+#: templates/admin_base.html:10 templates/userlist.html:4
 msgid "Users"
 msgstr "Käyttäjät"
 
-#: templates/admin_base.html:11
+#: templates/admin_base.html:13
 msgid "Attendances"
 msgstr "Osallistumiset"
 
-#: templates/admin_eventlist.html:9 templates/eventlist.html:10
+#: templates/admin_base.html:14
+msgid "Update guildpoints"
+msgstr "Päivitä pistetilanne"
+
+#: templates/admin_eventlist.html:9
 msgid "Search events"
 msgstr "Etsi tapahtumaa"
 
-#: templates/admin_eventlist.html:34 templates/eventlist.html:38
-#: templates/userlist.html:7
+#: templates/admin_eventlist.html:36 templates/eventlist.html:16
+#: templates/userlist.html:9 templates/userrank.html:11
 msgid "Name"
 msgstr "Nimi"
 
-#: templates/admin_eventlist.html:35
+#: templates/admin_eventlist.html:37
 msgid "Description"
 msgstr "Kuvaus"
 
-#: templates/admin_eventlist.html:36 templates/eventlist.html:39
-#: templates/user_info.html:23 templates/userlist.html:9
+#: templates/admin_eventlist.html:38 templates/guildrank.html:11
+#: templates/user_info.html:23 templates/userlist.html:11
 msgid "Guild"
 msgstr "Kilta"
 
-#: templates/admin_eventlist.html:37 templates/eventlist.html:40
-#: templates/eventlist.html:64 templates/user_info.html:42
+#: templates/admin_eventlist.html:39 templates/eventlist.html:17
+#: templates/guildrank.html:12 templates/user_attendances.html:5
+#: templates/userrank.html:12
 msgid "Points"
 msgstr "Pisteet"
 
-#: templates/admin_eventlist.html:38
+#: templates/admin_eventlist.html:40
 msgid "Repeats"
 msgstr "Toistot"
+
+#: templates/admin_eventlist.html:51
+msgid "Do you want to delete the event"
+msgstr "Oletko varma että haluat poistaa tapahtuman"
 
 #: templates/admin_index.html:4
 msgid "Welcome to admin pages"
 msgstr "Tervetuloa ylläpitosivuille"
 
-#: templates/base.html:24 templates/base.html:43 templates/base.html:87
-#: templates/simple_login.html:27 templates/simple_login.html:56
-msgid "Log in"
-msgstr "Kirjaudu sisään"
-
-#: templates/base.html:30 templates/base.html:32
-#: templates/simple_login.html:33
-msgid "User ID"
-msgstr "Käyttäjä"
-
-#: templates/base.html:36 templates/base.html:38
-#: templates/simple_login.html:39
-msgid "Password"
-msgstr "Salasana"
-
-#: templates/base.html:44 templates/simple_login.html:57
-msgid "Empty"
-msgstr "Tyhjennä"
-
-#: templates/base.html:63
-msgid "ISOskaba"
-msgstr "ISOskaba"
-
-#: templates/base.html:69 templates/user_info.html:4
-msgid "User info"
-msgstr "Käyttäjätiedot"
-
-#: templates/base.html:70
-msgid "Guild leaderboard"
-msgstr "Killan pisteet"
-
-#: templates/base.html:71
-msgid "Total leaderboard"
-msgstr "Kokonaispisteet"
-
-#: templates/base.html:74
-msgid "Admin panel"
-msgstr "Ylläpito"
-
-#: templates/base.html:85
-msgid "Log out"
-msgstr "Kirjaudu ulos"
-
-#: templates/eventlist.html:37
-msgid "Extra info"
-msgstr "Lisätietoa"
-
-#: templates/eventlist.html:42 templates/eventlist.html:52
+#: templates/base.html:37 templates/eventlist.html:19
+#: templates/eventlist.html:30
 msgid "Attend"
 msgstr "Osallistu"
 
-#: templates/eventlist.html:60 templates/user_info.html:38
-msgid "Attended events"
-msgstr "Osallistumiset"
+#: templates/base.html:38
+msgid "Guild ranking"
+msgstr "Kiltojen pisteet"
 
-#: templates/eventlist.html:65
-msgid "Created"
-msgstr "Luotu"
+#: templates/base.html:39
+msgid "User ranking"
+msgstr "Käyttäjien pisteet"
 
-#: templates/eventlist.html:66 templates/user_info.html:44
-msgid "Verified"
-msgstr "Vahvistettu"
+#: templates/base.html:41
+msgid "ISOskaba"
+msgstr "ISOskaba"
+
+#: templates/base.html:44
+msgid "Admin panel"
+msgstr "Ylläpito"
+
+#: templates/base.html:53
+msgid "Profile"
+msgstr "Profiili"
+
+#: templates/base.html:57
+msgid "Log out"
+msgstr "Kirjaudu ulos"
+
+#: templates/base.html:58 templates/user_info.html:4
+msgid "User info"
+msgstr "Käyttäjätiedot"
+
+#: templates/base.html:62 templates/simple_login.html:27
+#: templates/simple_login.html:56
+msgid "Log in"
+msgstr "Kirjaudu sisään"
+
+#: templates/eventlist.html:9 templates/eventlist.html:39
+msgid "Submit checked"
+msgstr "Osallistu valittuihin"
+
+#: templates/eventlist.html:20
+msgid "Check"
+msgstr ""
+
+#: templates/guildrank.html:7
+msgid "Scoreboard"
+msgstr "Pistetilanne"
 
 #: templates/index.html:4
 msgid "Welcome to ISOskaba!"
@@ -221,6 +264,46 @@ msgstr ""
 "osallistumalla eri tapahtumiin ja kevään lopuksi aktiivisimmat ISOt "
 "palkitaan!"
 
+#: templates/registration/password_reset_complete.html:6
+msgid "sign in"
+msgstr "kirjautua sisään"
+
+#: templates/registration/password_reset_complete.html:6
+msgid "now."
+msgstr "nyt"
+
+#: templates/registration/password_reset_form.html:8
+msgid "Forgotten password"
+msgstr "Unohtunut salasana"
+
+#: templates/registration/password_reset_form.html:14
+msgid "Submit"
+msgstr "Lähetä"
+
+#: templates/simple_login.html:33
+msgid "User ID"
+msgstr "Käyttäjä"
+
+#: templates/simple_login.html:39
+msgid "Password"
+msgstr "Salasana"
+
+#: templates/simple_login.html:57
+msgid "Empty"
+msgstr "Tyhjennä"
+
+#: templates/simple_login.html:58
+msgid "Forgotten password?"
+msgstr "Salasana hukassa?"
+
+#: templates/user_attendances.html:6
+msgid "Created"
+msgstr "Luotu"
+
+#: templates/user_attendances.html:7
+msgid "Verified"
+msgstr "Vahvistettu"
+
 #: templates/user_info.html:7
 msgid "Username"
 msgstr "Käyttäjätunnus"
@@ -233,41 +316,77 @@ msgstr "Etunimi"
 msgid "Last name"
 msgstr "Sukunimi"
 
-#: templates/user_info.html:19 templates/userlist.html:8
+#: templates/user_info.html:19 templates/userlist.html:10
 msgid "Email"
 msgstr "Sähköposti"
 
 #: templates/user_info.html:27
-msgid "TF status"
-msgstr "TF-status"
+msgid "TF member"
+msgstr "TF jäsen"
 
 #: templates/user_info.html:31
 msgid "INTL status"
 msgstr "KV-status"
 
-#: templates/user_info.html:36
+#: templates/user_info.html:34
+msgid "Total points"
+msgstr "Kokonaispisteet"
+
+#: templates/user_info.html:39
 msgid "Edit"
 msgstr "Muokkaa"
 
 #: templates/user_info.html:41
-msgid "Event name"
-msgstr "Tapahtuman nimi"
+msgid "Attended events"
+msgstr "Osallistumiset"
 
-#: templates/user_info.html:43
-msgid "Date added"
-msgstr "Lisätty"
-
-#: templates/userlist.html:10
+#: templates/userlist.html:12
 msgid "Role"
 msgstr "Rooli"
 
-#: templates/userlist.html:11
+#: templates/userlist.html:13
 msgid "TF"
 msgstr "TF"
 
-#: templates/userlist.html:12
+#: templates/userlist.html:14
 msgid "KV"
 msgstr "KV"
+
+#: templates/userlist.html:24
+msgid "Do you want to delete the user"
+msgstr "Oletko varma, että haluat poistaa käyttäjän"
+
+#~ msgid "Attend multiple"
+#~ msgstr "Valitse"
+
+#~ msgid "Your password has been set. You may go ahead and"
+#~ msgstr "Salasanasi on vaihdettu. Voit"
+
+#, fuzzy
+#~| msgid "Email"
+#~ msgid "Email sent"
+#~ msgstr "Sähköposti"
+
+#~ msgid "You have attended for the maximum amount"
+#~ msgstr "Olet osallistunut maksimimäärän"
+
+#~ msgid "Guild leaderboard"
+#~ msgstr "Killan pisteet"
+
+#~ msgid "Total leaderboard"
+#~ msgstr "Kokonaispisteet"
+
+#~ msgid "Extra info"
+#~ msgstr "Lisätietoa"
+
+#~ msgid "TF status"
+#~ msgstr "TF-status"
+
+#~ msgid "Event name"
+#~ msgstr "Tapahtuman nimi"
+
+#~ msgid "Date added"
+#~ msgstr "Lisätty"
 
 #~ msgid "Home"
 #~ msgstr "Etusivu"

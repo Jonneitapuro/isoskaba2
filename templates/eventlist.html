@@ -6,6 +6,7 @@
 <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
 <h1>{% trans 'Events' %}</h1>
 <form role="form" class="form-horizontal" action="/attend" method="POST">
+<button type="submit" class="skaba-button button-submit-events">{% trans 'Submit checked' %}</button><br>
   {% csrf_token %}
   <input type="hidden" name="order_by_events" value="{{ order_by_events }}" />
   <input type="hidden" name="order_by_attendances" value="{{ order_by_attendances }}" />
@@ -16,7 +17,7 @@
       <div style="width: 10%" class="link"><a href="?order_by_events=points">{% trans 'Points' %}</a></div>
       <div style="width: 20%" class="link hidden-on-mobile"><a href="?order_by_events=eventdate">{% trans 'Date' %}</a></div>
       <div class="bigger-on-mobile">{% trans 'Attend' %}</div>
-      <div style="width: 10%">Check</div>
+      <div style="width: 10%">{% trans 'Check' %}</div>
     </div>
 
     {% for event in events %}
@@ -35,6 +36,6 @@
     </div>
     {% endfor %}
   </div>
-  <button type="submit" class="skaba-button button-submit-events">Submit checked</button>
+  <button type="submit" class="skaba-button button-submit-events">{% trans 'Submit checked' %}</button>
 </form>
 {% endblock %}

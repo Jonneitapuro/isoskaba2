@@ -21,7 +21,6 @@ general_id = 1
 def index(request):
     response = TemplateResponse(request, 'index.html', {})
     response.render()
-    print(request.LANGUAGE_CODE)
     return response
 
 @user_passes_test(check_moderator)
@@ -297,7 +296,7 @@ def user_edit(request):
             try:
                 form.save()
                 status = 200
-                messages.add_message(request, messages.INFO, 'Changes saved')
+                messages.add_message(request, messages.INFO, _('Changes saved'))
                 return redirect('/user/edit/')
             except:
                 status = 400
@@ -309,8 +308,8 @@ def user_edit(request):
     token = {}
     token.update(csrf(request))
     token['forms'] = [form]
-    token['site_title'] = 'Edit user info'
-    token['submit_text'] = 'Save user info'
+    token['site_title'] = _('Edit user info')
+    token['submit_text'] = _('Save user info')
     token['form_action'] = '/user/edit/'
 
     return render(request, 'form.html', token)
@@ -327,7 +326,7 @@ def admin_edit(request, user_id):
                 user_form.save()
                 profile_form.save()
                 status = 200
-                messages.add_message(request, messages.INFO, 'Changes saved')
+                messages.add_message(request, messages.INFO, _('Changes saved'))
                 return redirect('/admin/users/edit/' + user_id + '/')
             except:
                 status = 400

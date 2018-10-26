@@ -51,7 +51,7 @@ msgstr ""
 
 #: skaba/views.py:145 templates/admin_base.html:10
 msgid "Add user"
-msgstr ""
+msgstr "Add user"
 
 #: skaba/views.py:168
 msgid "Logged in successfully, welcome"
@@ -146,7 +146,7 @@ msgstr ""
 #: templates/base.html:24 templates/base.html:43 templates/base.html:87
 #: templates/simple_login.html:27 templates/simple_login.html:56
 msgid "Log in"
-msgstr ""
+msgstr "Log in"
 
 #: templates/base.html:30 templates/base.html:32
 #: templates/simple_login.html:33
@@ -164,7 +164,7 @@ msgstr ""
 
 #: templates/base.html:63
 msgid "ISOskaba"
-msgstr ""
+msgstr "BABABABAB"
 
 #: templates/base.html:69 templates/user_info.html:4
 msgid "User info"
@@ -184,7 +184,7 @@ msgstr ""
 
 #: templates/base.html:85
 msgid "Log out"
-msgstr ""
+msgstr "Log out"
 
 #: templates/eventlist.html:37
 msgid "Extra info"
