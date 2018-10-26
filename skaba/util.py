@@ -1,6 +1,7 @@
 from skaba.models import User, Event
 import csv
 from io import StringIO
+from datetime import datetime
 
 """
 Check if user has admin status.
@@ -23,7 +24,7 @@ def check_moderator(user):
 def csv_user_import(csv_file, guild):
     # assume columns to be First name, Last name, e-mail, is_KV, is_TF, Password
     csvf = StringIO(csv_file.read().decode())
-    csvreader = csv.DictReader(csvf, delimiter=';',
+    csvreader = csv.DictReader(csvf, delimiter=',',
     	fieldnames=['firstname', 'lastname', 'email', 'is_kv', 'is_tf', 'password'])
 
     for row in csvreader:
@@ -49,7 +50,7 @@ def csv_user_import(csv_file, guild):
 def csv_event_import(csv_file, guild):
     # assume columns to be Event name, desc(fi), desc(en), desc(swe), Points, url, repeats, date
     csvf = StringIO(csv_file.read().decode())
-    csvreader = csv.DictReader(csvf, delimiter=';',
+    csvreader = csv.DictReader(csvf, delimiter=',',
     	fieldnames=['eventname', 'descfi', 'descen', 'descswe', 'points', 'url', 'repeats', 'date'])
 
     for row in csvreader:
@@ -60,7 +61,7 @@ def csv_event_import(csv_file, guild):
             guild_id = guild,
             slug = row['url'],
             repeats = row['repeats'],
-            date = row['date']
+            eventdate = datetime.strptime(row['date'],'%Y-%m-%d').date()
             )
         event.save()
 
