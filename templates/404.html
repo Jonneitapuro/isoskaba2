@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+<!-- {% extends 'base.html' %}
 {% load staticfiles %}
 {% block page_content %}
 
@@ -13,4 +13,42 @@ If you feel it should, please contact your tutor coordinator.</p>
 <img class="error_img" src="{% static 'images/kitten-walking.jpg' %}" alt="oh my god isn't this working either" />
 
 
-{% endblock %}
+{% endblock %} -->
+
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ISOskaba</title>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/mobile.css' %}" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+    <div id="incredible">
+        <div class="incredibleText">
+            <h1>404 error :(</h1>
+            
+            <p></p>It appears this page doesn't exists. <br>
+            If you feel it should, please contact your tutor coordinator.</p>
+            
+            <p></p>Meanwhile have a kitten.</p>
+            
+            <img class="error_img" src="{% static 'images/kitten-walking.jpg' %}" alt="oh my god isn't this working either" />
+
+        </div>
+    </div>
+
+
+</body>
+
+</html>
