@@ -18,37 +18,6 @@ from skaba.util import check_moderator, check_admin, csv_user_import, csv_event_
 
 general_id = 1
 
-@login_required
-def incredible(request):
-    response = TemplateResponse(request, 'incredible.html', {})
-    response.render()
-    return response
-
-def incredible_password(request):
-    status = 200
-
-    if (request.user and request.user.is_authenticated()):
-        logout(request)
-
-    if request.POST:
-        password = request.POST.get('password')
-        user = authenticate(username='incredibleISO', password=password)
-
-        if user is not None:
-            if user.is_active:
-                login(request, user)
-                return redirect('incredible')
-            else:
-                messages.error('???')
-                status=403 #Forbidden
-
-        else:
-            messages.error(request, _('Try again'))
-            status=401 #Unauthorised
-    
-    return render(request, 'incredible_login.html')
-
-
 def index(request):
     response = TemplateResponse(request, 'index.html', {})
     response.render()
@@ -241,7 +210,6 @@ def event_import(request):
     args['form_action'] = '/admin/events/import'
     return render(request, 'admin_form.html', args)
 
-
 def login_user(request):
     c = RequestContext(request)
     redirectURL = request.GET.get('next', None)
@@ -279,8 +247,7 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     messages.success(request, _('Logged out'))
-    #return redirect('index')
-    return redirect('incredible_pass')
+    return redirect('index')
 
 @login_required
 def list_user_events(request):
