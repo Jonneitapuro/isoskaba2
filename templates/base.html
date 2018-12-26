@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>ISOskaba</title>
   <meta charset="UTF-8">
+  <title>ISOjen kevätskaba</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
@@ -38,7 +38,7 @@
             <li><a href="/guildranking">{% trans 'Guild ranking' %}</a></li>
             <li><a href="/userranking"> {% trans 'User ranking' %}</a></li>
           {% else %}
-            <a class="navbar-brand" href="/">{% trans 'ISOskaba' %}</a>
+            <a class="navbar-brand" href="/">{% trans 'ISOjen kevätskaba' %}</a>
           {% endif %}
           {% if user.is_superuser or user.profile.role == 'moderator' or user.profile.role == 'admin' %}
             <li><a href="/admin/">{% trans 'Admin panel' %}</a></li>
