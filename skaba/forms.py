@@ -21,7 +21,7 @@ class EventForm(forms.ModelForm):
 class AddUserForm(UserCreationForm):
     #role choices
     role_choices = (('user', 'user'), ('moderator', 'moderator'), ('admin', 'admin'))
-    email = forms.EmailField(required=True)
+    email = forms.EmailField(required=False)
     first_name = forms.CharField(required = True)
     last_name = forms.CharField(required = True)
     #role = forms.CharField(label='User\'s role', required=False, initial='user')
@@ -32,7 +32,7 @@ class AddUserForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'is_kv', 'is_tf', 'role')
+        fields = ('username', 'first_name', 'last_name', 'password1', 'password2', 'is_kv', 'is_tf', 'role')
 
     def save(self,commit = True):
         user = super(AddUserForm, self).save(commit = True)
@@ -58,7 +58,7 @@ class EditUserForm(forms.ModelForm):
 
     def save(self, commit=True):
         user = super(EditUserForm, self).save(commit=False)
-        user.email = self.cleaned_data['email']
+        #user.email = self.cleaned_data['email']
         new_password = self.cleaned_data['password1']
         if (user.check_password(self.cleaned_data['old_password']) and 
                 new_password == self.cleaned_data['password2'] and
@@ -97,6 +97,7 @@ class AdminEditProfileForm(forms.ModelForm):
         profile.guild = self.cleaned_data['guild']
         profile.is_kv = self.cleaned_data['is_kv']
         profile.is_tf = self.cleaned_data['is_tf']
+        
         return profile
 
         if commit:
@@ -105,13 +106,19 @@ class AdminEditProfileForm(forms.ModelForm):
         return profile
 
 class AdminEditUserForm(forms.ModelForm):
+    password1 = forms.CharField(widget=forms.PasswordInput(), required=False)
+    password2 = forms.CharField(widget=forms.PasswordInput(), required=False)
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email')
+        fields = ('username', 'first_name', 'last_name', 'email',)
 
     def save(self, commit=True):
         user = super(AdminEditUserForm, self).save(commit=False)
-        user.email = self.cleaned_data['email']
+        new_password = self.cleaned_data['password1']
+
+        if (new_password == self.cleaned_data['password2'] and
+                len(new_password) > 5):
+            user.set_password(new_password)
 
         if commit:
             user.save()
