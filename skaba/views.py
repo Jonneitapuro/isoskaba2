@@ -464,6 +464,7 @@ def guild_points_update(request):
         one_third = max(1, int(0.3 * usercount))
         two_thirds = 2 * one_third
         three_thirds = 3 * one_third
+        multiplier = 17.64 #Random multiplier to get bigger guildpoints
         points_list = get_guild_point_list(guild_users)
         guild_points = 0
 
@@ -479,7 +480,7 @@ def guild_points_update(request):
 
                 n += 1
         
-        guild_points = int(guild_points)
+        guild_points = int(guild_points * multiplier )
         Guildpoints.objects.filter(guild_id = g.guild_id).update(points = guild_points)
 
     return redirect('guild_ranking')
