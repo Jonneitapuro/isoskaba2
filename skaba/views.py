@@ -390,6 +390,7 @@ def verify_attendances(request):
 
     order_by = request.GET.get('order_by', 'user')
     own_guild = request.user.userprofile.guild
+    general_guild = Guild.objects.filter(id = general_id)
 
     if own_guild.abbreviation != 'TF':
         guild_users = User.objects.filter(userprofile__guild = own_guild)
@@ -397,11 +398,11 @@ def verify_attendances(request):
         guild_users = User.objects.filter(userprofile__is_tf = True)
 
     unverified = Attendance.objects.filter(Q(user__in = guild_users) 
-                                            & Q(event__guild = own_guild) 
+                                            & (Q(event__guild = own_guild) | Q(event__guild = general_guild))
                                             & Q(verified = False)).order_by(order_by)
     verified = Attendance.objects.filter(Q(user__in = guild_users) 
-                                        & Q(event__guild = own_guild) 
-                                        & Q(verified = True)).order_by(order_by)
+                                            & (Q(event__guild = own_guild) | Q(event__guild = general_guild))
+                                            & Q(verified = True)).order_by(order_by)
 
     response = TemplateResponse(request, 'admin_attendances.html', {'unverified': unverified, 'verified': verified})
     response.render()
