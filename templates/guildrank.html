@@ -6,7 +6,7 @@
 <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
 <h1 class="scoreboard">{% trans 'Scoreboard' %}</h1>
 {% csrf_token %}
-<div class="div-table">
+{% comment %} <div class="div-table">
   <div class="div-table-row div-table-heading">
     <div style="width: 50%">{% trans 'Guild' %}</div>
     <div style="width: 50%"">{% trans 'Points' %}</div>
@@ -18,6 +18,9 @@
     <div style="width: 50%">{{ guild.points }}</div>
   </div>
   {% endfor %}
-</div>
+</div> {% endcomment %}
+
+<p>Voittaja selviää pian!! Kiitos osallistumisesta! <br>
+The winner will be announced soon! </p>
 
 {% endblock %}
